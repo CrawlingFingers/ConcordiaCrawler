@@ -38,6 +38,7 @@ def init_lucene (index_directory):
   return IndexWriter(dir, analyzer, True, IndexWriter.MaxFieldLength(512))
 
 def main ():
+  lucene.initVM()
   check_params()
   files = glob.glob(sys.argv[2])
   directory = sys.argv[1]
