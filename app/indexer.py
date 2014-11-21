@@ -14,6 +14,7 @@ def check_params ():
     print("Usage: ")
     print("  python indexer.py <index_folder> <data_folder>")
     print("")
+    sys.exit()
 
 # parses a supplied file path
 def parse_file (file_path):
