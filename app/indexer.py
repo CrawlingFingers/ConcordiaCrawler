@@ -1,5 +1,6 @@
 import lxml
 import sys
+import glob
 
 
 def check_params ():
@@ -12,6 +13,7 @@ def check_params ():
 
 def main ():
   check_params()
+  files = glob.glob(sys.argv[1])
 
 
 if __name__ == "__main__":
