@@ -9,7 +9,7 @@ def uquery():
 def main():
     lucene.initVM()
     directory = lucene.SimpleFSDirectory(lucene.File(sys.argv[1]))
-    analyzer = lucene.StandardAnalyzer()
+    analyzer = lucene.StandardAnalyzer(lucene.Version.LUCENE_30)
     search = lucene.IndexSearcher(directory)
 
     userq = uquery()
