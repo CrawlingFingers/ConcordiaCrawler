@@ -2,7 +2,7 @@ import lucene
 import sys
 
 def uquery():
-    print("Query:\n")
+    print("Query:")
     userin = sys.stdin.readline()
     return userin
 
