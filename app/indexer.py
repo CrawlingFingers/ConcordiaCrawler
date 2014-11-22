@@ -17,7 +17,7 @@ def check_params ():
     sys.exit()
 
 # parses a supplied file path
-def parse_file (file_path):
+def parse_file (file_path, writer):
   f = open(file_path, 'r')
   soup = BeautifulSoup(f.read())
   f.close()
