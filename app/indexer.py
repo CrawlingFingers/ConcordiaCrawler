@@ -1,6 +1,7 @@
 import sys
 import glob
 import lucene
+import afinn
 from bs4 import BeautifulSoup
 from lucene import SimpleFSDirectory, System, File, Document, Field, StandardAnalyzer, IndexWriter, Version
 
@@ -30,7 +31,10 @@ def parse_file (file_path, writer):
     for match in matches:
       if match.string:
         content += match.string + " "
+  afinn_score = afinn.sentiment(content)
+  doc.add(Field("filepath", file_path, Field.Store.YES, Field.Index.ANALYZED))
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
+  doc.add(Field("sentiment", afinn_score, Field.Store.YES, Field.Index.ANALYZED))
   writer.addDocument(doc)
 
 # initialize the lucene writer
