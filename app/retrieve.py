@@ -13,7 +13,7 @@ def main():
     search = lucene.IndexSearcher(directory)
 
     userq = uquery()
-    query = lucene.QueryParser("content", analyzer)
+    query = lucene.QueryParser(lucene.Version.LUCENE_30, "content", analyzer)
     qq = query.parse(userq)
     maxhits = 5000
     hits = search.search(qq, maxhits)
