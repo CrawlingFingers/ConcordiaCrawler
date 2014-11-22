@@ -12,7 +12,8 @@ def main():
     analyzer = lucene.StandardAnalyzer(lucene.Version.LUCENE_30)
     search = lucene.IndexSearcher(directory)
 
-    query = lucene.QueryParser("content", analyzer).parse(query())
+    uquery = query()
+    query = lucene.QueryParser("content", analyzer).parse(uquery)
     maxhits = 5000
     hits = search.search(query, maxhits)
 
