@@ -34,7 +34,7 @@ def parse_file (file_path, writer):
   afinn_score = afinn.sentiment(content)
   doc.add(Field("filepath", file_path, Field.Store.YES, Field.Index.ANALYZED))
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
-  doc.add(Field("sentiment", afinn_score, Field.Store.YES, Field.Index.ANALYZED))
+  doc.add(Field("sentiment", str(afinn_score), Field.Store.YES, Field.Index.ANALYZED))
   writer.addDocument(doc)
 
 # initialize the lucene writer
@@ -54,7 +54,7 @@ def main ():
   check_params()
   files = glob.glob(sys.argv[2])
   directory = sys.argv[1]
-  index_files(files, index_directory)
+  index_files(files, directory)
 
 
 
