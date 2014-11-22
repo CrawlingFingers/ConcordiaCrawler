@@ -28,7 +28,8 @@ def parse_file (file_path, writer):
     matches = soup.find_all(tag)
     print(type(matches))
     for match in matches:
-      content += match.string + " "
+      if match.string:
+        content += match.string + " "
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
   writer.addDocument(doc)
 
