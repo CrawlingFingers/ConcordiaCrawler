@@ -34,7 +34,7 @@ def parse_file (file_path, writer):
   afinn_score = afinn.sentiment(content)
   doc.add(Field("filepath", file_path, Field.Store.YES, Field.Index.ANALYZED))
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
-  doc.add(DoubleField("sentiment", afinn_score, Field.Store.YES))
+  doc.add(DoubleField("sentiment", str(afinn_score), Field.Store.YES, Field.Index.ANALYZED))
   writer.addDocument(doc)
 
 # initialize the lucene writer
