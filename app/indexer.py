@@ -3,7 +3,7 @@ import glob
 import lucene
 import afinn
 from bs4 import BeautifulSoup
-from lucene import SimpleFSDirectory, System, File, Document, DoubleField, Field, StandardAnalyzer, IndexWriter, Version
+from lucene import SimpleFSDirectory, System, File, Document, Field, StandardAnalyzer, IndexWriter, Version
 
 
 # checks that the required command-line
@@ -34,7 +34,7 @@ def parse_file (file_path, writer):
   afinn_score = afinn.sentiment(content)
   doc.add(Field("filepath", file_path, Field.Store.YES, Field.Index.ANALYZED))
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
-  doc.add(DoubleField("sentiment", str(afinn_score), Field.Store.YES, Field.Index.ANALYZED))
+  doc.add(Field("sentiment", str(afinn_score), Field.Store.YES, Field.Index.ANALYZED))
   writer.addDocument(doc)
 
 # initialize the lucene writer
