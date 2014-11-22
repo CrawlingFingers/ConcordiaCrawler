@@ -1,6 +1,8 @@
 import lucene
 import sys
 
+#This works (the deprecated code)
+
 def uquery():
     print("Query:")
     userin = sys.stdin.readline()
