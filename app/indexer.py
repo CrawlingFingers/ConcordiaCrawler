@@ -54,7 +54,7 @@ def main ():
   check_params()
   files = glob.glob(sys.argv[2])
   directory = sys.argv[1]
-  index_files(files, index_directory)
+  index_files(files, directory)
 
 
 
