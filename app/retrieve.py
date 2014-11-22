@@ -1,7 +1,7 @@
 import lucene
 import sys
 
-def query():
+def uquery():
     print("Query:\n")
     userin = sys.stdin.readline()
     return userin
@@ -12,8 +12,8 @@ def main():
     analyzer = lucene.StandardAnalyzer(lucene.Version.LUCENE_30)
     search = lucene.IndexSearcher(directory)
 
-    uquery = query()
-    query = lucene.QueryParser("content", analyzer).parse(uquery)
+    userq = uquery()
+    query = lucene.QueryParser("content", analyzer).parse(userq)
     maxhits = 5000
     hits = search.search(query, maxhits)
 
