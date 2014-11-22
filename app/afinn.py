@@ -18,10 +18,7 @@ sys.setdefaultencoding('utf-8')
  
 # AFINN-111 is as of June 2011 the most recent version of AFINN
 filenameAFINN = 'app/afinn.txt'
-f = open(filenameAFINN)
-print(f.read())
-f.close()
-afinn = dict(map(lambda (w, s): (w, int(s)), [ ws.strip().split('\t') for ws in open(filenameAFINN) ]))
+afinn = dict(map(lambda (w, s): (w, int(s)), [ ws.strip().split(' ') for ws in open(filenameAFINN) ]))
  
 # Word splitter pattern
 pattern_split = re.compile(r"\W+")
