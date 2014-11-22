@@ -1,6 +1,7 @@
 import sys
 import glob
 import lucene
+import afinn
 from bs4 import BeautifulSoup
 from lucene import SimpleFSDirectory, System, File, Document, Field, StandardAnalyzer, IndexWriter, Version
 
@@ -12,7 +13,7 @@ def check_params ():
     print("Concordia Crawler.")
     print("")
     print("Usage: ")
-    print("  python indexer.py <index_folder> <data_folder>")
+    print("  python indexer.py <index_folder> <data_glob>")
     print("")
     sys.exit()
 
@@ -28,27 +29,32 @@ def parse_file (file_path, writer):
     matches = soup.find_all(tag)
     print(type(matches))
     for match in matches:
-      content += match.string + " "
+      if match.string:
+        content += match.string + " "
+  afinn_score = afinn.sentiment(content)
+  doc.add(Field("filepath", file_path, Field.Store.YES, Field.Index.ANALYZED))
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
+  doc.add(Field("sentiment", afinn_score, Field.Store.YES, Field.Index.ANALYZED))
   writer.addDocument(doc)
 
 # initialize the lucene writer
-def init_lucene (index_directory):
+def index_files (files, index_directory):
+  lucene.initVM()
   d = SimpleFSDirectory(File(index_directory))
   analyzer = StandardAnalyzer(Version.LUCENE_30)
-  return IndexWriter(d, analyzer, True, IndexWriter.MaxFieldLength(512))
-
-def main ():
-  lucene.initVM()
-  check_params()
-  files = glob.glob(sys.argv[2])
-  directory = sys.argv[1]
-  writer = init_lucene(directory)
+  writer = IndexWriter(d, analyzer, True, IndexWriter.MaxFieldLength(512))
   for f in files:
     parse_file(f, writer)
   writer.optimize()
   writer.close()
 
+
+
+def main ():
+  check_params()
+  files = glob.glob(sys.argv[2])
+  directory = sys.argv[1]
+  index_files(files, index_directory)
 
 
 
