@@ -35,7 +35,7 @@ def parse_file (file_path):
 def init_lucene (index_directory):
   d = SimpleFSDirectory(File(index_directory))
   analyzer = StandardAnalyzer(Version.LUCENE_30)
-  return IndexWriter(dir, analyzer, True, IndexWriter.MaxFieldLength(512))
+  return IndexWriter(d, analyzer, True, IndexWriter.MaxFieldLength(512))
 
 def main ():
   lucene.initVM()
