@@ -26,6 +26,7 @@ def parse_file (file_path, writer):
   content = ""
   for tag in content_tags:
     matches = soup.find_all(tag)
+    print(type(matches))
     for match in matches:
       content += match.string + " "
   doc.add(Field("content", content, Field.Store.YES, Field.Index.ANALYZED))
