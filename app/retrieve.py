@@ -13,11 +13,12 @@ def main():
     search = lucene.IndexSearcher(directory)
 
     userq = uquery()
-    query = lucene.QueryParser("content", analyzer).parse(userq)
+    query = lucene.QueryParser("content", analyzer)
+    qq = query.parse(userq)
     maxhits = 5000
-    hits = search.search(query, maxhits)
+    hits = search.search(qq, maxhits)
 
-    print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, query)
+    print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, qq)
 
     for e in hits.scoreDocs:
         print e.score, e.doc, e.toString()
