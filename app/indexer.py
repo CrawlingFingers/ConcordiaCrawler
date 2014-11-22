@@ -27,7 +27,6 @@ def parse_file (file_path, writer):
   content = ""
   for tag in content_tags:
     matches = soup.find_all(tag)
-    print(type(matches))
     for match in matches:
       if match.string:
         content += match.string + " "
