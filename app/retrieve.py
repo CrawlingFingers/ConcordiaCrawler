@@ -22,7 +22,7 @@ class Retriever:
   # @return {object}              A lucene.TopDocs object representing the top results
   def query_content (self, query_string, max_hits=5000):
     query_parser = lucene.QueryParser(lucene.Version.LUCENE_30, "content", self.analyzer)
-    query = query.parse(query_string)
+    query = query_parser.parse(query_string)
     return self.search.search(query, max_hits)
 
 
