@@ -1,5 +1,6 @@
 import lucene
 import sys
+import re
 
 #This works (the deprecated code)
 
@@ -24,6 +25,24 @@ class Retriever:
     query_parser = lucene.QueryParser(lucene.Version.LUCENE_30, "content", self.analyzer)
     query = query_parser.parse(query_string)
     return self.search.search(query, max_hits)
+
+
+  # retrieves the indexed collections based on their root URL.
+  # for example, all the data is stored in "data/x".  This 
+  # method returns a dictionary where the key is "x" and the 
+  # value is a collection of all the docs in that folder
+  def get_collections (self):
+    collections = {}
+    reader = lucene.DirectoryReader.open(self.directory)
+    for i in range(0, reader.maxDoc() - 1):
+      doc = reader.document(i)
+      file_path = doc.get("filepath")
+      collection_name = re.match("^data/([A-Za-z\-]*)", file_path).group(1)
+      if collection_name not in collections:
+        collections[collection_name] = []
+      collections[collection_name].append(doc)
+    return collections
+
 
 
 
