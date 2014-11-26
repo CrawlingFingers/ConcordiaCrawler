@@ -36,7 +36,7 @@ def uquery():
 def main():
 
   # check for args
-  if sys.argc < 2:
+  if len(sys.argv) < 2:
     print("")
     print("Usage: ")
     print("  python retrieve.py <index_directory>")
