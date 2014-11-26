@@ -24,3 +24,13 @@ if len(sys.argv) < 2:
 # initialize Retriever
 retriever = Retriever(sys.argv[1])
 collections = retriever.get_collections()
+
+
+# rank collections by sentiment
+sentiments = { k: reduce(lambda sum, val: sum + val, v) for k, v in collections.iteritems() }
+
+
+# print sentiments
+print("Sentiments by department: ")
+for k, v in sentiments.iteritems():
+  print(k + ": " + str(v))
