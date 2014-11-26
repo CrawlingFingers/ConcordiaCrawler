@@ -50,6 +50,14 @@ if sentiments['computer-science-software-engineering'] > sentiments['electrical-
 else:
   print("A:  Computer Science and Software Engineering is less positive than Electrical and Computer Engineering")
 
+# question 3
+print("Q3. Rank the departments in ENCS by sentiment of their web documents")
+print("A:")
+ordered_sentiments = sorted(sentiments.items(), key=lambda x: x[1])
+for i, s in enumerate(ordered_sentiments):
+  print(str(i) + "       " + s[0] + "    " + s[1])
+
+
 # finally
 print("")
 print("Bye! :)")
