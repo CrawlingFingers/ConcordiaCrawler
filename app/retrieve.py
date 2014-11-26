@@ -47,10 +47,13 @@ def main():
   retriever = Retriever(sys.argv[1])
 
   # init query loop
-  quit = False
   while not quit:
     userq = uquery()
-    quit = userq == "quit"
+    
+    if userq == "quit":
+      print("Bye :)")
+      sys.exit()
+    
     hits = retriever.query_content(userq)
     print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, qq)
 
