@@ -28,8 +28,7 @@ class Retriever:
 
 
 def uquery():
-  print("Enter a query, or type \"quit\" to quit:")
-  userin = sys.stdin.readline()
+  userin = raw_input("Enter a query, or type \"quit\" to quit:")
   return userin
 
 
