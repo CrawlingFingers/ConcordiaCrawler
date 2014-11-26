@@ -29,6 +29,12 @@ collections = retriever.get_collections()
 # rank collections by sentiment
 sentiments = { k: reduce(lambda sum, val: sum + float(val.get("sentiment")), v, 0.0) for k, v in collections.iteritems() }
 
+# intro printer
+print("")
+print("COMP479 Final Project")
+print(" by ")
+print("Connor Bode, Greg Houle, Michael bla")
+print("")
 
 # question 1
 print("Q1. Which is the most positive Department in ENCS at Concordia?")
@@ -43,3 +49,8 @@ if sentiments['computer-science-software-engineering'] > sentiments['electrical-
   print("A:  Computer Science and Software Engineering is more positive than Electrical and Computer Engineering")
 else:
   print("A:  Computer Science and Software Engineering is less positive than Electrical and Computer Engineering")
+
+# finally
+print("")
+print("Bye! :)")
+print("")
