@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Prakash Panangaden's Home Page</title>
+
+<style type="text/css">
+<!--
+body {
+	background-color: #000000;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+-->
+</style>
+
+<style type="text/css"></style>
+
+<script src="http://www.cs.mcgill.ca/~prakash/jquery-1.2.1.pack.js" type="text/javascript"></script>
+<script src="http://www.cs.mcgill.ca/~prakash/jquery-easing.1.2.pack.js" type="text/javascript"></script>
+<script src="http://www.cs.mcgill.ca/~prakash/jquery-easing-compatibility.1.2.pack.js" type="text/javascript"></script>
+<script src="http://www.cs.mcgill.ca/~prakash/coda-slider.1.1.1.pack.js" type="text/javascript"></script>
+	
+	<!-- 
+	The CSS. You can of course have this in an external .css file if you like.
+	-->
+	<style type="text/css">
+		
+		* { margin: 0; padding: 0 }
+		/* I've used a hard CSS reset above, but you should consider a more sophisticated reset, such as this one: http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */
+		
+		p { text-align: left; margin: 15px 0 }
+		
+		p, ul { font-size: 13px; line-height: 1.4em } 
+		
+		p a, li a { color: #39c; text-decoration: none }
+		
+		p.intro { border-bottom: 1px solid #ccc; margin-bottom: 20px; padding: 20px 0 30px 0; text-align: center; width: 100% }
+		
+		p#cross-links { text-align: center }
+		
+		p#cross-links { border-bottom: 1px solid #ccc; margin-bottom: 30px; padding-bottom: 30px }
+		
+		noscript p, noscript ol { color: #a00; font-size: 13px; line-height: 1.4em; text-align: left }
+		noscript a { color: #a00; text-decoration: underline }
+		noscript ol { margin-left: 25px; }
+		
+		a:focus { outline:none }
+		
+		img { border: 0 }
+		
+		h3 { border-bottom: 1px solid silver; margin-bottom: 5px; padding-bottom: 3px; text-align: left }
+		
+		body {
+	font-family: Verdana, Arial;
+	background: #ebebeb url("images/body-bg.png") repeat-y center;
+	color: #000;
+	width: 800px;
+	margin: auto;
+	text-align: center;
+	padding-bottom: 20px;
+	background-color: #000000;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: autp;
+	margin-bottom: auto;
+		}
+		
+		.stripViewer .panelContainer .panel ul {
+			text-align: left;
+			margin: 0 15px 0 30px;
+		}
+		
+		.slider-wrap { /* This div isn't entirely necessary but good for getting the side arrows vertically centered */
+			margin: 20px 0;
+			position: relative;
+			width: 100%;
+		}
+
+		/* These 2 lines specify style applied while slider is loading */
+		.csw {width: 100%; height: 460px; background: #fff; overflow: scroll}
+		.csw .loading {margin: 200px 0 300px 0; text-align: center}
+
+		.stripViewer { /* This is the viewing window */
+			position: relative;
+			overflow: hidden; 
+			border: 0px solid #000; /* this is the border. should have the same value for the links */
+			margin: auto;
+			width: 400px; /* Also specified in  .stripViewer .panelContainer .panel  below */
+			height: 196px;
+			clear: both;
+		}
+		
+		.stripViewer .panelContainer { /* This is the big long container used to house your end-to-end divs. Width is calculated and specified by the JS  */
+			position: relative;
+			left: 0; top: 0;
+			width: 100%;
+			list-style-type: none;
+			/* -moz-user-select: none; // This breaks CSS validation but stops accidental (and intentional - beware) panel highlighting in Firefox. Some people might find this useful, crazy fools. */
+		}
+		
+		.stripViewer .panelContainer .panel { /* Each panel is arranged end-to-end */
+			float:left;
+			height: 100%;
+			position: relative;
+			width: 700px; /* Also specified in  .stripViewer  above */
+		}
+		
+		.stripViewer .panelContainer .panel .wrapper { /* Wrapper to give some padding in the panels, without messing with existing panel width */
+			padding: 10px;
+		}
+		
+		.stripNav { /* This is the div to hold your nav (the UL generated at run time) */
+			margin: auto;
+		}
+		
+		.stripNav ul { /* The auto-generated set of links */
+			list-style: none;
+		}
+		
+		.stripNav ul li {
+			float: left;
+			margin-right: 2px; /* If you change this, be sure to adjust the initial value of navWidth in coda-slider.1.1.1.js */
+		}
+		
+		.stripNav a { /* The nav links */
+			font-size: 10px;
+			font-weight: bold;
+			text-align: center;
+			line-height: 25px;
+			background: #009900;
+			color: #FFF;
+			text-decoration: none;
+			display: block;
+			padding: 0 15px;
+		}
+		
+		.stripNav li.tab1 a { background: #006600 }
+		.stripNav li.tab2 a { background: #006600 }
+		.stripNav li.tab3 a { background: #006600 }
+		
+		.stripNav li a:hover {
+			background: #000000;
+		}
+		
+		.stripNav li a.current {
+			background: #003300;
+			color: #fff;
+		}
+		
+		.stripNavL, .stripNavR { /* The left and right arrows */
+			position: absolute;
+			top: 230px;
+			text-indent: -9000em;
+		}
+		
+		.stripNavL a, .stripNavR a {
+			display: block;
+			height: 40px;
+			width: 40px;
+		}
+		
+		.stripNavL {
+			left: 0;
+		}
+		
+		.stripNavR {
+			right: 0;
+		}
+		
+		.stripNavL {
+			background: url("images/arrow-left.gif") no-repeat center;
+		}
+		
+		.stripNavR {
+			background: url("images/arrow-right.gif") no-repeat center;
+		}
+		
+	body,td,th {
+	color: #FFFFFF;
+}
+a:link {
+	color: #777777;
+}
+a:visited {
+    color: #777777;
+}
+a:hover {
+    color: #FF0000;
+}
+.style1 {
+	font-family: "Lucida Sans";
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+}
+    .style2 {
+	color: #000000;
+	font-size: 12px;
+}
+    .style3 {font-size: 12px}
+    </style>
+	
+	<!-- Initialize each slider on the page. Each slider must have a unique id -->
+<script type="text/javascript">
+jQuery(window).bind("load", function() {
+			jQuery("div#slider1").codaSlider()
+			// jQuery("div#slider2").codaSlider()
+			// etc, etc. Beware of cross-linking difficulties if using multiple sliders on one page.
+		});
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+</head>
+
+<body onload="MM_preloadImages('image/index/nav/links.png','image/index/nav/cv.png','image/index/nav/pubs.png','image/index/nav/confs.png','image/index/nav/talks.png','image/index/nav/students.png','image/index/nav/teaching.png','image/index/nav/lab.png')">
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><img src="http://www.cs.mcgill.ca/~prakash/image/index/header.png" width="850" height="122" /></td>
+  </tr>
+  <tr>
+    <td><img src="http://www.cs.mcgill.ca/~prakash/image/index/nav.png" width="850" height="31" border="0" usemap="#Map" id="Image1" /></td>
+  </tr>
+  <tr>
+    <td><table border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="520" background="image/index/content.png"><table width="518" height="23" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="32">&nbsp;</td>
+            <td width="486"><div align="left">
+              <p class="style2">I have three research areas: (a)
+              probabilistic systems (b) logic and computation and (c)
+              quantum information theory.  I work on approximation of
+              continuous-state systems and associated metrics and logics.
+              Lately I have been working on Stone duality for Markov
+              processes and completeness theorems for Markovian logics.  
+
+              In logic and computation I am interested in security and
+              modal logics for reasoning about information flow and in
+              incorporating modalities into the programming language.  My
+              main recent activity is using Stone-type dualities to
+              minimize automata of various kinds.  I am also interested in
+              Tannaka-type theorems for C* algebras.
+              In quantum information theory I work on informatic phenomena in
+              relativistic situations. 
+              <!-- <p class="style2">Alexandra Silva and I recently organized
+              <a href="Bellairs/14/wshop14.html">a workshop on duality
+              theory</a> 
+              at <a href="http://www.mcgill.ca/bellairs">Bellairs</a> in
+              March 2014.  We also organized a parallel workshop on
+              probabilistic systems.<br>
+              I have recently published a book
+              called <a
+              href="http://www.worldscibooks.com/compsci/p595.html"><b>Labelled
+              Markov Processes</b>.</a><br>-->
+              The <a href="edb.html"><b>editorial
+              boards</b></a> on which I serve are accessible
+              through <a href="edb.html">Links</a> above.<br>
+              <!-- I was recently <a href="mycitation.pdf">elected</a> as a
+              Fellow of the Academy of Science of the <a href="http://rsc-src.ca/en">Royal
+              Society of Canada</a>.<br>
+              <a href="fifteen.htm"> Here</a> is a list
+              of my favourite fifteen papers.<br> 
+              <a href="links.html">Here </a> are some links.</p> -->
+              
+              </div></td>
+          </tr>
+        </table></td>
+        <td bgcolor="#FFFFFF"><img src="http://www.cs.mcgill.ca/~prakash/image/index/dad.png" width="305" height="226" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="221" background="image/index/bottom.png"><table width="821" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="63" width-"100"><img src="http://www.cs.mcgill.ca/~prakash/image/index/spacer.png" /></td>
+        <td width="169" background="image/index/sliderbackground.png"><div class="slider-wrap">
+	<div id="slider1" class="csw">
+		<div class="panelContainer">
+		
+			<div class="panel" title="Recent Publications">
+				<div class="wrapper" >
+					<p class="style1">Recent Publications</p>
+<p>
+<a href="http://www.cs.mcgill.ca/~prakash/Pubs/new_plain.pdf"> Aproximating
+  Markov processes by ...</a> (JACM)<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Pubs/fair-reactive.pdf"> Fair
+				reactive programming.</a> (POPL 2014)<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Pubs/BrzMin.pdf">
+  Algebra-coalgebra duality ...</a> (TOCL)<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Pubs/lics2013.pdf"> Stone duality
+  for Markov processes.</a> (LICS 2013)<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Pubs/mfcs2013.pdf"> Strong
+  completeness for Markovian logics.</a> (MFCS 2013)<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Pubs/sud11.pdf">Quantum
+  Communication in Rindler Spacetime.</a> (CMP)<br>
+<a href="publications.html">More Publications </a></p>
+					
+				
+				</div>
+			</div>
+			<div class="panel" title="Recent Talks">
+				<div class="wrapper">
+					
+					<p class="style1">Recent Talks</p>
+<p>
+Duality tutorial at Oxford, May 2014: <a href="http://www.cs.mcgill.ca/~prakash/Talks/ssqs14-1.pdf">
+    Stone</a>, <a href="http://www.cs.mcgill.ca/~prakash/Talks/ssqs14-2.pdf"> Gelfand,</a><br>
+    and <a href="http://www.cs.mcgill.ca/~prakash/Talks/ssqs14-3.pdf"> Pontryagin.</a><br>
+<a href="http://www.cs.mcgill.ca/~prakash/Talks/vmcai_nopics.pdf">Invited talk</a> at VMCAI, Jan 2014 <br>
+<a href="http://www.cs.mcgill.ca/~prakash/Talks/lics13_inv_talk_nopics.pdf">Invited talk</a> at LICS, June 2013.<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Talks/ann_csqt.pdf">Talk</a> at Benasque, Spain, June 2013.<br>
+<a href="http://www.cs.mcgill.ca/~prakash/Talks/glynn_birthday.pdf">Talk</a> given at the Symposium to
+    Honour Glynn Winskel.<br>
+<a href="talks.html">More Talks</a></p>
+					
+				</div>
+			</div>		
+		  <div class="panel" title="Recent Conferences">
+				<div class="wrapper">
+					<p class="style1">Recent Conferences and Workshops</p>
+					<p>
+ICALP 2015 PC Member <br>
+CSR 2015 PC Member <br>
+ICTAC 2015 PC Member <br>
+MFPS 2014 PC Member <br>
+QPL 2014 PC Co-chair
+<br /><br />> <a href="confs.html">More Conferences</a></p>
+
+					
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+		  </div>
+		</div><!-- .panelContainer -->
+	</div><!-- #slider1 -->
+</div>
+<p>
+  <!-- .slider-wrap --></td>
+        <td width="589" valign="bottom">
+          <div align="right">
+          <table width="378">
+            <tr>
+              <td width="370" height="95" valign="top"><span class="style3">E-mail: prakash@cs.mcgill.ca<br />
+Office: McConnell ENGG North Wing 105<br />
+Office Phone: +1 514 3987074,FAX: 3983883<br />
+My postal address is <a href="contact.html"> here</a>;<strong> do not use my
+                  office number.</strong><br>
+                Teaching :<br> COMP 330 Tu Th 11:30 - 1:00 Leacock 232<br>
+                           COMP 525: Tu Th 4:00 - 5:30 Trottier 2100
+<br /> Office Hours: Tu Th 1:30 - 3:00.
+<br />
+My Fall 2014 schedule <a href="http://www.cs.mcgill.ca/~prakash/fall2014.pdf"> is here.</a><br>
+Please check my Google cal
+link below.</a><br>
+
+</span><br /></td>
+          </tr></table>
+  <table width="399" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="right" valign="top"><table width="374" border="0" cellpadding="10" cellspacing="0">
+        
+        <tr>
+          <td width="31"><a href="pics.html"><img src="http://www.cs.mcgill.ca/~prakash/image/index/photo.png" width="50" height="50" /></a></td>
+          <td width="126"><div align="center"><a href="http://www.cs.mcgill.ca/people/faculty/profile?uid=prakash"><img src="http://www.cs.mcgill.ca/~prakash/image/index/department.png" width="74" height="55" /></a></div></td>
+          <td width="108"><a href="google_cal.html"><img src="http://www.cs.mcgill.ca/~prakash/image/index/cal.png" alt="calendar" width="73" height="73" /></a></td>
+          <td width="29">&nbsp;</td>
+        </tr>
+        <tr>
+          <td valign="top"><span class="style3"><a href="pics.html"> Photos</a> </span></td>
+          <td><div align="center"><span class="style3"><a href="http://www.cs.mcgill.ca/people/faculty/profile?uid=prakash">My
+          SOCS home page</a> </span></div></td>
+          <td valign="top"><span class="style3"><a href="google_cal.html">My Google calendar</a></span></td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+      
+     </tr>
+   </table>
+<!--    
+<table  width="400" align="center">    
+    <tr>
+      <td align="center" valign="bottom"> 
+<a href="mcgill_google.html">My Google McGill search engine.
+<!--      <FORM method=GET action="http://www.google.ca/univ/mcgill"> 
+      <INPUT TYPE=text name=q size=31 maxlength=255 value=""> 
+  <INPUT type=submit name=btnG VALUE="McGill Google Search"> -->
+  		</td>
+    </tr>
+</table>
+          </div><br /></td>
+      </tr>
+    </table>
+  
+</table>
+
+<map name="Map" id="Map">
+  <area shape="rect" coords="25,-9,112,30" href="publications.html" alt="Publications" onmouseover="MM_swapImage('Image1','','image/index/nav/pubs.png',1)" onmouseout="MM_swapImgRestore()" />
+<area shape="rect" coords="112,2,335,32" href="confs.html" alt="conferences and workshops" onmouseover="MM_swapImage('Image1','','image/index/nav/confs.png',1)" onmouseout="MM_swapImgRestore()" /><area shape="rect" coords="337,-4,402,27" href="talks.html" alt="Talks" onmouseover="MM_swapImage('Image1','','image/index/nav/talks.png',1)" onmouseout="MM_swapImgRestore()" />
+<area shape="rect" coords="402,4,491,29" href="students.html" alt="Students" onmouseover="MM_swapImage('Image1','','image/index/nav/students.png',1)" onmouseout="MM_swapImgRestore()" />
+<area shape="rect" coords="492,3,560,32" href="teaching.html" alt="Teaching" onmouseover="MM_swapImage('Image1','','image/index/nav/teaching.png',1)" onmouseout="MM_swapImgRestore()" />
+<area shape="rect" coords="559,1,635,35" href="rllab.html" alt="RL Lab" onmouseover="MM_swapImage('Image1','','image/index/nav/lab.png',1)" onmouseout="MM_swapImgRestore()" />
+<area shape="rect" coords="632,-8,690,29" href="edb.html" alt="Links" onmouseover="MM_swapImage('Image1','','image/index/nav/links.png',1)" onmouseout="MM_swapImgRestore()" />
+<area shape="rect" coords="690,-2,827,28" href="cv.html" alt="curricullum " onmouseover="MM_swapImage('Image1','','image/index/nav/cv.png',1)" onmouseout="MM_swapImgRestore()" />
+</map></body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               

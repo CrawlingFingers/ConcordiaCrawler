@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 575  Fundamentals of Distributed Algorithms</TITLE>
+</HEAD>
+<BODY bgcolor="CCFFFF" text="#333333">
+<font color="3399CC">
+<h1 align="center">DISTRIBUTED ALGORITHMS PROJECT</h1>
+</font>
+</font>
+
+<P>In this project, you are asked to build a parallel queuing network simulator on a network of workstations
+implementing either of the deadlock detection algorithms for communication deadlocks which we discussed
+in class. A queuing network simulator is consists of a collection of discrete event simulators which
+pass events between themselves. Each of the discrete event simulators constitutes a process in the
+distributed simulation. You will make use of a 
+blocking (i.e. conservative) algorithm in the queueing network simulation. This means that if one of the
+queues at a process is empty, then the process blocks itself until it
+receives a message in the empty queue. This blocking is the cause of the deadlocks which occur in the
+simulation. This is why you will be using the deadlock detection algorithm. 
+<P> Here is how you organize the project. First you write a simulation without any message
+passing at all, i.e. a one node simulation. Then you include message passing into the picture. Then you
+include the knot detection algorithm into the picture (last but not least!!!).
+<P> How do you write the one  node simulation? Simple, you create events and routines which proess the
+events.You put the events into a priority queue ordered by their time-stamps.You will need two events, send_message, receive_message, to start with. The routine which processes
+the send_event figures out how much (logical) time to add to the time-stamp of the event which it selects.
+The time that it adds is a constant (we will discuss the details of how to figure out this constant
+in class). 
+<P> How do we extend this to multiple workstations?  First, we use MPI to send messages (which contain
+events) between the workstations. Then  we implement the blocking algorithm, and finally we implement the knot
+detection algorithm. When the time comes, we will briefly discuss MPI in class. Reading materials are
+indicated on the course home-page. 
+<P> The trick to doing this project is to follow the above recipe for doing it, i.e. first the single proces
+simulator, then the multiple process simulator. We will devote class time to each part of the project as
+the semster progresses. 
+<P> Last but not least, the project is due on the last day of classes.  You will have to mail in the
+(well commented) source to the TA. We will make appointments to demonstrate the program to the TA. We will
+sort out these details as the time approaches. 
+</BODY>
+</HTML>
+
+
+

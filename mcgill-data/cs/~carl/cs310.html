@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 310/ECSE 427  Operating Systems</TITLE>
+</HEAD>
+<BODY bgcolor="CCFFFF" text="#333333">
+<font color="3399CC">
+<h1 align="center">OPERATING SYSTEMS<br>COMP 310/ECSE 427</h1>
+</font>
+</font>
+<h3>Instructor</h3>
+<a href="http://www.cs.mcgill.ca/~carl"> Carl Tropper </a>
+<br>
+Office:112N McConnell<br>
+email:carl@cs.mcgill.ca<br>
+Phone:(514) 398-3743<br> 
+Office hours:
+Tuesday,Thursday : 12-1:30, McConnell 
+<h3>Teaching assistants</h3>
+1.Arash Nourian<br>
+Trottier 3130 (office hours)<br>
+Office hour: Wednesday, 12:30-1:30<br>
+e-mail: arash.nourian@mail.mcgill.ca<br> 
+2.Hariharan Natnasirhamani<br> 
+McConnell Engineering Building 107(Distributed Simulation Laboratory)<br>
+Office hour:Friday, 11:30-12:30<br>
+e-mail:hariharan.natansihamani@mail.mcgill.ca<br>
+<h3>
+What is the course about?</h3>
+</P>
+<P>
+Viewed from the outside, an operating system (OS) is an interface for the
+user of a computer to
+the hardware which actually comprises the computer. Its job is to
+allow the user to make use of the hardware without actually acquainting
+himself with the details of its operation. Hence high-level abstractions
+for such functions as the reading and writing of files are necessary for
+someone to be actually able to use a computer. Another way of saying 
+this is that the user is presented with a virtual machine to make use
+of. However, the OS also has the fundamental job of managing the
+hardware, i.e. providing access to the many programs which compete
+for the hardware (processors, disks, memory) in an efficient and fair
+way. 
+</P>
+<P> Operating systems have a long and interesting history from the first
+batch systems to our present generation of personal computer OS's, 
+distributed OS's, and "specialized" systems such as real-time and
+embedded systems. They continue to evolve and be the subject of
+active research.
+<P>Major topics to be covered in this course are:
+<ul>
+<li><I>Processes and threads</I> Process and thread models, process and
+thread creation,implementation.</li>
+<li><I>Memory management</I> Swapping,virtual memory,page replacement
+algorithms.</li>
+<li><I>File Systems</I> Directories, implementation.</li>
+<li><I>Multiple Processor Systems</I> Multiprocessors, distributed systems.</li> 
+<li><I>OS Security</I> Threats,cryptography,formal models,defense vs. offense.</li>
+</ul>
+<p>
+<I>Disclaimer</I>
+It is assumed that any student taking this course can program
+in C, or is willing to learn C. One reason for this is that OS internals are written
+in C. There is some supplementary material available on-line (see below)
+which is intended to provide a refresher for those of you who have been
+primarily programming in Java. The course itself is
+systems-oriented. Accordingly, 
+there will be a fair amount of programming in the form of assignments, which
+will comprise a large (50%) portion of the grade.
+
+<h3>What do I gain from this course?</h3>
+An understanding of how an extraordinarily complicated piece of software, which runs 
+all computers is built, along with some  understanding of how the OS has affected other areas
+of programming. Hands on experience through programming exercises will make this 
+real. 
+<br>
+<h3>Reading materials for the course</h3>
+<h4>Textbook</h4>
+<I>Operating Sytems,third edition</I>, by Andrew Tanenbaum 
+The author is a well known expert in the field, having written a stripped down
+version of UNIX (MINIX) for pedagogical purposes. Strangely enough, MINIX led
+to the development of LINUX. The book is available in the bookstore. You can also get
+copies from Amazon. 
+<h4>Other texts</h4>
+<ol>
+<li><I>Operating Systems:Design and Implementation</I> by Andrew Tanenbaum and Woodhull
+This text emphsizes the description of MINIX, so that students will have a concrete
+view of what the code in an OS really looks like.</li>
+<li><I>Operating Systems Concepts </I> by Silberschatz,et al. Known as the dinosaur
+book because of the art work on the cover, this has become a standard text for OS courses.</li>
+<li><I>Operating Systems: A Design Oriented Approach</I> by Crowley. Emphasizes the design of an OS, as the
+title proclaims.</li>
+</ol>
+<h4>Other Books</h4>
+<ol>
+<li><I>The Mythical Man Month:Essays on Software Engineering</I> by Fred Brooks. One of the original designers of the
+ OS 360, Brooks wrote a classic on what works when building a large software system.</li>
+<li>
+<I>Understanding the Linux Kernel</I> by Bovet and Cesati. An excellent desription of what is in the
+Linux Kernel</li>
+<li>
+<I>Advanced Programming in the UNIX Environment</I> by Stevens and Rago. How to write programs in C which
+use the Unix call interface and standard C library.</li> 
+</ol>
+<h4>Papers</h4>
+<ol>
+<li><I>Unix and Beyond: An Interview with Ken Thompson</I> by Cooke et al. One of original designers of UNIX,
+Thompson gives his thoughts about where the field is going</li>
+<li><I>On Building Systems that will fail</I> by Corbato. Actually, a Turing award lecture. Main point is-keep it
+simple, since complex systems will eventually fail.</li>
+</ol>
+<br><P>
+There is a detailed list of references at the back of the text for each of the chapters in the event that you
+wish to pursue some of the material in greater depth.
+<h3>Class schedule</h3>
+An approximate schedule is to be found at <a href="schedos.html">schedule</a>. By approximate, I mean that I can't
+guarantee that I will cover all of the material in the schedule. Problems for each of the chapters
+are included in the schedule.
+<h3>Course Evaluation</h3>
+<ul>
+<li><I>Final</I>:40%. The final will cover all of the material in the course up to
+and inlcluding the bitter end.</li> 
+<li><I>Midterm</I>:10%. I will provide you with a list of problems to do as we make
+our way through the course. These problems
+are intended to prepare you for the midterm and the final exam. You can work with other
+students on their solution, as this is a really good way to learn about the subject. 
+Doing the problems is the best way to study for the midterm and the final.</li> 
+<li><I>Course projects</I>: 50%</li>
+</ul>
+<h3>Course projects</h3>
+To be found at <a href="probos.html">Course Projects</a>
+<h3>Lecture slides</h3>
+To be posted when the lecture is given at <a href="slides.html">Lecture
+slides</a> Do yourself a favor-<it>read the text</it>. You will gain a lot more then taking the short cut. 
+<h3>Midterm</h3> Answers, statistics and the dreaded curve.
+<ul>
+<li><a href="http://www.cs.mcgill.ca/~carl/osmidtermanswers2011.docx">Answers to Midterm</a>
+</ul>
+</ul>
+</body>
+</html>
+
+ 
+                                                                                          

@@ -1,0 +1,361 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+
+
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 557 A1</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head><body>
+
+
+<center><table style="max-width: 800px;" width="100%" border="0"><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 557 - Fall 2010 - Assignment 1<br>
+Transform Hierarchy for Character Posing</h1>
+</div>
+
+
+<h2 class="section">Due 12:00 noon Monday 27 September</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+  <p>Download the <!-- <a href="a1.zip">provided code</a> --> provided
+  code from WebCT and dump it into a new java project. Follow the
+  instructions in assignment zero for setting up your environment.
+  Note that the provided code contains a jar called <em>mintools</em>.
+  We will be using more of these helper classes in subsequent
+  assignments, but for now, we are only using the
+  <em>TrackBallCamera</em> class.  The provided code attaches an
+  instance of this class to the glCanvas so that mouse events can be
+  used to alter the 3D view.  Using the left mouse button you can
+  rotate the object, using the middle button you can pan the object in
+  the viewing plane, and using the right mouse button you can move the
+  camera further or closer.</p>
+
+  <p>Start early!  This assignment is not supposed to be hard, or time 
+  consuming, yet it is possible to get caught up on various details.</p>
+
+  </div>
+
+<h2 class="section">Objectives
+</h2>
+
+  <div class="sbody">
+
+<a href="http://www.flickr.com/photos/geodesic/89654977/">
+<img style="padding-left: 20px; padding-bottom: 20px;" src="http://cs.mcgill.ca/~kry/comp557F10/a1/wood.png" border="0" align="right"></a>
+  <p>The purpose of this assignment is to use a hierarchy of
+  transformations to draw and animate a character.  You can use a
+  variety of objects to build your character.  Using glut to draw
+  spheres, cubes, cones, cylinders, and the occasional teapot will be
+  easiest.  If you also want to draw triangles and quadrilaterals, you
+  will need to specify their surface normal for lighting to work.</p>
+
+  <p>The file A1App.java contains the necessary source code to create
+  an OpenGL renderer in a windowed frame.  A reasonable camera
+  position and projection matrix is set up for you (see the use of the
+  <em>TrackBallCamera</em> instance in the display method).  The code
+  also contains <b>TODO</b> comments in the places where you will need
+  to add code to complete the assignment objectives that are given
+  below.</p>
+
+  <p>Each objective is worth one mark, unless otherwise noted.</p>
+
+  <ol>
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Create Scene Graph Nodes</em></span>
+
+       <p>
+       Finish writing the scene graph node class called
+       <em>BodyNode</em>.  The node should have a display method to
+       draw the contents of the node and all its children (which are
+       also <em>BodyNode</em>s).  In each node, you may want to store:
+       </p>
+
+       <ul><li>position with respect to its parent;</li>
+           <li>rotation axis for the joint connecting this node to its parent;</li>
+	   <li>current rotation angle;
+           <li>a list of children (possibly the empty list);</li>
+           <li>colour, i.e., material properties of the geometry of this node;
+           <li>position, scale, orientation, and geometry information for this node.</li>
+       </ul>
+
+       <p>Note that as described in the list above, the rotation axis
+       for the joint, and the position of the node with respect to its
+       parent, describe a rigid transformation.  The transformation
+       describes the local coordinate frame in which the geometry of
+       this node and its children are drawn.  In the last bullet item,
+       you can consider the position, scale, and orientation as
+       additional modeling transforms to help you to place your
+       desired canonical glut primitives (sphere, torus, cube, etc.).
+       </p></li>
+
+       <p>This is similar to how we saw the scene graph organized in
+       class, except that we are mixing many transforms, material
+       properties, and geometry in each node.  The idea here is to
+       simplify things slightly, but feel free to modify this as you
+       see fit (be careful that your modifications work nicely with
+       the rest of the objectives of the assignment).  For instance,
+       you may find it conceptually cleaner to keep the geometry in a
+       separate type of node (i.e., create another class, such as a
+       <em>GeometryNode</em>, to store the bottom two bullet items in
+       the above list).
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <img style="padding-left: 20px; padding-bottom: 20px;" src="http://cs.mcgill.ca/~kry/comp557F10/a1/chain.png" align="right">
+  <em>Create and Animate a Chain (two marks)</em></span>
+ 
+       <p> Write code such that when the 'C' key is pressed, a chain
+          is created.  The chain should be a reasonable length (e.g.,
+          5 to 10 links), where each link is a torus.  Choose your
+          glutSolidTorus parameters so that you get something that
+          resembles a chain link, and such that your chain is an
+          appropriate size to be seen on the screen (i.e., without
+          need of using the mouse to moving the camera from the
+          default position).  Each link should be rotated 90 degrees
+          from its parent, and placed such that it appears to be
+          hanging from its parent (see the screen shot at right).</p>
+
+       <p>Each link should rotate as if it is sliding at the point of
+          contact of its parent.  You have two options, and can do
+          either (or both, though doing both is obviously hardest).
+          The easier option is to use the axis of rotation that goes
+          through the center of the torus; this will produce a
+          rotation which is only visible via the motion of its
+          children (i.e., the torus will be rotating in place).  The
+          other option is to apply a rotation with an rotation axis
+          on, and tangent to, the <a href="http://www.google.ca/search?q=medial+axis">medial
+          axis<a> of the torus (i.e., at the point at center of the
+          tube above the point of contact, and tangent to the circle
+          at the center of the tube); this rotation will be visible
+          both at the children and the torus itself.  Note that the
+          third axis (the overall direction of the chain) is not a
+          good choice for rotations in the chain because twists along
+          the chain direction quickly result in interpenetration.</p>
+          
+       <p>Use the space bar to toggle the animation mode.  The
+          provided code has an animation mode that sets all the angles
+          to a sinusoid based on the current time to test your chain.
+          It should appear to be swinging.</p>
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <em>Create a Character (two marks)</em></span>
+
+       <p>
+  <a href="http://www.ode.org/ode-0.039-userguide.html">
+  <img style="padding-left: 20px; padding-bottom: 0px;" border="0" src="http://cs.mcgill.ca/~kry/comp557F10/a1/Imageball-and-socket-sm.png" align="right" alt="link goes to source... no need to read the manual!">
+  <img style="padding-left: 20px; padding-bottom: 0px;" border="0" alt="link goes to source... no need to read the manual!" src="http://cs.mcgill.ca/~kry/comp557F10/a1/Imagehinge-sm.png" align="right"></a> 
+       Create an articulated character when the user presses the <a TITLE="Why? D is close to C!">'D'</a>
+       key.  You can choose to make anything you like (e.g., animal,
+       human, robot), but it should have at least two legs, two arms,
+       and a head.  In all you should have about 20 degrees of freedom
+       in your character.</p>
+
+       <p>You will likely find it useful to first make a sketch of
+       your character to figure out how each of its body parts are
+       connected to one another and where.  Note that you will also
+       need to choose a reasonable root node for the character, such
+       as the torso.  Write code to create the various body parts, and
+       link them together by adding each child to the appropriate
+       parent.  Be sure to also add all your nodes to the
+       <em>nodeList</em>!  Note that you will want to avoid making a
+       DAG so that all limbs of your character can be animated
+       separately. </p>
+       
+       <p>Some joints should have a single degree of freedom (as shown
+       in the picture above left), such as knees and elbows, while you
+       should also have other joints which have multiple degrees of
+       freedom (e.g., hips, shoulders, neck).  You can create your
+       multi-DOF joints any way you like, but it should work with the
+       posing and animation controls in subsequent steps.  One easy
+       way to achieve a spherical joint would be to create three nodes
+       all at the same location with different rotation axes.  Two of
+       the three nodes need not have any geometry associated with
+       them, i.e., you would have two "invisible" nodes at the anchor
+       position of the ball in socket joint show in the picture above
+       right.
+       </p>
+       </li>
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <em>Posing Controls and Setting Key Frames</em></span>
+     
+       <p>
+       The provided code contains a primitive means of changing the
+       pose of your character.  The provided code uses the left and
+       right arrow keys to walk through the <em>nodeList</em>, and then
+       use up down arrows to adjust the angle by small increments
+       (perhaps a few degrees).</p>
+
+       <p>You may find it useful to try to find a way to modify the
+       code so that the currently selected node is drawn in a
+       different style or colour.
+       </p>
+
+       <p> Add code to save the current pose when you press 'K'.  Save
+       the pose into the existing list of "key poses".  Code already
+       exists to erase, load and save your key poses using keys 'E',
+       'L', and 'S'.  Any code you add should work with the provided
+       code, or you should fix it so that it works with your
+       implementation.</p>
+
+       <p> Note that using OpenGL picking to select which body part
+       you want to pose would be a great way to simplify the task of
+       character posing.  This is beyond the scope of this assignment,
+       but can be implemented for a 5% bonus!
+
+       <!-- could add this back, and other objectives for a 3 week assignment -->
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <em>Key Frame Animation</em></span>
+     
+       <p>
+       Create a simple key-frame animation.  Plan ahead!  The key pose
+       editing functions are very limited (i.e., there is no undo,
+       redo, insert, replace, delete, etc.).  Try to make a reasonable
+       walk cycle using at least four key poses.  Save the animation
+       and submit the resulting <em>keyposes.javabin</em> file with
+       your code.  Consider adding additional keyboard controls to
+       increase or decrease the speed of the keyframe animation
+       (currently the time between keyframes is half a second).
+       </p>
+       </li>
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <em>Readme File (two marks)</em></span>
+     
+       <p>
+       Create a <em>readme.txt</em> or <em>readme.pdf</em> file to
+       submit with your assignment.  The readme should include any
+       comments you have with respect to the assignment, and describes
+       anything you deem to be noteworthy.  Try to be brief!  Your
+       readme should also contain written answers to the following
+       questions:</p>
+
+       <ol type=a>
+       <li><p>Is setting the joint angles individually always a good
+       interface for setting key poses?  What do you think would be a
+       useful alternative?  Try to think of at least one alternative,
+       but list several if you can.</p></li>
+
+       <li><p>For the following pairs of transformation types, do they
+       commute <b>always</b>, <b>sometimes</b>, or <b>never</b>?
+       Always means always, while never means only if one or both are
+       the identity transformation.  Sometimes means that the
+       transforms do not commute in general, however, there are
+       situations where two transforms will commute.  If your answer
+       is sometimes, then describe, as concisely and as generally as
+       possible the situation where commutability will occur.</p>
+
+         <ul>
+         <li> Rotation and Scale in 2D</li>
+         <li> Rotation and Scale in 3D</li>
+         <li> Rotation and Rotation in 2D</li>
+         <li> Rotation and Rotation in 3D</li>
+         <li> Translation and Rotation in 3D</li>
+         <li> Translation and Scale in 3D</li>
+         <ul>
+       </li>
+       </ol>
+
+       </li>
+  </ol> 
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+    <div class="sbody">
+
+     <p>Great!  Be sure your name and student number is in the window
+     title, in your readme, and in the top comments section of each of
+     your source files.</p>
+
+     <p>Submit your source code and written answers in the readme file
+     as a <em>zip</em> archive via <a href="http://www.mcgill.ca/webct">WebCT</a>.  <b>DOUBLE CHECK</b>
+     your submitted files by downloading them from WebCT.  You cannot
+     receive any marks for assignments with missing or corrupt
+     files!!</p>
+
+     <p>Note that you are encouraged to discuss assignments with your
+     classmates, but not to the point of sharing code and answers.
+     All code and written answers must be your own.  </p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body></html>

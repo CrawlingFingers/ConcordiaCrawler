@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>Getting Started with JOGL</title>
+
+  <style>
+.title { font-family: Arial,Helvetica,sans-serif;
+color: rgb(153, 0, 0);
+font-size: 0.8em;
+text-align: left;
+padding-top: 0px;
+}
+.section { font-family: Arial,Helvetica,sans-serif; color: rgb(153, 0, 0);
+font-size: 1.2em;
+text-align: left; }
+.indent, .sbody{
+margin-left: 40px;
+}
+.sbody { font-family: Arial,Helvetica,sans-serif;
+color: rgb(0, 0, 0);
+font-size: 0.83em;
+max-width: 800px;
+text-align: left; }
+.info{
+font-family: Arial,Helvetica,sans-serif;
+color: rgb(0, 0, 0);
+font-size: 0.83em;
+text-align: left;
+vertical-align: top;
+}
+.icell1{
+padding-right: 25px;
+vertical-align: top;
+} .icell2{
+padding-right: 25px;
+vertical-align: top;
+} .schedule{ font-family: Arial,Helvetica,sans-serif;
+color: rgb(0, 0, 0);
+font-size: 0.83em;
+text-align: left;
+vertical-align: top;
+width: 90%;
+border-color: rgb(192, 192, 192);
+border-width: 0 0 1px 1px;
+border-style: solid;
+border-spacing: 0;
+border-collapse: collapse;
+}
+.scell{
+padding-left: 5px;
+border-color: rgb(192, 192, 192);
+border-width: 1px 1px 0 0;
+border-style: solid;
+vertical-align: top;
+} .scellg {
+padding-left: 5px;
+border-color: rgb(192, 192, 192);
+border-width: 1px 1px 0 0;
+border-style: solid;
+vertical-align: top;
+background-color: rgb(222, 222, 222);
+}
+  </style>
+</head>
+
+<body>
+
+<center>
+<table style="max-width: 800px;" border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <div class="title">
+<h1>Getting Started with OpenGL in Java </h1>
+      </div>
+
+      <div class="sbody">
+      <p><img style="padding-left: 20px; padding-bottom: 20px;" src="http://cs.mcgill.ca/~kry/comp557F13/asetup/a0.png" align="right"> This page provide information useful for
+getting your workspace ready to work on computer graphics and computer
+animation assignments.  The lab machines already have the necessary
+software installed, but if you are using your own machine then you may
+need to install some software.</p>
+
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>Java
+and Eclipse Software</em></span></p>
+
+      <p>If you are not already using Sun/Oracle Java, or have an
+older installation, then download and install the latest
+<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">
+Java SE JDK</a> (careful not to select the JRE). Note that
+you may already have "other" Java versions installed on your
+machine (for instance, Microsoft or GNU Java), but avoid using
+these as they will very likely lead to problems.</p>
+
+      <p>I also strongly recommend
+using <a href="http://www.eclipse.org">Eclipse</a>
+as a development environment. If you need to install it, then I suggest
+downloading the
+      <a href="http://www.eclipse.org/downloads/">Eclipse IDE for Java
+Developers</a> because it is slightly smaller. If you have multiple
+versions of java installed, you will want to make sure that you are
+using the appropriate JDK (see Window-&gt;Preferences, Java, Installed
+JREs) and have the compiler compliance level is set to at least 1.6
+(see Window-&gt;Preferences, Java, Compiler). 
+<!--If you are familiar with Eclipse, you can probably skip the rest of this section.-->
+</p>
+
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>Using
+Eclipse</em></span></p>
+
+      <p>Eclipse uses a workspace to organize your projects. When you
+start eclipse for the first time, it will make you a workspace in some
+default location (probably your home directory), but you can switch
+workspaces with the file menu, and open any folder you want for your
+workspace. One nice way to organize this would be to create a
+workspaceComp557 folder in your home directory, then tell eclipse to
+open that workspace.</p>
+
+      <p>
+Once your workspace is open, add a new java project, give it a name,
+such as A0, A1, etc. The defaults for the project when you click next are
+probably fine, e.g., default JRE, separate folders for source and class
+files. Once it is created, you will see a src folder for the source
+files and bin for the class files.  Note that you may eventually create
+additional folders for data.</p>
+
+      <p>
+Lastly a few tips on using eclipse to help you browse provided code. If
+you let your mouse hover over an identifier, variable or method, a
+window will pop up telling you what it is, and providing you with the
+javadoc. If you hold ctrl and click on an identifier, it will take you
+to its definition (e.g., the implementation of a method). This is a
+great way to explore code rapidly! Note the yellow forward and back
+buttons on the tool bar are useful for going back to where you were
+after control clicking an identifier.</p>
+
+
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>Provided
+Code</em></span></p>
+
+      <p>Download the <a href="http://cs.mcgill.ca/~kry/comp557F13/asetup/a0.zip">provided
+code</a>
+and dump it into a new java project. Note that the code lives in the <i>comp557.a0</i>
+package. Please do not
+change the package name for any of your assignments. This
+example code contains a minimal example framework with which you can
+try out the OpenGL API, and may be of use during the
+tutorials.</p>
+
+      <p>You'll want to put the provided code (see below) in src
+folder of your
+new project, and there are lots of ways to do this. Most
+importantly, you need the directory structure to match the
+package structure! An easy way is to copy the directory provided in the
+zip file and paste it into the src directory. Since everything lives in
+the package <span style="font-style: italic;">comp557</span>
+you need this folder (i.e., you can't just copy and
+paste the <span style="font-style: italic;">a0 </span>folder
+into src). If you copy files into your project on
+the file system side, you'll need to tell Eclipse to refresh its view
+of the project (right click on the project and select refresh). This
+summarizes the steps for "dumping the source code into a project".
+You'll have lots of errors at this point, but they all go away when you
+attach the jars as specified in the assignment.</p>
+
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>Libraries</em></span></p>
+
+      <p>The provided code uses <i>JOGL</i> for
+OpenGL
+bindings.
+      <i>JOGL</i> has been around for many years and has
+changed over the years to keep up to date with the evolving OpenGL
+specification.  The latest version involves "profiles" to
+allow for applications to be developed for different versions of OpenGL
+and different hardware (e.g., OpenGL ES 2.0, as you would use for an
+Android or iOS device). Grab the latest release version from
+<a href="http://jogamp.org/">jogamp.org</a>.  In version 2.0 of JOGL,
+installation has become slightly simpler with respect to the native
+libraries.
+See <a href="https://jogamp.org/jogl/doc/userguide/#localinstallation"> 
+local installation information</a>, and download the 7zip file.
+<!--, for instance,
+version <a href="https://jogamp.org/deployment/archive/rc/v2.0.2/">2.0.2</a>.
+Be sure to download the appropriate version for your platform.-->
+Unzip the archive somewhere convenient. You will want to include
+jogl-all.jar and gluegen-rt.jar in your build path, and likewise
+attach the provided source code for your own convenience (e.g.,
+jogl-src.zip).  Because you will need to do this for each assignment,
+you will want to set this up as a user library.
+
+<!-- <p>To complete most assignments you will likely need to use
+additional jars, such as the <i>vecmath</i> jar for working with
+matrices, points, and vectors. The <i>vecmath</i> package is available
+as part of JAVA3D, but instead of installing the full Java3D, you will
+be provided with the jar files on an assignment by assignment basis.
+For vecmath, you can attach the jar itself as source as the source
+code will be included.</p>  -->
+
+      <p>You may find the following links useful for
+documentation on OpenGL:</p>
+<ul>
+<li> <a href="http://glprogramming.com/red/">The OpenGL Programming Guide (The Red Book) online version</a> (<a href="http://www.amazon.com/OpenGL-Programming-Guide-Official-Learning/dp/0321173481">or
+at Amazon</a>)
+<li><a href="https://jogamp.org/wiki/index.php/Jogl_Tutorial">JOGAMP JOGL
+  Tutorial page</a>
+</ul>
+</p>
+   
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>JOGL User Library</em></span></p>
+
+<p>You will be using several jars in each assignment, and to save time
+in setting up dependancies it will be useful to create a user defined
+library that groups together the necessary jars.  Create a user
+library called JOGL2 and add to it jogl.all.jar and jlugen-rt.jar.
+You will want to set the source code attachment and native library
+location.  As we will also be regularly using vecmath.jar and
+mintools.jar you can add these too once they are provided. </p>
+
+<a href="http://cs.mcgill.ca/~kry/comp557F13/asetup/userlib.png"><img width="562" src="http://cs.mcgill.ca/~kry/comp557F13/asetup/userlib.png"></a>
+
+<p>Right click on your project, select settings, and choose Java Build
+  Path, and click on the Libraries tab.  When you click Add Library,
+  select User Library and click next, choose User Libraries, and click
+  New. Give it the name JOGL2.  Now add the jars to your library, set
+  the source path, and if necessary native library paths. Once
+  finished, you can select the user library you created for inclusion.
+
+
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>JOGL2.0 Idiosyncrasies</em></span></p>
+
+
+<p>As mentioned previously, different profiles are available, e.g.,
+  GL2, GL3.  You will notice in the provided code that we are pretty
+  much exclusively using GL2.</p>
+
+<p>OpenGL functions that have parameters that take pointers or arrays
+as argiments in C are mapped to Java an a way that facilitates code
+porting, but may look mysterious at first.  For instance, a glVertex
+  call that accepts an array of doubles, in JOGL, has the method 
+signature glVertex3dv(double[] v, int v_offset).  We typically provide
+  0 for the offset.  Alternatively we can use native IO buffers.</p>
+
+<p> DebugGL is your friend!  It will call glGetError for you and throw
+  exceptions.  Notice how the provided code sets the GL2 to be a
+  DebugGL2. </p>
+
+<!--
+      <p><span style="color: rgb(153, 0, 0); font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-weight: bold; text-align: left;"><em>Submitting Assignments on MyCourses</em></span></p>
+
+
+      <p>
+You should always check that the system has correctly received your
+uploaded files by downloading your submission and verifying its
+contents!  You can always "take back your work" before the deadline
+and resubmit.  Once the deadline has passed, you'll not be able to do
+this.  Late assignment submissions are permitted, but can only be made
+if you have not previously submitted an assignment.  If ever you have
+problems submitting your work, contact the instructor or one of the
+TAs. </p>
+-->
+      </div>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</center>
+
+</body>
+</html>

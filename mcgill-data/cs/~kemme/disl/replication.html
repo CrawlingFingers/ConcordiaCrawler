@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.06 [en] (X11; U; Linux 2.2.14 i586) [Netscape]">
+  <title>Replication</title>
+</head>
+<body bgcolor="#ffffff">
+<h2>Database Replication </h2>
+Data replication is very attractive in
+order to increase system throughput and provide fault-tolerance.
+However, it is a challenge to keep data copies consistent. Furthermore,
+in order to fully take advantage of the processing power of all
+replicas, adaptive load-balancing schemes are needed. <br>
+<p>Conceptually, our work can be split into two branches:<br>
+</p>
+
+<h3>Middleware-based replication</h3>
+
+<p>Middle-R is our middleware based replication tool. Clients connect to
+Middle-R via a JDBC driver and Middle-R forwards the requests to one of
+several database replicas. Each database replica is an instance of a
+non-replicated standard database system. We currently work with
+PostgreSQL. Middle-R can have one middleware instance, or one middleware instance for each database instance. Middle-R provides efficient, fast and consistent database replication for both cluster configurations (all replicas are within a LAN) and in WAN environments. Our approach provides fault-tolerance. 
+
+Current&nbsp; projects related to Middle-R:<br>
+</p>
+<ul>
+  <li><span style="font-weight: bold;">Isolation levels: </span>Our solutions allows for different levels of isolation of concurrent transactions. More recently, we have focused on snapshot isolation, as this is the level that is also provided by the underlying PostgreSQL system.<br>
+  </li>
+  <li><b>Wide-Area Systems: </b>
+Most research has focused on local area networks since
+communication is, in principle, fast in these networks. However, the
+requirement is also high to provide transparent, efficient, and
+consistent data replication in wide area networks. The usual communication technology used in clusters (e.g., group communication systems) does not work well in WAN settings. Our solution is nearly as
+performant as current commercial solutions for wide-area replication
+but at the same time provides a higher degree of flexibility and
+consistency. <br>
+  </li>
+  <li><span style="font-weight: bold;">Partial Replication: </span>While full replication places copies of data items at all replicas, partial replication only assigns copies of an individual data item to some replicas. When there is a high update workload full replication has too much overhead to keep all copies consistent and the individual replicas have little resources left to execute read operations. In contrast, with partial replication, a replica only has to execute the updates for data items for which it has local copies, and thus, has more potential to execute read operations. We have analyzed the performance gains that can be achieved with partial replication. We also addressed many challenges associated with partial replication, such as a more complex concurrency control, the challenge of finding a replica with the data copies needed for a request, and finally with the necessity  of distributed query execution.  <br>
+  </li>
+  <li><span style="font-weight: bold;">Relationship between middleware and database system: </span>When implementing a replication solution outside the database system, the replication tool does not have access to important components within the database system, such as concurrency control. Thus, functionality has to be reimplemented in the middleware. Understanding database interfaces, and the possibility to expose some of the internals to the outside world might allow for better performance and simpler solutions at the middleware layer.
+<br>
+  </li>
+</ul>
+
+
+<h3>Postgres-R<br>
+</h3>
+<p>Postgres-R is an extension of the open-source relational database
+system <a href="http://www.postgresql.org/">PostgreSQL</a>. Postgres-R
+provides efficient, fast and consistent database replication for
+cluster configuration. To address the performance and consistency
+challenges we exploit the rich semantics of <b> group communication
+systems.</b>
+<it>In particular, the approach exploits the <i> total
+order delivery </i> semantics of the multicast primitives to guarantee
+the
+isolation of transactions (all sites serialize conflicting
+transactions according to the total order in which the group
+communication system delivers messages), and the <i> reliable
+delivery </i> of
+messages despite failures to provide fault-tolerance (the same
+messages are delivered to all available sites making it is easy for
+the surviving system to decide on the commit/abort of pending
+transactions). Our approach provides atomicity and the same isolation
+level in regard to concurrency control than the underlying PostgreSQL
+system (snapshot isolation). Furthermore, its performance is excellent.
+For update transactions, it adds an overhead of a few milliseconds in
+order to propagate changes to all replicas. By adding new replicas to
+the system, the read load can be distributed leading to excellent
+scalability. Postgres-R uses the Spread group communication system. The
+product uses software
+developed by Spread Concepts LLC for use in the Spread toolkit. For
+more
+information about Spread see http://www.spread.or.g The current status
+and project related to Postgres-R are as follows. 
+<ul>
+  <li> <b> Postgres-R for Snapshot Isolation:</b> Our first prototype
+of Postgres-R in 2000 was&nbsp; based PostgreSQL 6.4. PostgreSQL 6.4
+uses 2-phase-locking as
+concurrency control protocol. In contrast, the current versions
+use&nbsp; a multiversion concurrency control mechanism similar
+to the one on Oracle 8i providing the isolation level snapshot
+isolation. Our newest version Postgres-R(SI) works correctly with this
+concurrency control method providing exactly the same isolation level
+as a centralized version of PostgreSQL. <br>
+  </li>
+  <li> <b> Recovery: </b>
+An essential aspect of cluster databases is the need to allow failed
+nodes to recover and rejoin the system without interruption of the
+ongoing transaction processing on the available nodes (denoted as
+online recovery). In particular, before a joining site can execute
+transactions, an up-to-date peer site has to provide the current state
+of
+the data to the joining site.
+We have developed online-recovery solutions and integrated them into
+our Postgres-R prototype. One solution transfers the entire database
+state to the joining replica, the other only sends the changes that
+were performed during the downtime of the rejoined site. With the means
+of heuristics, the system automatically chooses the recovery strategy
+that is expected to take less time depending on the database size and
+the changes the joining site needs to install.&nbsp; <br>
+  </li>
+  <li><span style="font-weight: bold;">Client transparency: </span>So
+far,&nbsp; a client has to know the address of a replica and must
+directly connect to this replica. When the replica fails, it receives
+the typical error message, and has to connect to another replica. We
+are planning to generate an automatic failover component. For instance,
+the JDBC driver could be extended with the following features. While
+the client sees a generic database name, the JDBC driver can retrieve a
+configuration file that provides the addresses of the individual
+replicas behind the database. Then it can connect to any (allowing
+possibly for some load-balancing features). When the client the driver
+is connected to crashes, the driver can automatically connect to
+another replica without the client being aware of it. <br>
+  </li>
+</ul>
+
+
+<h3><span style="font-weight: bold;">Collaboration</span></h3>
+Part of the work of both projects has been performed in the context of the <a href="http://adapt.ls.fi.upm.es/adapt.htm">Adapt</a>
+project (Middleware Technologies for Adaptive and Composable
+Distributed Components). Adapt was a RTD project funded by the
+Information Sociaty Technologies Programme of the European Commision
+under FP5, and the Programme de soutien &agrave; la recherche (PSR) of
+the
+Minist&egrave;re du D&eacute;veloppement &eacute;conomique, de
+l'innovation et de
+l'exportation (MDEIE) du Qu&eacute;bec, Canada.<br>
+<br>
+<hr>
+<address><a href="mailto:kemme@inf.ethz.ch"><br>
+</a></address>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYP HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Lectures for Artificial Intelligence I (COMP-424) - Winter 2012</title>
+  </head>
+
+<!-- Background white, links blue (unvisited), navy (visited), red (active) -->
+ <BODY
+  BGCOLOR="#FFFFFF"
+  TEXT="#000000"
+  LINK=blue
+  VLINK=purple
+  ALINK="#FF0000"
+ >
+<font=geneva,arial,helvetica>
+<center><h2>Lectures for Artificial Intelligence I (COMP-424)</h2></center>
+<center><h2>Winter 2014</h2></center>
+</font>
+<hr>
+
+<p>
+Lecture notes will be linked to this web page, in PDF format.  The <a href="http://www.adobe.com/products/acrobat/readstep.html">reader for
+PDF files</a> is available free from Adobe for UNIX, Apple Macintosh,
+and Windows. 
+<p>
+
+<p>
+<center><h3>Schedule</h3></center>
+
+<center><table BORDER=3 CELLSPACING=0 CELLPADDING=2 WIDTH="95%" NOSAVE >
+<tr NOSAVE>
+<td WIDTH="5%"><center><b><i><font color="#006600">Lec.</font></i></b></center></td>
+<td WIDTH="5%"><center><b><i><font color="#006600">Date</font></i></b></center></td>
+<td WIDTH="35%"><center><b><i><font color="#006600">Topic</font></i></b></center></td>
+<td WIDTH="20%"><center><b><i><font color="#006600">Readings</font></i></b></center></td>
+<td WIDTH="15%"><center><b><i><font color="#006600">Slides</font></i></b></center></td>
+<td WIDTH="20%"><center><b><i><font color="#006600">To-do (TENTATIVE DATES! Check frequently.)</font></i></b></center></td>
+</tr>
+
+<tr>
+<td><center>1</center></td>
+<td><center>Jan. 7</center></td>
+<td ALIGN=LEFT><b>Introduction</b></td>
+<td ALIGN=LEFT>RN, Chapter 1 & 2<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/01Intro.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>2</center></td>
+<td><center>Jan. 9 </center></td>
+<td><b>Search (uninformed)</b></td>
+<td>RN, Chapter 3<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/02UninformedSearch.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>3</center></td>
+<td><center>Jan. 14 </center></td>
+<td><b>Search (informed)</b></td>
+<td>RN, Chapter 3<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/03InformedSearch.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>4</center></td>
+<td><center>Jan. 16 </center></td>
+<td><b>Search (optimization)</b></td>
+<td>RN, Section 4.1<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/04Optimization.pdf">Slides</a></td>
+<td>Homework 1 <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework1.pdf">available now</a>. Sample <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/csp_base_code.txt">base code</a> (in python, change the extension to .py to run). Sample <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/example_input.txt">input file</a>.</td>
+</tr>
+
+<tr>
+<td><center>5</center></td>
+<td><center>Jan. 21 </center></td>
+<td><b>Search (under uncertainty)</b></td>
+<td>RN, Sec. 4.2-4.5<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/05CSP.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>6</center></td>
+<td><center>Jan. 23 </center></td>
+<td><b>Constraint satisfaction</b></td>
+<td>RN, Chapter 6<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/06SearchUncertainty.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>7</center></td>
+<td><center>Jan. 28 </center></td>
+<td><b>Game playing (Minimax)</b></td>
+<td>RN, Chapter 5<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/07Games.pdf">Slides</a></td>
+<td>Homework 1 due (next day).  <font color="#FF0000">Now available</font>: <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework1-solution.pdf">Homework 1 solution set</a></td>
+</tr>
+
+<tr>
+<td><center>8</center></td>
+<td><center>Jan. 30 </center></td>
+<td><b>Game playing (Monte-Carlo search trees)</b></td>
+<td>RN, Chapter 5<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/08MCTreeSearch.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>9</center></td>
+<td><center>Feb. 4 </center></td>
+<td><b>Logical reasoning (propositional logic)</b></td>
+<td>RN, Chapter 7<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/09PropositionalLogic.pdf">Slides</a></td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework2.pdf">Homework 2</a> with modified definition of Stop operator for Q4.</td>
+</tr>
+
+<tr>
+<td><center>10</center></td>
+<td><center>Feb. 6 </center></td>
+<td><b>Logical reasoning (first-order logic)</b></td>
+<td>RN, Chapters 8, 9<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/10FirstOrderLogic.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>11</center></td>
+<td><center>Feb. 11 </center></td>
+<td><b>Sequential logical reasoning (classical planning)</b></td>
+<td>RN, Chapter 10 <br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/11Planning.pdf">Slides</a></td>
+<td>Practice <a href="http://www.cs.mcgill.ca/~jpineau/comp424/midterm-practice.pdf">questions</a> with some <a href="http://www.cs.mcgill.ca/~jpineau/comp424/midterm-practice-solution.pdf">solutions</a>. Old <a href="http://www.cs.mcgill.ca/~jpineau/comp424/midterm-practice2.pdf">midterm</a>.</td>
+</tr>
+
+<tr>
+<td><center>12</center></td>
+<td><center>Feb. 13 </center></td>
+<td><b>Probabilistic reasoning (basics)</b></td>
+<td>RN, Chapter 13<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/12Probs.pdf">Slides</a></td>
+<td>Homework 2 due (next day). <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework2-solution.pdf">Homework 2 solution set</a></td>
+</tr>
+
+<tr>
+<td><center>13</center></td>
+<td><center>Feb. 18</center></td>
+<td><b><font color="#FF0000">Midterm Exam<br></font></b></td>
+<td><br></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>14</center></td>
+<td><center>Feb. 20</center></td>
+<td><b>Probabilistic reasoning (Bayesian networks)<br></b></td>
+<td>RN, Sec. 14.1, 14.2, 14.4<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/14BayesNets1.pdf">Slides</a></td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Project/project-specification-v2.pdf">Project specification</a> (ver.2), <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Project/code-description.pdf">code description</a> and <a href="https://code.google.com/p/mcgill-cs424-project-2014/source/browse/">project code repository</a> are now posted.</td>
+</tr>
+
+<tr>
+<td><center>15</center></td>
+<td><center>Feb. 25 </center></td>
+<td><b>Probabilistic reasoning (Bayesian networks cont'd)</b></td>
+<td>RN, Sec. 14.1, 14.2, 14.4<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/15Bayesnets2.pdf">Slides</a></td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework3.pdf">Homework 3</a> available.</td>
+</tr>
+
+<tr>
+<td><center>16</center></td>
+<td><center>Feb. 27 </center></td>
+<td><b>Learning probabilistic models with complete data</b></td>
+<td>RN, Sec. 20.1-20.2 (up to p.719) <br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/16ML.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center></center></td>
+<td><center>Mar. 4 </center></td>
+<td><b>Study week.</b></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center></center></td>
+<td><center>Mar. 6 </center></td>
+<td><b>Study week.</b></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>17</center></td>
+<td><center>Mar. 11 </center></td>
+<td><b>Learning probabilistic models with missing data</b></td>
+<td>RN, Sec. 20.3<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/17EM.pdf">Slides</a></td>
+<td>Homework 3 due (next day).  <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework3-solution.pdf">Homework 3 solution set</a> (updated Mar.18)</td>
+</tr>
+
+<tr>
+<td><center>18</center></td>
+<td><center>Mar. 13 </center></td>
+<td><b>Reasoning with temporal probabilistic models (HMMs)</b></td>
+<td>RN, Sec. 15.1-15.3<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/18TemporalInference.pdf">Slides</a></td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework4.pdf">Homework 4</a> available. Additional notes on <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/softem.pdf">soft EM</a></td>
+</tr>
+
+<tr>
+<td><center>19</center></td>
+<td><center>Mar. 18 </center></td>
+<td><b>Learning temporal probabilistic models (Baum-Welch)</b></td>
+<td>RN, Sec. 20.3<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/19LearningHMM.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>20</center></td>
+<td><center>Mar. 20 </center></td>
+<td><b>Reasoning with utilities</b></td>
+<td>RN, Chapter 16<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/20Utility.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>21</center></td>
+<td><center>Mar. 25 </center></td>
+<td><b>Learning utilities from exploration (Bandits)</b></td>
+<td>RN, Sec. 21.3</td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/21Bandits.pdf">Slides</a></td>
+<td>Homework 4 due (next day). <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework4-solution.pdf">Homework 4 solution set</a></td>
+</tr>
+
+<tr>
+<td><center>22</center></td>
+<td><center>Mar. 27 </center></td>
+<td><b>Sequential reasoning (Markov Decision Processes)</b></td>
+<td>RN, Sec. 17.1 - 17.3<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/22MDP.pdf">Slides</a></td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework5.pdf">Homework 5</a> available.</td>
+</tr>
+
+<tr>
+<td><center>23</center></td>
+<td><center>Apr. 1 </center></td>
+<td><b>Sequential reasoning (Markov Decision Processes, cont'd)</b></td>
+<td></td>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/23MDP-2.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>24</center></td>
+<td><center>Apr. 3 </center></td>
+<td><b>Learning sequential decisions (Reinforcement Learning)</b></td>
+<td>RN, Chapter 21<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/24RL.pdf">Slides</a></td>
+<td>Homework 5 due (next day). <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Homework/homework5-solution.pdf">Homework 5 solution set</a></td>
+</tr>
+
+<tr>
+<td><center>25</center></td>
+<td><center>Apr. 8</center></td>
+<td><b>Reasoning under uncertainty (POMDPs) and/or with multiple agents</b></td>
+<td>RN, Sec. 17.4-5<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/25POMDP.pdf">Slides</a></td>
+<td></td>
+</tr>
+
+<tr>
+<td><center>26</center></td>
+<td><center>Apr.10 </center></td>
+<td><b>AI: Present and Future.</b></td>
+<td>RN, Chapters 26 and 27<br>
+<td><a href="http://www.cs.mcgill.ca/~jpineau/comp424/Lectures/26Conclusion.pdf">Slides</a></td>
+<td>Project due (<font color="#FF0000">Update: due next day, Apr.11, 11:59pm</font>).  Written report <a href="http://www.cs.mcgill.ca/~jpineau/comp424/Project/evaluation_form.pdf">evaluation form</a>.</td>
+</tr>
+
+</table></center>
+
+
+  </body>
+</html>
+
+

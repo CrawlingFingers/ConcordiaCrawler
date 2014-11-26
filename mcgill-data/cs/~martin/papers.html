@@ -1,0 +1,700 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Martin Robillard - Publications</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Publications by Martin Robillard, an associate professor of computer science at McGill University.">
+  <link rel="stylesheet" href="http://www.cs.mcgill.ca/~martin/css/main.css" type="text/css" media="screen, projection" />
+  <link media="screen" href="http://www.cs.mcgill.ca/~martin/css/jquery.cluetip.css" type="text/css" rel="stylesheet">
+  <script type="text/javascript" src="http://www.cs.mcgill.ca/~martin/js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="http://www.cs.mcgill.ca/~martin/js/jquery.cluetip.js"></script>
+  <script type="text/javascript" src="http://www.cs.mcgill.ca/~martin/js/common-layout.js"></script>
+  
+  <script type="text/javascript">
+    $(function() {
+      // Set the abstract cluetip
+      $('.features a:textEquals("abstract")').each(function(){
+        // add the attributes needed for cluetip
+        var title = $(this).parent().parent().children('.title').html();
+	$(this).attr('title',title);
+        $(this).attr('class',$(this).attr('class') + " abstract");
+	$(this).attr('href',"papers/abstracts/" + $(this).attr('href')+ ".html");
+        $(this).attr('rel',$(this).attr('href'));
+        });
+      $('a.abstract').cluetip({ 
+           width: 600, 
+	   cursor:'pointer',
+	   activation: 'click',
+	   sticky: true,
+	   closePosition: 'bottom',
+	   closeText: '<img src="http://www.cs.mcgill.ca/~martin/images/cross.png" alt="" />'
+      });
+    });
+  </script>
+  
+</head>
+
+<body id="home">
+<div class="wrap">
+  <div id="logo">
+    <h1><a href="index.html">Martin Robillard</a></h1>
+    <p>Associate Professor &middot; McGill University</p>
+  </div>
+  <ul id="nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a class="current" href="papers.html">Publications</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="activities.html">Activities</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="students.html">Students</a></li>
+    <li><a href="software.html">Software</a></li>
+  </ul>
+</div>
+<div class="wrap">
+  <div id="left">
+
+    <h2>Publications</h2>
+
+    <p/>
+
+    <h3>2014</h3>
+
+    <p class="bibentry">Barth&eacute;l&eacute;my Dagenais and Martin
+  P. Robillard. <span class="title">Using Traceability Links to
+  Recommend Adaptive Changes for Documentation Evolution</span>. To
+  appear in <em>IEEE Transactions on Software Engineering</em>, 23
+  pages,  2014. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/tse2014a">abstract</a></span></p>
+
+    <p class="bibentry">Annie T.T. Ying and Martin
+    P. Robillard. <span class="title">Selection and Presentation
+    Practices for Code Example Summarization. </span> To appear
+    in <em>Proceedings of the 22nd ACM SIGSOFT International Symposium
+    on the Foundations of Software Engineering</em>, 2014. 11
+    pages. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/fse2014">abstract</a>
+    &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/fse2014.pdf">pdf</a></span>
+
+    <p class="bibentry">Gias Uddin and Martin
+    P. Robillard. <span class="title">How API Documentation
+    Fails. </span> To appear in <em>IEEE Software</em>, 2014.</p>
+
+    <p class="bibentry">Yam B. Chhetri and Martin
+    P. Robillard. <span class="title">Recommending Reference API
+    Documentation. </span> <em>Empirical Software
+    Engineering</em>, 2014. 28
+    pages. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/cr2014a">abstract</a>
+    &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/cr2014a.pdf">pdf</a> &middot; <a href="http://dx.doi.org/10.1007/s10664-014-9323-y">site</a></span></p>
+
+    <p class="bibentry">Martin P. Robillard and Robert
+    J. Walker. <span class="title">An Introduction to Recommendation
+    Systems in Software Engineering. </span> In Martin P. Robillard,
+    Walid Maalej, Robert J. Walker, and Thomas Zimmermann
+    (Eds.) <em>Recommendation Systems in Software
+    Engineering</em>. Springer, 2014. Pages
+    1-11. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/rw2014a">abstract</a>
+    &middot; <a href="http://link.springer.com/chapter/10.1007/978-3-642-45135-5_1">site</a></span></p>
+
+    <p class="bibentry">Annie T. T. Ying, Martin
+    P. Robillard. <span class="title">Developer Profiles for
+    Recommendation Systems. </span> In Martin P. Robillard, Walid
+    Maalej, Robert J. Walker, and Thomas Zimmermann
+    (Eds.) <em>Recommendation Systems in Software
+    Engineering</em>. Springer, 2014. Pages
+    199-222. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/yr2014a">abstract</a>
+    &middot; <a href="http://link.springer.com/book/10.1007%2F978-3-642-45135-5">site</a></span></p>
+
+    <p class="bibentry">Martin P. Robillard, Walid Maalej, Robert
+    J. Walker, and Thomas Zimmermann
+    (Eds.) <span class="title">Recommendation Systems in Software
+    Engineering. </span> Springer, 2014, ISBN 978-3-642-45134-8 <span class="features"><a href="http://www.cs.mcgill.ca/~martin/rww2014a">abstract</a>
+    &middot; <a href="papers.html">site</a></span></p>
+
+    <h3>2013</h3>
+
+    <p class="bibentry">Walid Maalej and Martin
+       P. Robillard. <span class="title">Patterns of Knowledge in API
+  Reference Documentation. </span> <em>IEEE Transactions on
+  Software Engineering</em>, 39(9):1264-1282, September 2013. 
+  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/tse2013b">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/tse2013a.pdf">pdf</a>
+  &middot; <a href="http://doi.ieeecomputersociety.org/10.1109/TSE.2013.12">site</a></span></p>
+  
+  <p class="bibentry">Annie T.T. Ying and Martin
+  P. Robillard. <span class="title">Code Fragment Summarization. </span> New Ideas Paper.  <em>9th joint meeting of the European Software Engineering Conference and
+the ACM SIGSOFT Symposium on the Foundations of Software Engineering</em>, 4 pages, August 2013.</p>
+    
+    <p class="bibentry">Peter C. Rigby and Martin
+  P. Robillard. <span class="title">Discovering Essential Code
+  Elements in Informal Documentation</span>. In <em>Proceedings of the
+  35th IEEE/ACM International Conference on Software Engineering</em>,
+  pages 832-841, May
+  2013. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2013">abstract</a>
+  &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icse2013.pdf">pdf</a></span></p>
+
+   <p class="bibentry">Martin P. Robillard, Eric Bodden, David Kawrykow, Mira Mezini, and Tristan Ratchford.
+  <span class="title">Automated API Property Inference Techniques. </span> <em>IEEE
+  Transactions on Software
+  Engineering</em>, 39(5):613-637, May 2013. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/tse2013a">abstract</a>
+  &middot; <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6311409">site</a></span></p> </p>
+
+  <h3>2012</h3>
+
+  <p class="bibentry">Barth&eacute;l&eacute;my Dagenais and Martin
+  P. Robillard. <span class="title">Recovering Traceability Links
+  between an API and its Learning Resources</span>. In <em>Proceedings
+  of the 34th IEEE/ACM International Conference on Software
+  Engineering</em>, pages 47-57, June 2012. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2012b">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icse2012b.pdf">pdf</a>  </span></p>
+  
+  <p class="bibentry">Ekwa Duala-Ekoko and Martin P. Robillard. <span
+  class="title">Asking and Answering Questions About Unfamiliar APIs:
+  An Exploratory Study</span>. In <em>Proceedings of the 34th IEEE/ACM
+  International Conference on Software Engineering</em>, pages
+  266-276, June
+  2012. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2012e">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icse2012e.pdf">pdf</a> </span></p>
+
+  <p class="bibentry">Gias Uddin, Barth&eacute;l&eacute;my Dagenais,
+  and Martin P. Robillard. <span class="title">Temporal Analysis of
+  API Usage Concepts</span>. In <em>Proceedings of the 34th
+  IEEE/ACM International Conference on Software Engineering</em>,
+  pages 804-814, June
+  2012. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2012g">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icse2012g.pdf">pdf</a> </span></p>
+
+  <h3>2011</h3>
+
+  <p class="bibentry">Gias Uddin, Barth&eacute;l&eacute;my Dagenais,
+  and Martin P. Robillard. <span class="title">Analyzing Temporal API
+  Usage Patterns</span>. Short paper. In <em>Proceedings of the 26th
+  IEEE/ACM International Conference on Automated Software
+  Engineering</em>, pages 456-459,  November 2011. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/ase2011">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/ase2011.pdf">pdf</a> </span></p>
+
+  <p class="bibentry">Barth&eacute;l&eacute;my Dagenais and Martin
+  P. Robillard. <span class="title">Recommending Adaptive Changes for
+  Framework Evolution</span>. <em>ACM Transactions on Software
+  Engineering and Methodology</em>, 20(4), September 2011. <span
+  class="features"><a href="http://www.cs.mcgill.ca/~martin/tosem2011b">abstract</a> &middot; <a href="http://dl.acm.org/authorize?6580492">pdf</a> </span>
+  </p>
+
+  <p class="bibentry">Ekwa Duala-Ekoko and Martin P. Robillard. <span
+  class="title">Using Structure-Based Recommendations to Facilitate
+  Discoverability in APIs</span>. In <em>Proceedings of the 25th
+  European Conference on Object-Oriented Programming</em>, pages
+  79-104, July 2011. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/ecoop2011">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/ecoop2011.pdf">pdf</a> </span></p>
+
+  <p class="bibentry">Annie T.T. Ying and Martin P. Robillard. <span
+  class="title">The Influence of the Task on Programmer
+  Behaviour</span>. In <em>Proceedings of the 19th IEEE International Conference
+  on Program Comprehension</em>, pages 31-40, June 2011. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icpc2011">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icpc2011.pdf">pdf</a> </span></p>
+
+  <p class="bibentry">David Kawrykow and Martin P. Robillard. <span
+  class="title">Non-Essential Changes in Version Histories</span>. In
+  <em>Proceedings of the 33rd ACM/IEEE International Conference on
+  Software Engineering</em>, pages 351-360, May 2011. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2011">abstract</a> &middot; <a href="http://dl.acm.org/authorize?414054">pdf</a></span>
+  </p>
+  
+  <p class="bibentry">Martin P. Robillard and Robert DeLine. <span
+  class="title">A Field Study of API Learning
+  Obstacles</span>. <em>Empirical Software Engineering</em>, 16(6):
+  703-732, 2011. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/esem2011">abstract</a> &middot; <a href="http://www.springerlink.com/content/g32350137247p233/">site</a>
+  </span>
+  </p>
+
+  <h3>2010</h3>
+
+  <p class="bibentry">
+  Barth&eacute;l&eacute;my Dagenais and Martin P. Robillard. <span
+  class="title">Creating and Evolving Developer Documentation:
+  Understanding the Decisions of Open Source Contributors</span>. In
+  <em>Proceedings of the 18th ACM SIGSOFT International Symposium on
+  the Foundations of Software Engineering</em>, pages 127-136,
+  November 2010. <strong>[ACM SIGSOFT Distinguished Paper]</strong>
+  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/fse2010">abstract</a> &middot; <a href="http://dl.acm.org/authorize?309272">pdf</a></span>
+  </p>
+    
+  <p class="bibentry">
+  Martin P. Robillard, Robert J. Walker and Thomas Zimmermann. <span
+  class="title">Recommendations Systems for Software
+  Engineering</span>. <em>IEEE Software</em>, 27(4):80-86, July-August
+  2010. <span class="features"> <a href="http://www.cs.mcgill.ca/~martin/ieeesw2010">abstract</a> &middot; <a href="http://doi.ieeecomputersociety.org/10.1109/MS.2009.161">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Ekwa Duala-Ekoko and Martin P. Robillard. <span class="title">Clone
+  Region Descriptors: Representing and Tracking Duplication in Source
+  Code</span>. <em>ACM Transactions on Software Engineering and
+  Methodology</em>, 20(1):1-31, June 2010. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/tosem2010e">abstract</a> &middot; <a href="http://dl.acm.org/authorize?363645">pdf</a> </span>
+  </p>
+
+  <p class="bibentry">
+  Barth&eacute;l&eacute;my Dagenais, Harold Ossher, Rachel
+  K.E. Bellamy, Martin P. Robillard, and Jacqueline P. de Vries. <span
+  class="title">Moving into a New Software Project
+  Landscape</span>. In <em>Proceedings of the 32nd ACM/IEEE
+  International Conference on Software Engineering</em>, pages
+  275-284, May 2010. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2010">abstract</a> &middot; <a href="http://dl.acm.org/authorize?369038">pdf</a>
+  </span>
+  </p>
+
+  <p class="bibentry"> Martin P. Robillard and
+  Barth&eacute;l&eacute;my Dagenais. <span class="title">Recommending
+  Change Clusters to Support Software Investigation: An Empirical
+  Study</span>. <em>Journal of Software Maintenance and Evolution:
+  Research and Practice</em>, 22(3):143-164, April 2010. <span
+  class="features"><a href="http://www.cs.mcgill.ca/~martin/jsme2010">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/jsme2010.pdf">pdf</a> </span>
+  </p>
+
+  <h3>2009</h3>
+
+  <p class="bibentry">
+  Martin P. Robillard. <span class="title">What Makes APIs Hard to Learn? Answers from
+  Developers</span>. <em>IEEE Software - Special Issue on the Collaborative
+  and Human Aspects of Software Engineering</em>, 26(6):27-34,
+  November/December 2009. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/software2009a">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/software2009a.pdf">pdf</a> &middot; <a href="http://dx.doi.org/10.1109/MS.2009.193">site</a> </span>
+  </p>
+
+  <p class="bibentry">
+  David Kawrykow and Martin P. Robillard. <span class="title">Improving API Usage through
+  Detection of Redundant Code</span>. In <em>Proceedings of the 24th IEEE/ACM
+  International Conference on Automated Software Engineering</em>,
+  pages 111-122, November 2009. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/ase2009a">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/ase2009a.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1747491.1747513&coll=ACM&dl=ACM&type=series&idx=SERIES10803&part=series&WantType=Proceedings&title=ASE&CFID=91178059&CFTOKEN=97494002">site</a>
+  </span>
+  </p>
+
+  <p class="bibentry">
+  Reid Holmes, Tristan Ratchford, Martin P. Robillard, and Robert
+  J. Walker. <span class="title">Automatically Recommending Triage Decisions for Pragmatic
+  Reuse Tasks</span>. In <em>Proceedings of the 24th IEEE/ACM International
+  Conference on Automated Software Engineering</em>, pages 397-408,
+  November 2009. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/ase2009b">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/ase2009b.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1747491.1747534&coll=ACM&dl=ACM&type=series&idx=SERIES10803&part=series&WantType=Proceedings&title=ASE&CFID=91178059&CFTOKEN=97494002">site</a>
+  </span>
+  </p>
+
+  <p class="bibentry">
+  Ekwa Duala-Ekoko and Martin P. Robillard. <span class="title">A Detailed Examination of
+  the Correlation Between Imports and Failure-Proneness of Software
+  Components</span>. In <em>Proceedings of the 3rd International Symposium on
+  Empirical Software Engineering</em>, pages 34-43, October
+  2009. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/esem2009a">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/esem2009a.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1671248.1671253&coll=&dl=&type=series&idx=SERIES11506&part=series&WantType=Proceedings&title=ESEM">site</a>
+  </span>
+  </p>
+
+  <p class="bibentry">
+  Barth&eacute;l&eacute;my Dagenais and Martin P. Robillard. <span class="title">SemDiff:
+  Analysis and Recommendation Support for API Evolution</span>. Formal
+  research demonstration. In <em>Proceedings of the 31th ACM/IEEE
+  International Conference on Software Engineering</em>, pages
+  599-602, May 2009.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2009d">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icse2009d.pdf">pdf</a>
+  &middot; <a href="http://portal.acm.org/citation.cfm?id=1555001.1555083&coll=ACM&dl=ACM&type=series&idx=SERIES402&part=series&WantType=Proceedings&title=ICSE&CFID=44304929&CFTOKEN=43696054">site</a>
+  &middot; <a href="http://www.cs.mcgill.ca/~swevo/semdiff/">tool</a> </span>
+  </p>
+
+  <p class="bibentry">
+  David Kawrykow and Martin P. Robillard. <span class="title">Detecting Inefficient API
+  Usage</span>. New ideas and emergent results paper. In <em>Proceedings of
+  the 31th ACM/IEEE International Conference on Software Engineering -
+  Companion</em>, pages 183-186, May 2009. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/icse2009n">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/icse2009n.pdf">pdf</a> &middot; <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=5070977">site</a>
+  </span>
+  </p>
+
+  <p class="bibentry">
+  Barth&eacute;l&eacute;my Dagenais, Harold Ossher, Rachel
+  K. E. Bellamy, Martin P. Robillard, and Jacqueline P. de
+  Vries. <span class="title">A
+  Qualitative Study on Project Landscapes</span>. In <em>Procceedings of the
+  ICSE 2009 Workshop on Cooperative and Human Aspects of Software
+  Engineering</em>, pages 32-35, May 2009. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/chase2009">abstract</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/papers/chase2009.pdf">pdf</a> &middot; <a href="http://dx.doi.org/10.1109/CHASE.2009.5071407">site</a> </span>
+  </p>
+    
+  <h3>2008</h3>
+
+  <p class="bibentry">
+  Martin P. Robillard. Topology Analysis of Software
+  Dependencies. <em>ACM Transactions on Software Engineering and
+  Methodology</em>, 17(4):Article 18 (36 pages), August 2008. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/tosem2008.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/13487689.13487691">site</a> &middot; <a href="http://www.cs.mcgill.ca/~swevo/suade/">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Barth&eacute;l&eacute;my
+  Dagenais. Retrieving Task-Related Clusters from Change History. In
+  <em>Proceedings of the 15th Working Conference on Reverse
+  Engineering</em>, pages 17-26, October 2008. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/wcre2008.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1448028">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Putra Manggala. Reusing Program
+  Investigation Knowledge for Code Understanding. In <em>Proceedings
+  of the 16th IEEE International Conference on Program
+  Comprehension</em>, pages 202-211, June 2008. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icpc2008.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1437898.1438606&coll=portal&dl=GUIDE&CFID=91177432&CFTOKEN=54042373">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Barth&eacute;l&eacute;my Dagenais and Martin
+  P. Robillard. Recommending Adaptive Changes for Framework
+  Evolution. In <em>Proceedings of the 30th ACM/IEEE International
+  Conference on Software Engineering</em>, pages 481-490, May
+  2008. <B>[ACM SIGSOFT Distinguished Paper]</B> <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2008.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1368088.1368154">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Ekwa Duala-Ekoko and Martin P. Robillard. CloneTracker: Tool Support
+  for Code Clones Management. Formal Research Demonstration. In
+  <em>Proceedings of the 30th ACM/IEEE International Conference on
+  Software Engineering</em>, pages 843-846, May 2008. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2008d.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1368088.1368218">site</a></span>
+  </p>
+
+  <h3>2007</h3>
+
+  <p class="bibentry">
+  Barth&eacute;l&eacute;my Dagenais, Silvia Breu,
+  Fr&eacute;d&eacute;ric Weigand Warr and Martin
+  P. Robillard. Inferring Structural Patterns for Concern Traceability
+  in Evolving Software. In <em>Proceedings of the 22nd IEEE/ACM
+  International Conference on Automated Software Engineering</em>,
+  pages 254-263, November 2007. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/ase2007.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1321631.1321669">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Brian De Alwis, Gail C. Murphy, and Martin P. Robillard. A
+  Comparative Study of Three Program Exploration Tools. In
+  <em>Proceedings of the 15th International Conference on Program
+  Comprehension</em>, pages 103-112, June 2007. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icpc2007.pdf">pdf</a> &middot; <a href="http://dx.doi.org/10.1109/ICPC.2007.6">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Ekwa Duala-Ekoko and Martin P. Robillard. Tracking Code Clones in
+  Evolving Software. In <em>Proceedings of the 29th International
+  Conference on Software Engineering</em>, pages 158-167, May
+  2007. <B>[ACM SIGSOFT Distinguished Paper]</B> <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2007.pdf">pdf</a> &middot; <a href="http://dx.doi.org/10.1109/ICSE.2007.90">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Fr&eacute;d&eacute;ric Weigand-Warr and Martin P. Robillard. Suade:
+  Topology-Based Searches for Software Investigation. Research
+  demonstration. In <em>Proceedings of the 29th International
+  Conference on Software Engineering</em>, pages 780-783, May
+  2007. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2007d.pdf">pdf</a> &middot; <a href="http://dx.doi.org/10.1109/ICSE.2007.80">site</a> &middot; <a href="http://www.cs.mcgill.ca/~swevo/suade">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Representing Concerns in
+  Source Code. <em>ACM Transactions on Software Engineering and
+  Methodology</em>, 16(1):1-38, February 2007. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/tosem2007.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1189748.1189751">site</a> &middot; <a href="http://www.cs.ubc.ca/labs/spl/projects/feat/">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard, David Shepherd, Emily Hill, K. Vijay-Shanker,
+  and Lori Pollock. An Empirical Study of the Concept Assignment
+  Problem. Technical Report SOCS-TR-2007.3, School of Computer
+  Science, McGill University, June 2007. <span><a href="http://www.cs.mcgill.ca/~martin/papers/socs-tr-2007.3.pdf">pdf</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/concerns">data</a></span>.
+  </p>
+
+  <p class="bibentry">
+  Isaac Yuen and Martin P. Robillard. Bridging the Gap between Aspect
+  Mining and Refactoring. Position paper for the <em>AOSD 2007
+  Workshop on Linking Aspect Technology and Evolution (LATE)</em>,
+  March 2007. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/late2007.pdf">pdf</a></span>
+  </p>
+
+  <h3>2006</h3>
+
+  <p class="bibentry">
+  Olivier Giroux and Martin P. Robillard.  Detecting Increases in
+  Feature Coupling using Regression Tests.  In <em>Proceedings of the
+  14th ACM SIGSOFT International Symposium on the Foundations of
+  Software Engineering</em>, pages 163-173, November 2006. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/fse2006.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1181775.1181795">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Jean-S&eacute;bastien Boulanger and Martin P. Robillard. Managing
+  Concern Interfaces. In <em>Proceedings of the 22nd IEEE
+  International Conference on Software Maintenance</em>, pages 14-23,
+  September 2006. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icsm2006b.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1172974&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a>
+  &middot; <a href="http://www.cs.mcgill.ca/~jboula2/jmantlet/">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard.  Tracking Concerns in Evolving Source Code: An
+  Empirical Study. In <em>Proceedings of the 22nd IEEE International
+  Conference on Software Maintenance</em>, pages 479-482, September
+  2006. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icsm2006a.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1173034&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard. Tracking and Assessing the Evolution of
+  Scattered Concerns.  In <em>Proceedings of the AOSD 2006 Workshop on
+  Linking Aspect Technology and Evolution (LATE)</em>, March
+  2006. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/late2006.pdf">pdf</a></span>
+  </p>
+
+  <h3>2005</h3>
+
+  <p class="bibentry">
+  Imran Majid and Martin P. Robillard.  NaCIN - An Eclipse Plug-In for
+  Program Navigation-based Concern Inference. In <em>Proceedings of
+  the Eclipse Technology Exchange at OOPSLA</em>, pages 70-74, October
+  2005. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/etx2005b.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1117696.1117711">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Fr&eacute;d&eacute;ric Weigand-Warr.
+  ConcernMapper: Simple View-Based Separation of Scattered Concerns.
+  In <em>Proceedings of the Eclipse Technology Exchange at
+  OOPSLA</em>, pages 65-69, October 2005.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/etx2005a.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1117696.1117710">site</a> &middot; <a href="http://www.cs.mcgill.ca/~martin/cm">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard.  Automatic Generation of Suggestions for
+  Program Investigation.  In <em>Proceedings of the Joint European
+  Software Engineering Conference and ACM SIGSOFT Symposium on the
+  Foundations of Software Engineering</em>, pages 11-20, September
+  2005. <B>[ACM SIGSOFT Distinguished Paper]</B> <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/esecfse2005a.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1081706.1081711">site</a> &middot; <a href="http://www.cs.mcgill.ca/~swevo/suade">tool</a> </span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard.  Workshop on the Modeling and Analysis of
+  Concerns in Software (MACS 2005).  Workshop summary.  Software
+  Engineering Notes, 30(4), pages 1-3, July 2005. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/macs-summary.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1082983.1082995">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Gail C. Murphy, Mik Kersten, Martin P. Robillard, and Davor
+  Cubranic. The Emergent Structure of Development Tasks.  Invited
+  Paper.  In <em>Proceedings of the 19th European Conference on
+  Object-Oriented Programming</em>, volume 3586 of <em>Lecture Notes
+  in Computer Science</em>, pages 33-48.  Springer-Verlag, July
+  2005. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/ecoop2005.pdf">pdf</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Just-in-Time Concern
+  Modeling.  Position paper.  In <em>Proceedings of the 1st
+  International Workshop on the Modeling and Analysis of Concerns in
+  Software.</em> Software Engineering Notes, 30(4), pages 1-3, July
+  2005. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2005w.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1083125.1083136">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Peri Tarr.  First International Workshop on
+  the Modeling and Analysis of Concerns in Software (MACS 2005).
+  Workshop description.  In <em>Proceedings of the 27th International
+  Conference on Software Engineering</em>, page 685, May 2005. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/macs2005d.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/1062455.1062611">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy. Evolving Descriptions of
+  Scattered Concerns.  Technical Report SOCS-TR-2005.1, McGill
+  University, Canada, January 2005. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/socs-tr-2005.1.pdf">pdf</a></span>
+  </p>
+
+  <h3>2004</h3>
+    
+  <p class="bibentry">
+  Martin P. Robillard, Wesley Coelho, and Gail C. Murphy. How
+  Effective Developers Investigate Source Code: An Exploratory Study.
+  <em>IEEE Transactions on Software Engineering</em>, 30(12):889-903,
+  December 2004. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/tse2004.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1042417&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a>
+  &middot; <a href="http://www.cs.mcgill.ca/~martin/tse1">data</a></span>
+  </p>
+
+  <p class="bibentry">
+  Gail C. Murphy, William G. Griswold, Martin P. Robillard, Jan
+  Hannemann, and Wesley Leong.  Design Recommendations for Concern
+  Elaboration Tools.  Chapter 22 of <em>Aspect-Oriented Software
+  Development</em>, pages 507-530.  Addison-Wesley, 2004.
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Program Navigation Analysis
+  to Support Task-aware Software Development Environments.  In <em>
+  Proceedings of the ICSE Workshop on Directions in Software
+  Engineering Environments</em>, pages 83--88.  May 2004.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2004w.pdf">pdf</a></span>
+  </p>
+
+  <h3>2003</h3>
+
+  <p class="bibentry">
+  Martin P. Robillard.  Representing Concerns in Source Code.
+  Ph.D. Thesis. Department of Computer Science, University of British
+  Columbia.  November 2003.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/phdthesis.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=1023466&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a>
+  &middot; <a href="http://www.cs.ubc.ca/labs/spl/projects/feat">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Automatically Inferring
+  Concern Code from Program Investigation Activities.  In
+  <em>Proceedings of the 18th International Conference on Automated
+  Software Engineering</em>, pages 225-234, October 2003.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/ase2003.pdf">pdf</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  FEAT: A tool for locating,
+  describing, and analyzing concerns in source code. Research
+  demonstration.  In <em>Proceedings of the 25th International
+  Conference on Software Engineering</em>, pages 822-823, May 2003.
+  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2003d.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=776969&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a>
+  &middot; <a href="http://www.cs.ubc.ca/labs/spl/projects/feat">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Static Analysis to Support
+  the Evolution of Exception Structure in Object-Oriented Systems.
+  <em>ACM Transactions on Software Engineering and Methodology</em>,
+  12(2):191-221, April 2003.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/tosem2003.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/941566.941569">site</a> &middot; <a href="http://www.cs.ubc.ca/~mrobilla/jex/">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  A Study of Program
+  Evolution Involving Scattered Concerns.  Technical Report
+  UBC-CS-TR-2003-06, Department of Computer Science, University of
+  British Columbia, 26 March 2003.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/tr-2003-06.pdf">pdf</a></span>
+  </p>
+
+  <h3>2002</h3>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy. Capturing Concern
+  Descriptions During Program Navigation.  Position paper for the
+  OOPSLA 2002 Workshop on Tool Support for Aspect Oriented Software
+  Development.  November, 2002.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/oopsla2002w.pdf">pdf</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Concern Graphs: Finding and
+  Describing Concerns Using Structural Program Dependencies. In
+  <em>Proceedings of the 24th International Conference on Software
+  Engineering</em>, pages 406-416, May 2002. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2002.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/581339.581390">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard.  A Representation for Describing and Analyzing
+  Concerns in Source Code.  Doctoral Symposium abstract.  In
+  <em>Proceedings of the 24th International Conference on Software
+  Engineering</em>, pages 721-722, May 2002.<span class="features"> <a href="http://www.cs.mcgill.ca/~martin/papers/icse2002ds.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/581339.581470">site</a></span>
+  </p>
+
+  <h3>2001</h3>
+
+  <p class="bibentry">
+  Gail C. Murphy, Robert J. Walker, Elisa L.A. Baniassad, Martin
+  P. Robillard, Albert Lai, and Mik A. Kersten. Does Aspect-oriented
+  Programming Work?.  <em>Communication of the ACM</em>, 44(10):75-77,
+  October 2001. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/cacm2001.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/383845.383862">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Analyzing Concerns Using
+  Class Member Dependencies.  Position paper for the ICSE 2001
+  Workshop on Advanced Separation of Concerns in Software Engineering.
+  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2001w1.pdf">pdf</a></span>
+  </p>
+
+  <p class="bibentry">
+  Wim De Pauw, Nick Mitchell, Martin P. Robillard, Gary Sevitsky and
+  Harini Srinivasan.  Drive-by Analysis of Running Programs.  Position
+  paper for the ICSE 2001 Workshop on Software Visualization.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2001w2.pdf"> pdf</a></span>
+  </p>
+
+  <p class="bibentry">
+  Gail C. Murphy, Albert Lai, Robert J. Walker, and Martin
+  P. Robillard. Separating Features in Source Code: An Exploratory
+  Study.  In <em>Proceedings of the 23rd International Conference on
+  Software Engineering</em>, pages 275-284, May 2001. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/icse2001.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=381502&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a></span>
+  </p>
+
+  <h3>2000</h3>
+    
+  <p class="bibentry">
+  Pierre N. Robillard and Martin P. Robillard.  Types of Collaborative
+  Work in Software Engineering.  <em>Journal of Systems and
+  Software</em>, 53(3):219-224, 15 September, 2000. <span class="features"><a href="http://portal.acm.org/citation.cfm?id=357688&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948#">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Robert J. Walker, Gail C. Murphy, Jeffrey Steinbok, and Martin
+  P. Robillard.  Efficient Mapping of Software System Traces to
+  Architectural Views>.  In <em>Proceedings of CASCON 2000</em>, pages
+  31-40, 2000.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/cascon2000.pdf">pdf</a> &middot; <a href="http://portal.acm.org/citation.cfm?id=782046&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Designing Robust Java
+  Programs with Exceptions.  In <em>Proceedings of the ACM SIGSOFT
+  Eight International Symposium on the Foundations of Software
+  Engineering</em>, pages 2-10, November 2000.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/fse2000.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/355045.355046">site</a></span>
+  </p>
+   
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  An Exploration of a
+  Lightweight Means of Concern Separation.  Position paper for the
+  <em>ECOOP'2000 Workshop on Aspects and Dimensions of Concerns</em>,
+  June, 2000.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/ecoop2000w.pdf">pdf</a></span>
+  </p>
+
+  <h3>1999</h3>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Migrating a Static Analysis
+  Tool to AspectJ.  Position paper for the <em>OOPSLA'99 Workshop on
+  Multi-Dimensional Separation of Concerns in Object-Oriented
+  Systems</em>, November, 1999.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/oopsla1999w.pdf">pdf</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard and Gail C. Murphy.  Analyzing Exception Flow in
+  Java Programs. In <em>Proceedings of the 7th European Software
+  Engineering Conference and 7th ACM SIGSOFT Symposium on the
+  Foundations of Software Engineering</em>, volume 1687 of <em>Lecture
+  Notes in Computer Science</em>, pages 322-337.  Springer-Verlag,
+  September 1999. <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/fse1999.pdf">pdf</a> &middot; <a href="http://doi.acm.org/10.1145/318773.319251">site</a> &middot; <a href="http://www.cs.ubc.ca/~mrobilla/jex/">tool</a></span>
+  </p>
+
+  <p class="bibentry">
+  Martin P. Robillard.  Analyzing Exception Flow in Java Programs.
+  Master's thesis.  University of British Columbia, 1999.  <span class="features"><a href="http://www.cs.mcgill.ca/~martin/papers/robillard1999msc.pdf">pdf</a></span>
+  </p>
+
+  <h3>1998</h3>
+
+  <p class="bibentry">
+  Pierre N. Robillard and Martin P. Robillard.  Improving academic
+  software engineering projects: A comparative study of academic and
+  industry projects.  <em>Annals of Software
+  Engineering</em>,6:343-363, 1998.  Special issue on software
+  engineering education.  Published April 1999. <span class="features"><a href="http://portal.acm.org/citation.cfm?id=314653&coll=portal&dl=GUIDE&CFID=18354228&CFTOKEN=83947948">site</a></span>
+  </p>
+
+  </div>
+
+  <div id="right">
+
+    <h2>Other Bibliographies</h2>
+    <ul>
+      <li><a href="http://dl.acm.org/author_page.cfm?id=81100431590&coll=DL&dl=GUIDE&CFID=336367423&CFTOKEN=43655793">ACM
+      Author Page</a></li>
+      <li><a href="http://www.informatik.uni-trier.de/~ley/pers/hd/r/Robillard:Martin_P=.html">DBLP Query</a></li>
+      <li><a href="http://academic.research.microsoft.com/Author/688801/martin-p-robillard">Microsoft
+      Academic Search</a></li>
+      <li><a href="http://scholar.google.ca/citations?user=XlDo0wgAAAAJ&hl=en&oi=sra">Google Scholar</a></li>
+    </ul>
+
+  </div>
+  <div id="footer">
+    
+    <p>&copy; <a href="index.html">Martin Robillard</a> 2013 &middot;
+    Based on a design by: <a href="http://www.solucija.com/">Luka Cvrk</a> &middot; Released under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Licence</a></p>
+  </div>
+</div>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+  var sc_project=740212; 
+  var sc_invisible=1; 
+  var sc_security="1811b6e7"; 
+</script>
+
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js">
+</script><noscript><div
+class="statcounter"><a title="counter for tumblr" href="http://www.statcounter.com/tumblr/"><img class="statcounter" src="http://c.statcounter.com/740212/0/1811b6e7/1/" alt="counter for tumblr"></a></div></noscript>
+<!-- End of StatCounter Code -->
+</body>
+</html>
+                                                                                                                                                                

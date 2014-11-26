@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 557 A2</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head><body>
+
+
+<center><table style="max-width: 800px;" width="100%" border="0"><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 557 - Fall 2010 - Assignment 2<br>
+Perspective Projection Frustums, Depth of Field, and Anaglyphs</h1>
+</div>
+
+
+<h2 class="section">Due 12:00 Noon Wednesday 13 October</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+<img style="padding-left: 10px; padding-bottom: 20px;" src="http://cs.mcgill.ca/~kry/comp557F10/a2/frustums2.png" border="0" align="right">
+
+  <p>In this assignment you will use projection frustums to draw 
+  a scene with blur due to depth of field, and to draw anaglyphs 
+  that allow for 3D viewing with inexpensive colour filter glasses.</p>
+
+  <h3 class="section">Provided Code</h3>
+
+<!--  <p>The <a href="a2.zip">sample code</a>  -->
+  <p>Download the sample code from WebCT.  It is a working program that
+  will display a small test scene (you can change the scene if you
+  like).  You will need to add the jogl, vecmath, and mintools jars to
+  your project.  The sample code zip file contains only one class.</p>
+
+  <p>The sample code has several drawing modes which you change by entering
+  numbers 1 through 7.  They are as follows:</p>
+
+  <ol>
+
+  <li> The world view (default) where you can use the trackball to see
+  the scene, the location of your frustums (as shown top right of this
+  assignment).</li>
+
+  <li> The view from the eye that lies on the z axis.</li>
+
+  <li> The blurred depth of field view from the eye that lies on the z
+  axis.</li>
+
+  <li> The view from the left eye. </li>
+
+  <li> The view from the right eye. </li>
+
+  <li> An anaglyph showing both left and right eyes in the same
+  image.</li>
+
+  <li> The combination of a depth of field blur for each eye show as
+  an anaglyph.</li>
+
+  </ol>
+
+  The first mode is the only mode that exists in the sample code.  You
+  need to implement the others in the steps and objectives listed
+  below.  To help with testing your assignment at the different steps,
+  you will be using <em>Parameters</em> for various values, such as
+  the eye position, and the near and far planes (and many values).
+  You should notice that the provided code already uses the
+  <em>DoubleParameter</em> class from the mintools jar.  It creates a
+  window with controls for each of the parameters.  When you call the
+  getValue method of a given parameter, you get the current value
+  which is set in the interface.  You will also find IntParameter
+  useful for setting the number of samples in your rendering of blur,
+  BooleanParameter will be useful for enabling or disabling drawing of
+  viewing frustums.  See the comments in the provided code.</p>
+
+  <p>Note that the current version of the mintools jar has a bug in
+  that the interface window initially shows all the sliders in the
+  middle position (i.e., a position that does not reflect their
+  current value).  You will receive an updated jar to fix this problem.</p>
+
+  <p>You will want to use the following OpenGL calls to
+  complete the assignment: </p>
+
+  <ul>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  glFrustum
+  </em></span>
+
+  <p>You will need to set up several projection frustums by specifying
+  the left right top and bottom positions of the near plane, and the
+  position of near and far planes.</P> </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  glAccum 
+  </em></span>
+
+  <p>For depth of field, you will render the scene multiple times with
+  slightly different viewing frustums, and blend the results.  The
+  accumulation buffer is a convenient mechanism for donig this.  If
+  you're blending </em>N<em> images together, use <em>glAccum(
+  GL.GL_LOAD, 1f/N )</em> to load the first image into the
+  accumulation buffer, and then <em>gl.glAccum( GL.GL_ACCUM, 1f/N
+  )</em> to add the contribution of the other renders.  Remember to
+  use glClear before drawing each image, and use </em>gl.glAccum(
+  GL.GL_RETURN, 1 )</em> to copy the result back into the frame buffer
+  once you're finished all rendering passes.</p></li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  glColorMask
+  </em></span>
+
+  <p>When drawing an anaglyph, you will want to draw one image for the
+  left eye, and a different image for the right eye.  With <em>
+  glColorMask</em> you can enable or disable writing to different
+  components of the frame buffer.  There are four components: red,
+  green, blue, and alpha.  The alpha channel is used for transparency
+  and should always be enabled to allow for colour blending.  Thus, to
+  draw only the red channel, call <em>gl.glColorMask( true, false,
+  false, true )</em> before rendering the scene.  To draw an image
+  into the green and blue chanells (cyan), then call
+  <em>gl.glColorMask( false, true, true, true )</em>, clear the buffer
+  with <em>glClear</em>, and draw the scene again with the projection
+  matrix for the other eye.  Different glasses will have different
+  filters so you'll have to choose your colour masks according to
+  those that you're using (e.g., red/blue, red/cyan, or green/magenta,
+  where magenta is blue and red combined, and cyan is blue and green
+  combined).</p></li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  glGetFloatv
+  </em></span>
+
+  <p>You need to draw frustums in this assignment, and since you will
+  likely find it easier to use <em>glFrustum</em> to set up the
+  projection matrix, you will also want to use <em>glGetFloatv</em>
+  (with either <em>GL_MODELVIEW_MATRIX</em> or
+  <em>GL_PROJECTION_MATRIX</em>) to get a copy of this matrix in a
+  Java array.  You can use the provided <em>copyMatrixToFlat</em> and
+  <em>copyFlatToMatrix</em> to convert between this row column OpenGL
+  format and a vecmath <em>Matrix4f</em>.  You'll use the inverse of
+  your projection matrix, combined with <em>glutWireCube(2)</em> to
+  draw the frustum.</p></li>
+
+  </ul>
+
+  </div>
+ 
+<h2 class="section">Steps and Objectives</h2>
+
+  <div class="sbody">
+
+  <p>In each step, you should be able to visually verify that your
+  implementation is working correctly.  
+
+<ol>
+<li> 
+
+<p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Draw Screen Rectangle and Eye Point</em></span></p>
+
+<p>Draw a white rectangle in the xy plane centered at the origin using
+GL_LINE_LOOP.  The x and y dimension should be equal to the width and
+height of the display window in meters.  Getting the screen dimensions
+approximately correct is important for correct 3D viewing, so you'll
+want to measure the width of your screen with a ruler and set the
+variable <em>metersPerPixel</em> appropriately (see the commented
+code).
+</p>
+
+<p>Draw a white sphere at the position of the eye using
+glutSolidSphere.  Note that with lighting disabled, it should just
+look like a white circle, i.e., no shading.  The radius should be
+0.0125 meters to approximate the size of the human eye.  Call
+<em>getValue</em> on the </em>eyeZPosition</em> member variable to find
+out where to draw the eye on the z axis.</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Draw Frustum (2 marks)</em></span></p>
+
+<p>In this step, you will want to create a projection matrix using
+glFrustum that will be needed to project points on the screen.  The
+<em>near</em> and <em>far</em> parameters should be used to compute
+the near and far plane positions.  Notice that these near and far
+plane positions are specified with respect to the origin, so you'll
+need to add the eye position to compute the value to pass to
+glFrustum.  The motivation for defining these parameters in world
+space is that they don't depend on anything.  That is, when in mode 1,
+world viewing mode, you can easily change the eye distance while
+leaving the near and far planes fixed with respect to the screen
+rectangle. </p>
+
+<p>Note that since you must provide left, right, top and bottom of the
+near plane, you will need to compute appropriate values to take into
+account the position of the near plane with respect to the screen
+rectangle (i.e., the screen rectangle should exactly fit inside your
+frustum).</p>
+
+<p>Use the technique described in the assignment introduction to draw
+a white wire frustum when <em>drawCenterEyeFrustum</em> is true.  For
+instance, you might first do a glPushMatrix, load the identity, set up
+your frustum, then extract it with getDoublev, and then pop your
+changes off the stack; then invert your matrix and put the inverse on
+the stack along with any necessary translation to accommodate the eye
+position, and draw a wire cube size 2 to show the region that will be
+projected to normalized device coordinates.</p>
+
+<p>You should also now implement viewing mode 2 which shows the result
+of using this frustum.  The easiest thing to do is overwrite the
+opengl projection and modelview matrices to be your projection and
+viewing transformation (i.e., the translation to the eye position).<p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Focal Plane Rectangle (2 marks)</em></span></p>
+
+<p>Draw a grey rectangle to represent the focal plane.  The focal
+plane is in the xy plane, and at a displacement in z from the origin
+specified by the <em>focalPlaneZPosition</em> parameter.  You need to
+compute the left, right, top, and bottom coordinates of the focal
+plane so that it exactly fits inside your frustum.  Try moving your
+focal plane to different distances.  Note that you should be able to
+place it beyond your far plane, or in front of your near plane.</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Eye Position Offset (2 marks) </em></span></p>
+
+<p>In this step, you will use the x and y offset parameters
+<em>eyeXOffset</em> and <em>eyeYOffset</em> to create a frustum at an
+eye position that is displaced from its position on the z axis.  The
+idea is to explore the frustums which keep the focal plane rectangle
+fixed while using different eye positions.  In the next step, you'll
+average together images created from many nearby eye positions while
+keeping the focal plane fixed in order to create an image with a depth
+of field effect.  The purpose of this step is to make sure that you're
+frustum is correct before proceeding.</p>
+
+<p>Adjust your eye and frustum drawing code from previous steps to
+account for the displaced eye position.  Compute left, right, top, and
+bottom values to pass to glFrustum to create the correct frustum which
+always contains the focal plane.  Test your code by moving the focal
+plane and the eye offsets, and convincing yourself that it is doing
+the right thing.</p>
+
+<li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+<img style="padding-left: 20px; padding-bottom: 10px;" src="http://cs.mcgill.ca/~kry/comp557F10/a2/focus.png" border="0" align="right">
+         <em>Depth of Field Blur</em></span></p>
+
+<p>Implement viewing mode 3 by averaging multiple renders of the scene
+with the accumulation buffer.  Use the <em>samples</em> parameter to
+get an integer number of samples to use in each axis direction, and
+use the <em>apertureSize</em> parameter as the width and height of
+the region in which you move the eye position.  So with samples set to
+3, you will render and average 9 images.  Note that while using a
+square aperture is easiest, you could also sample in a region of a
+different shape.</p>
+
+  </li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Draw Left and Right Eyes</em></span></p>
+
+<p>This step can be done independently of steps 3, 4, and 5.  For this
+objective you must create frustums for left and right eyes.  You
+should display both eye positions and their frustums in the same way
+as in step 2, but only if <em>drawEyeFrustums</em> is true.  The
+frustums should be colour coded according to the glasses that you are
+using, so if the filter for your left eye is red, then you should draw
+the left eye frustum and left eye position in red. </p>
+
+<p>The frustums should both contain the screen rectangle, thus you'll
+need to compute correct left, right, bottom, and top values for each.
+The <em>eyeDisparity</em> parameter should be used to set the distance
+between the eyes (default of 63 mm), so the left eye should be half
+this distance in the negative x direction, while the right eye should
+be half this distance in the positive x direction (i.e., the center
+point between the eyes lies on the z axis).  </p>
+
+<p> Note that if we were able to track the eyes, then we might want to
+use the known position of each eye in setting up the frustum.
+However, we will just assume that the viewer is sitting exactly in
+front of the screen at a distance from the screen specified by
+<em>eyeZPosition</em>.
+
+<p>Test that your frustums are correct by adjusting the near plane, and by 
+viewing the resulting images with viewing mode 4 and 5.</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+<img style="padding-left: 20px; padding-bottom: 10px;" src="http://cs.mcgill.ca/~kry/comp557F10/a2/anaglyph.png" border="0" align="right">
+         <em>Anaglyphs</em></span></p>
+
+<p>Combine the images you render for mode 4 and 5 by using the
+appropriate glColorMask calls.  Test your image using colour glasses.
+You should be able to make objects appear both behind and in front of
+the screen.  Be sure you do not have your left and right eyes
+reversed!  The <em>eyeDisparity</em> parameter value should always be
+a positive number.
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Anaglyphs with Defocus (optional, 5% bonus)</em></span></p>
+
+<p> Combine your efforts in the previous step to create anaglyphs
+where the left and right images have blur due to depth of field.  The
+trick is to define your frustums correctly.  The offsets you use to
+create the blurred image need to keep the focal plane rectangle fixed,
+but this focal plane rectangle is different for each eye as it is
+defined by the eye position and the screen rectangle position.</p>
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <em>Readme File (0 marks, yet not optional)</em></span>
+
+       <p> Create a <em>readme.txt</em> or <em>readme.pdf</em> file to
+       submit with your assignment.  The readme should include any
+       comments you have with respect to the assignment, and describes
+       anything you deem to be noteworthy.  Try to be brief!  
+
+<!-- Your
+       readme should also contain a written answer to the following
+       question:</p>
+
+       <ol type=a>
+       <li>
+       <p>
+       Extra special question about something or other
+       </p>
+       </li> 
+       </ol>
+   </li> -->
+
+</ol> 
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+    <div class="sbody">
+
+     <p>Great!  Be sure your name and student number is in the window
+     title, in your readme, and in the top comments section of each of
+     your source files.</p>
+
+     <p>Submit your source code as a zip file via <a href="http://www.mcgill.ca/webct">webCT</a>.  Include a
+     <em>readme.txt</em> or <em>readme.pdf</em> file with your
+     comments.  Be sure to check that your submission is correct
+     by downloading your submission from WebCT.  You cannot
+     receive any marks for assignments with missing or corrupt
+     files!</p>
+
+     <p>Note that you are encouraged to discuss assignments with your
+     classmates, but not to the point of sharing code and answers.
+     All code and written answers must be your own.  </p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body></html>

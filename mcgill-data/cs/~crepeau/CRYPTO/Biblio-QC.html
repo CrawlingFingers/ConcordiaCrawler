@@ -1,0 +1,896 @@
+<HEAD>
+<TITLE> Bibliography of Quantum Cryptography </TITLE>
+<BODY>
+
+<center>
+<H1>A Bibliography of Quantum Cryptography 
+</H1> by 
+
+<P>
+
+<B>Gilles Brassard
+</B> 
+
+<P>
+Dýpartement IRO, Universitý de Montrýal. <BR>
+C.P. 6128, Succursale "Centre-Ville" <BR>
+Montrýal (Quýbec) Canada H3C 3J7 
+
+<P>
+<H4>
+The original PostScript file from Gilles Brassard - provided by Edith Stoeveken -
+<BR>
+was converted to ASCII and reformatted in HTML; Sept 2 1994, Stephan Kaufmann.
+<BR> HTTP pointers to DVI files added by Claude Crýpeau, March 6 1995.
+<BR>
+Multiple file format added July 21st 1996 by Claude.
+<BR>
+</H4>
+
+<H2>
+FORMATS: D = DVI, P = POSTSCRIPT, G = POSTSCRIPT+GZIP
+</H2>
+<HR>
+
+<img src="http://www.cs.mcgill.ca/~crepeau/CRYPTO/GIF/QC.gif" align="upper">
+</center>
+
+<P>
+
+<H3>Abstract
+</H3>
+This paper provides an extensive annotated bibliography of papers that have been written on 
+quantum cryptography and related topics. 
+
+<H3>1. Introduction
+</H3>
+For ages, mathematicians have searched for a system that would allow two people to exchange 
+messages in perfect privacy. Quantum Cryptography was born in the early seventies when Stephen 
+Wiesner wrote "Conjugate Coding", which unfortunately took more than ten years to see the light 
+of print [1]. In the mean time, Charles H. Bennett (who knew of Wiesner's idea) and Gilles 
+Brassard picked up the subject and brought it to fruition in a series of papers that culminated with 
+the demonstration of an experimental prototype that established the technological feasibility of the 
+concept [2]. Quantum cryptographic systems take advantage of Heisenberg's uncertainty principle, 
+according to which measuring a quantum system in general disturbs it and yields incomplete 
+information about its state before the measurement. Eavesdropping on a quantum communication 
+channel therefore causes an unavoidable disturbance, alerting the legitimate users. This yields a 
+cryptographic system for the distribution of a secret random cryptographic key between two parties 
+initially sharing no secret information that is secure against an eavesdropper having at her disposal 
+unlimited computing power. Once this secret key is established, it can be used together with 
+classical cryptographic techniques such as the one-time-pad to allow the parties to communicate 
+meaningful information in absolute secrecy. 
+
+<P>
+In addition to key distribution, quantum techniques may also assist in the achievement of subtler 
+cryptographic goals, important in the post-cold war world, such as protecting private information 
+while it is being used to reach public decisions. Such techniques, pioneered by Claude Crýpeau [3, 
+4], allow two people to compute an agreed-upon function f(x; y) on private inputs x and y when 
+one person knows x, the other knows y, and neither is willing to disclose anything about their 
+private input to the other, except for what follows logically from one's private input and the 
+function's output. The classic example of such discreet decision making is the "dating problem", in 
+which two people seek a way of making a date if and only if each likes the other, without 
+disclosing any further information. For example, if Alice likes Bob but Bob doesn't like Alice, the 
+date should be called off without Bob finding out that Alice likes him|on the other hand, it is 
+logically unavoidable for Alice to learn that Bob doesn't like her, because if he did the date would 
+be on. 
+
+<P>
+In the past few years, a remarkable surge of interest in the international scientific and industrial 
+community has propelled quantum cryptography into mainstream computer science and physics. 
+Furthermore, quantum cryptography is becoming increasingly practical at a fast pace. The first 
+quantum key distribution prototype [2] worked over a distance of 32 centimetres in 1989. Two 
+additional experimental demonstrations have been set up since, which work over significant lengths 
+of optical fibre [13, 14]. 
+
+<P>
+The purpose of this work is to provide an extensive bibliography of most papers ever written on 
+quantum cryptography, including some unpublished papers. In addition, a limited selection of key 
+papers that describe techniques of crucial importance to quantum cryptography, such as privacy 
+amplification [63, 73], is included. The papers are listed in chronological order within each section. 
+
+<H3>2. The various uses of quantum physics for cryptography
+</H3>
+Quantum cryptography is best known for key distribution. The most complete paper written on the 
+subject, which also describes the original prototype, is [2]. However, two applications of quantum 
+physics to cryptography were discovered well before quantum key distribution: quantum bank 
+notes are impossible to counterfeit and quantum multiplexing allows one party to send two 
+messages to another party in a way that the receiver can obtain either message at his choice, but 
+reading one destroys the other irreversibly [1]. (The notion of multiplexing was reinvented ten 
+years later in the context of classical cryptography under the name of oblivious transfer, which will 
+be used henceforth in this paper.) A more elaborate quantum oblivious transfer protocol was 
+designed subsequently [3]. Another quantum cryptographic task that has been studied extensively 
+is bit commitment [4]. Applications of bit commitment and oblivious transfer are mentioned in 
+Section 9. 
+
+<UL>
+<LI> 1. Wiesner, S., "Conjugate coding", Sigact News, vol. 15, no. 1, 1983, pp. 78 - 88; 
+original manuscript written circa 1970. 
+
+<LI>
+2. Bennett, C. H., Bessette, F., Brassard, G., Salvail, L. and Smolin, J., "Experimental quantum 
+cryptography", 
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BBBSS92.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BBBSS92.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BBBSS92.ps.gz">
+G
+</a>
+]
+Journal of Cryptology, vol. 5, no. 1, 1992, pp. 3 - 28. Preliminary version in Advances in 
+Cryptology - Eurocrypt '90 Proceedings, May 1990, Springer - Verlag, pp. 253 - 265. 
+
+<LI>
+3. Bennett, C. H., Brassard, G., Crýpeau, C. and Skubiszewska, M.-H., "Practical quantum 
+oblivious transfer",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BBCS92.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BBCS92.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BBCS92.ps.gz">
+G
+</a>
+]
+Advances in Cryptology | Crypto '91 Proceedings, August 1991, Springer - Verlag, pp. 351 - 366. 
+
+<LI>
+4. Brassard, G., Crýpeau, C., Jozsa, R. and Langlois, D., "A quantum bit commitment scheme 
+provably unbreakable by both parties",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BCJL93.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BCJL93.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BCJL93.ps.gz">
+G
+</a>
+]
+Proceedings of the 34th Annual IEEE Symposium on Foundations of Computer Science, 
+November 1993, pp. 362 - 371. </UL>
+
+<H3>3. Alternative quantum key distribution protocols
+</H3>
+The original quantum key distribution protocol uses four different polarization states of single 
+photons as carrier of quantum information [2], but other approaches have been put forward. Early 
+variations were to use Einstein-Podolsky-Rosen entangled pairs [5], to use only two nonorthogonal 
+states rather than four [6], and to use phase modulation rather than polarization [6, 7]. A theoretical 
+advantage of using entangled pairs is to allow the key to remain protected by the uncertainty 
+principle even in storage, rather than merely in transit. More recent variations use rejected-data 
+protocols [8, 9], photon pairs [10], and bright light [11]. 
+
+<UL>
+<LI> 5. Ekert, A. K., "Quantum cryptography based on Bell's theorem", Physical Review Letters, 
+vol. 67, no. 6, 5 August 1991, pp. 661 - 663. 
+
+<LI> 6. Bennett, C. H., "Quantum cryptography using any two nonorthogonal states", Physical 
+Review Letters, vol. 68, no. 21, 25 May 1992, pp. 3121 - 2124. 
+
+<LI> 7. Ekert, A. K., Rarity, J. G., Tapster, P. R. and Palma, G. M., "Practical quantum 
+cryptography based on two-photon interferometry", Physical Review Letters, vol. 69, no. 9, 31 
+August 1992, pp. 1293 - 1295. 
+
+<LI> 8. Barnett, S. M. and Phoenix, S. J. D., "Information-theoretic limits to quantum 
+cryptography", Physical Review A, vol. 48, no. 1, July 1993, pp. R5 - R8. 
+
+<LI> 9. Barnett, S. M. and Phoenix, S. J. D., "Bell's inequality and rejected-data protocols for 
+quantum cryptography", Journal of Modern Optics, vol. 40, no. 8, August 1993, pp. 1443 - 1448. 
+
+<LI> 10. Huttner, B. and Peres, A., "Quantum cryptography with photon pairs", Journal of 
+Modern Optics, to appear. 11. Wiesner, S., "Quantum cryptography with bright light", 
+manuscript, 1993. </UL>
+
+<H3>4. Implementation
+</H3>
+At least three experimental apparatuses have been built for implementing quantum key distribution, 
+in addition to the original 32 centimetre implementation [2]. A prototype built in Geneva follows the 
+original protocol of [2]: it uses four different polarization states to carry the quantum information 
+over more than one kilometre of optical fibre [14]. Another prototype built independently by British 
+Telecom in association with the Defence Research Agency works by phase modulation over a 
+distance of 10 kilometres of fibre; it is described in a sequence of two papers [12, 13]. Yet another 
+experimental demonstration is in the works, which uses Einstein-Podolsky-Rosen entangled pairs 
+sent over kilometres of fibre [15]. 
+
+<UL>
+<LI> 12. Townsend, P. D., Rarity, J. G. and Tapster, P. R., "Single photon interference in a 10 
+km long optical fibre interferometer", Electronics Letters, vol. 29, no. 7, April 1993, pp. 634 - 
+635. 
+
+<LI> 13. Townsend, P. D., Rarity, J. G. and Tapster, P. R., "Enhanced single photon fringe 
+visibility in a 10 km-long prototype quantum cryptography channel", Electronics Letters, vol. 29, 
+no. 14, 8 July 1993, pp. 1291 - 1293. 
+
+<LI> 14. Muller, A., Breguet, J. and Gisin, N., "Experimental demonstration of quantum 
+cryptography using polarized photons in optical fibre over more than 1 km" Europhysics Letters, 
+vol. 23, no. 6, 20 August 1993, pp. 383 - 388. 
+
+<LI> 15. Rarity, J. G., Owens, P. C. M. and Tapster, P. R., "Quantum random number 
+generation and key sharing", Journal of Modern Optics, vol. 41, no. 12, December 1994, pp. 2435 
+- 2444. </UL>
+
+<H3>5. Eavesdropping
+</H3>
+The key distribution protocol described in [2] has been proven secure regardless of the 
+eavesdropper's computing power, but assuming some restrictions on the type of attack, such as 
+requiring eavesdropping to be independent from one light pulse to another. More sophisticated 
+attacks have been analysed in the papers quoted below, but none of them has yet presented a direct 
+threat to quantum key distribution. Note that, contrary to all known quantum key distribution 
+schemes, the quantum bit commitment protocol of [4] has been formally proven invulnerable to all 
+attacks consistent with the laws of quantum mechanics. 
+
+<UL>
+<LI> 16. Werner, M. J. and Milburn, G. J., "Eavesdropping using quantum-nondemolition 
+measurements", Physical Review A, vol. 47, no. 1, January 1993, pp. 639 - 641. 
+
+<LI> 17. Barnett, S. M., Huttner, B. and Phoenix, S. J. D., "Eavesdropping strategies and 
+rejected-data protocols in quantum cryptography", Journal of Modern Optics, vol. 40, no. 12, 
+December 1993, pp. 2501 - 2513. 
+
+<LI> 18. Huttner, B. and Ekert, A. K., "Tolerable noise in quantum cryptosystems", Journal of 
+Modern Optics, to appear. 
+
+<LI> 19. Ekert, A. K., Huttner, B., Palma, G. M. and Peres, A., "Eavesdropping on quantum 
+cryptosystems", Physical Review A, submitted. </UL>
+
+<H3>6. Popular accounts
+</H3>
+These papers appeared in popular science magazines. Many of them offer easy reading for the non 
+specialist. The best introduction to quantum cryptography is perhaps [33]. 
+
+<UL>
+<LI> 20. Gottlieb, A., "Conjugal secrets - The untappable quantum telephone", The Economist, 
+vol. 311, 22 April 1989, page 81. 
+
+<LI> 21. Wallich, P., "Quantum cryptography", Scientific American, May 1989, pp. 28 - 30. 
+
+<LI> 22. Deutsch, D., "Quantum communication thwarts eavesdroppers", New Scientist, 9 
+December 1989, pp. 25 - 26. 
+
+<LI> 23. Peterson, I., "Bits of uncertainty: Quantum security", Science News, vol. 137, 2 June 
+1990, pp. 342 - 343. 
+
+<LI> 24. Ekert, A. K., "La mecanique quantique au secours des agents secrets", La Recherche, 
+June 1991, pp. 790 - 791. 
+
+<LI> 25. Ekert, A. K., "Przygoda w kwantowej krainie szyfrow", Wiedza i Zycie, July 1991, pp. 
+45 - 49. 
+
+<LI> 26. Stewart, I., "Schrodinger's catflap", Nature, vol. 353, 3 October 1991, pp. 384 - 385. 
+
+<LI> 27. Flam, F., "Quantum cryptography's only certainty: Secrecy", Science, vol. 253, 1991, 
+page 858. 
+
+<LI> 28. Ekert, A. K., "Adventures in quantum cryptoland" (in Japanese), Parity, vol. 7, 
+February 1992, pp. 26 - 29. 
+
+<LI> 29. Ekert, A. K., "Cryptography | Beating the code breakers", Nature, vol. 358, 2 July 
+1992, pp. 14 - 15. 
+
+<LI>
+30. Bennett, C. H., "Quantum cryptography: Uncertainty in the service of privacy",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Ben92.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Ben92.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Ben92.ps.gz">
+G
+</a>
+]
+Science, vol. 257, 7 August 1992, pp. 752 - 753. 
+
+<LI> 31. Delahaye, J.-P., "Cryptographie quantique", Pour la Science, August 1992, pp. 101 - 
+106. 
+
+<LI> 32. Zimmer, C., "Perfect Gibberish", Discover, September 1992, pp. 92 - 99. 
+
+<LI> 33. Bennett, C. H., Brassard, G. and Ekert, A. K., "Quantum cryptography", Scientific 
+American, October 1992, pp. 50 - 57. Appeared in December 1992 as translation into German ( 
+Spektrum der Wissenschaft, pp. 96 - 104), Italian ( Le Scienze, pp. 84 - 93), Japanese ( Saiensu, 
+pp. 50 - 60), and Polish (Swiat Nauki, pp. 28 - 37), among others. 
+
+<LI> 34. Collins, G. P., "Quantum cryptography defies eavesdropping", Physics Today, 
+November 1992, pp. 21 - 23. 
+
+<LI> 35. Ekert, A. K., "Quantum keys for keeping secrets", New Scientist, 16 January 1993, pp. 
+24 - 28. 
+
+<LI> 36. Townsend, P. D. and Phoenix, S. J. D., "Quantum mechanics will protect area 
+networks", Opto and Laser Europe, July 1993, pp. 17 - 20. </UL>
+
+<H3>7. Historical papers
+</H3>
+These papers are superseded by other papers listed above; nevertheless they are of historical 
+interest. Of particular importance are the first paper ever published on quantum cryptography [37] 
+(recall that [1] was written earlier) and the first paper that gives a complete description of the 
+quantum key distribution protocol [42]. 
+
+<UL>
+<LI> 37. Bennett, C. H., Brassard, G., Breidbart, S. and Wiesner, S., "Quantum cryptography, 
+or unforgeable subway tokens", Advances in Cryptology: Proceedings of Crypto 82, August 1982, 
+Plenum Press, pp. 267 - 275. 
+
+<LI> 38. Bennett, C. H., Brassard, G. and Breidbart, S., "Quantum cryptography II: How to re-
+use a one-time pad safely even if P = N P ", unpublished manuscript, November 1982. 
+
+<LI> 39. Bennett, C. H. and Brassard, G., "Quantum cryptography and its application to provably 
+secure key expansion, public-key distribution, and coin-tossing", IEEE International Symposium 
+on Information Theory, September 1983, page 91. 
+
+<LI> 40. Bennett, C. H., Brassard, G., Breidbart, S. and Wiesner, S., "Eavesdrop-detecting 
+quantum communications channel", IBM Technical Disclosure Bulletin, vol. 26, no. 8, January 
+1984, pp. 4363 - 4366. 
+
+<LI> 41. Bennett, C. H. and Brassard, G., "An update on quantum cryptography", Advances in 
+Cryptology: Proceedings of Crypto 84, August 1984, Springer - Verlag, pp. 475 - 480. 
+
+<LI> 42. Bennett, C. H. and Brassard, G., "Quantum cryptography: Public-key distribution and 
+coin tossing", Proceedings of IEEE International Conference on Computers, Systems and Signal 
+Processing, Bangalore, India, December 1984, pp. 175 - 179. 
+
+<LI> 43. Bennett, C. H. and Brassard, G., "Quantum public key distribution system", IBM 
+Technical Disclosure Bulletin, vol. 28, no. 7, December 1985, pp. 3153 - 3163. 
+
+<LI>
+44. Crýpeau, C. and Kilian, J., "Achieving oblivious transfer using weakened security 
+assumptions",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/CK88.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/CK88.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/CK88.ps.gz">
+G
+</a>
+]
+Proceedings of the 29th Annual IEEE Symposium on Foundations of Computer Science, October 
+1988, pp. 42 - 52. 
+
+<LI> 45. Bennett, C. H. and Brassard, G., "The dawn of a new era for quantum cryptography: 
+The experimental prototype is working!", Sigact News, vol. 20, no. 4, 1989, pp. 78 - 82. 
+
+<LI>
+46. Brassard, G. and Crýpeau, C., "Quantum bit commitment and coin tossing protocols",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BC91.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BC91.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BC91.ps.gz">
+G
+</a>
+]
+Advances in Cryptology | Crypto '90 Proceedings, August 1990, Springer - Verlag, pp. 49 - 61. 
+</UL>
+
+<H3>8. Other papers
+</H3>
+Here are various other papers, theses and book chapters that have been written on quantum 
+cryptography. 
+
+<UL>
+<LI> 47. Wiedemann, D., "Quantum cryptography", Sigact News, vol. 18, no. 2, 1987, pp. 48 - 
+51; but please read also [48]. 
+
+<LI> 48. Bennett, C. H. and Brassard, G., "Quantum public key distribution reinvented", Sigact 
+News, vol. 18, no. 4, 1987, pp. 51 - 53. 
+
+<LI> 49. Brassard, G., Modern Cryptology, Chapter 6, Springer - Verlag, Lecture Notes in 
+Computer Science, vol. 325, 1988. 
+
+<LI>
+50. Crýpeau, C., "Correct and Private Reductions among Oblivious Transfers",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Cre90a.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Cre90a.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Cre90a.ps.gz">
+G
+</a>
+]
+PhD thesis, Department of Electrical Engineering and Computer Science, Massachusetts Institute of 
+Technology, February 1990. 
+
+<LI> 51. Ekert, A. K., Correlations in Quantum Optics, Thesis submitted for the Degree of Doctor 
+of Philosophy at the University of Oxford, Wolfson College, Oxford University, September 1991. 
+
+<LI>
+52. Bennett, C. H., Brassard, G. and Mermin, N. D., "Quantum cryptography with-out Bell's 
+theorem",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BBM91.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BBM91.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BBM91.ps.gz">
+G
+</a>
+]
+Physical Review Letters, vol. 68, no. 5, 3 February 1992, pp. 557 - 559. 
+
+<LI> 53. Brassard, G., Cryptologie contemporaine, Chapter 7, Masson, 1992. 
+
+<LI> 54. Ekert, A. K., "Quantum cryptography and Bell's theorem", in Quantum Measurement in 
+Optics (P. Tombesi and D. Walls, eds), Plenum Press, New York, 1992, pp. 413 - 418. 
+
+<LI> 55. Ardehali, M., "Efficient quantum cryptography", manuscript, 1992. 
+
+<LI> 56. Blow, K. J. and Phoenix, S. J. D., "On a fundamental theorem of quantum 
+cryptography", Journal of Modern Optics, vol. 40, no. 1, January 1993, pp. 33 - 36. 
+
+<LI> 57. Phoenix, S. J. D. and Townsend, P. D., "Quantum cryptography and secure optical 
+communication", British Telecom Technology Journal, vol. 11, no. 2, April 1993, pp. 65 - 75. 
+
+<LI> 58. Barnett, S. M., Ekert, A. K. and Phoenix, S. J. D., "Optical key to quantum 
+cryptography", SERC Nonlinear Optics Update, United Kingdom Science and Engineering 
+Research Council, vol. 5, Summer 1993, pp. 3 - 7. 
+
+<LI> 59. Phoenix, S. J. D., "Quantum cryptography without conjugate coding", Physical Review 
+A, vol. 48, no. 1, July 1993, pp. 96 - 102. 
+
+<LI>
+60. Crýpeau, C., "Quantum oblivious transfer",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Cre94.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Cre94.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Cre94.ps.gz">
+G
+</a>
+]
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2445 - 2454. </UL>
+
+<H3>9. Useful tools and related papers
+</H3>
+Raw quantum cryptography is useless in practice because limited eavesdropping may be 
+undetectable, yet it may leak some information, and errors are to be expected even in the absence of 
+eavesdropping. Also, we must protect against an eavesdropper who would impersonate Alice for 
+Bob and Bob for Alice. For these reasons, quantum cryptography must be supplemented by 
+classical tools such as privacy amplification [63, 73], error correction [71] and authentication [62]. 
+Additional useful information-theoretic tools are provided in [70]. Quantum bit commitment [4] can 
+be used to obtain zero-knowledge proofs [67] for arbitrary NP statements [68, 65]. Quantum 
+oblivious transfer [3] can be used for discreet decision making [64, 66]. High-efficiency single-
+photon detectors [72] are crucial for photon-based quantum cryptography. Quantum teleportation 
+[69] may be useful to increase the distance for quantum key distribution. The Einstein-Podolsky-
+Rosen effect is ubiquitous in quantum cryptography [61]. 
+
+<UL>
+<LI> 61. Einstein, A., Podolsky, B. and Rosen, N., "Can quantum-mechanical description of 
+physical reality be considered complete?", Physical Review, vol. 47, 1935, pp. 777 - 780. 
+Reprinted in Quantum theory and measurement (J. A. Wheeler and W. Z. Zurek, eds), Princeton 
+University Press, 1983. 
+
+<LI> 62. Wegman, M. N. and Carter, J. L., "New hash functions and their use in authentication 
+and set equality", Journal of Computer and System Sciences, vol. 22, 1981, pp. 265 - 279. 
+
+<LI> 63. Bennett, C. H., Brassard, G. and Robert, J.-M., "Privacy amplification by public 
+discussion", SIAM Journal on Computing, vol. 17, no. 2, April 1988, pp. 210 - 229. 
+
+<LI> 64. Kilian, J., "Founding cryptography on oblivious transfer", Proceedings of the 20th 
+Annual ACM Symposium on Theory of Computing, May 1988, pp. 20 - 31. 
+
+<LI>
+65. Brassard, G., Chaum, D. and Crýpeau, C., "Minimum disclosure proofs of knowledge",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BCC88b.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BCC88b.ps.gz">
+G
+</a>
+]
+Journal of Computer and System Sciences, vol. 37, 1988, pp. 156 - 189. 
+
+<LI>
+66. Crýpeau, C., "Verifiable disclosure of secrets and application",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Cre90b.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Cre90b.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Cre90b.ps.gz">
+G
+</a>
+]
+Advances in Cryptology: Proceedings of Eurocrypt '89, April 1989, Springer - Verlag, pp. 181 - 
+191. 
+
+<LI> 67. Goldwasser, S., Micali, S. and Rackoff, C., "The knowledge complexity of interactive 
+proof-systems", SIAM Journal on Computing, vol. 18, 1989, pp. 186 - 208. 
+
+<LI> 68. Goldreich, O., Micali, S. and Wigderson, A., "Proofs that yield nothing but their 
+validity, or All languages in NP have zero-knowledge proof systems", Journal of the ACM, vol. 
+38, 1991, pp. 691 - 729. 
+
+<LI>
+69. Bennett, C. H., Brassard, G., Crýpeau, C., Jozsa, R., Peres, A. and Wootters, W. K., 
+"Teleporting an unknown quantum state via dual classical and Einstein-Podolsky-Rosen channels",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BBC+93.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BBC+93.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BBC+93.ps.gz">
+G
+</a>
+]
+Physical Review Letters, vol. 70, 29 March 1993, pp. 1895 - 1899. 
+
+<LI>
+70. Maurer, U. M., "Secret key agreement by public discussion from common information",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Mau93.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Mau93.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Mau93.ps.gz">
+G
+</a>
+]
+ IEEE Transactions on Information Theory, vol. 39, no. 3, May 1993, pp. 733 - 742. 
+
+<LI>
+71. Brassard, G. and Salvail, L., "Secret-key reconciliation by public discussion",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BS93.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BS93.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BS93.ps.gz">
+G
+</a>
+]
+Advances in Cryptology | Eurocrypt '93 Proceedings, May 1993, to appear. 
+
+<LI> 72. Kwiat, P. G., Steinberg, A. M., Chiao, R. Y., Eberhard, P. H. and Petroff, M. D., 
+"High-efficiency single-photon detectors", Physical Review A, vol. 48, no. 2, August 1993, pp. 
+R867 - R870. 
+
+<LI>
+73. Bennett, C. H., Brassard, G., Crýpeau, C. and Maurer, U. M., "Generalized privacy 
+amplification",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/BBCM95.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/BBCM95.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/BBCM95.ps.gz">
+G
+</a>
+]
+to appear in IEEE Transactions on Information Theory, 1995. </UL>
+
+<H3>10. Bibliographies
+</H3>
+This bibliography of quantum cryptography [76] has evolved from an earlier version [75]. An 
+earlier bibliography is available [74]. 
+
+<UL>
+<LI>
+74. Crýpeau, C., "Cryptographic primitives and quantum theory",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Cre93.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Cre93.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Cre93.ps.gz">
+G
+</a>
+]
+Proceedings of Workshop on Physics and Computation, PhysComp 92, Dallas, October 1992, pp. 
+200 - 204. 
+
+<LI> 75. Brassard, G., "Cryptology column | Quantum cryptography: A bibliography", Sigact 
+News, vol. 24, no. 3, 1993, pp. 16 - 20. 
+
+<LI>
+76. Brassard, G., "A bibliography of quantum cryptography",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/QCbib.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/QCbib.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/QCbib.ps.gz">
+G
+</a>
+]
+this manuscript. </UL>
+
+<H3>Acknowledgements
+</H3>
+I wish to thank Charles H. Bennett, Claude Crýpeau, Artur K. Ekert, Neil Gershenfeld, Simon J. 
+D. Phoenix and Paul D. Townsend, who helped me put this bibliography together by supplying 
+corrections, updates and additions to previous versions. I am also grateful to Ron Rivest, whose 
+request for a quantum cryptography bibliography set me in motion for this work. Finally I am most 
+grateful to the Rank Foundation and Artur K. Ekert for making possible the first international 
+workshop on quantum cryptography, which was held in Broadway, England, in March 1993. That 
+was a historical event for the field. 
+
+<P>
+
+<HR>
+<H3>Latest update: 22 July 1998, Claude CR&Eacute;PEAU</H3>
+<HR>
+
+<H1> Recent papers on Quantum Cryptography </H1>
+<HR>
+
+<H3> JMO Special Issue: Quantum Communication </H3>
+<UL>
+
+<LI>
+Franson, J. D. and Ilves, H., "Quantum Cryptography using polarization feedback",
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2391 - 2396.
+
+<LI>
+Huttner, B. and Peres, A., "Quantum Cryptography with photon pairs",
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2397 - 2404.
+
+<LI>
+Breguet, J., Muller, A. and Gisin, N.,
+"Quantum Cryptography with polarized photons in optical fibres.
+Experiment and practical limits.",
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2405 - 2412.
+
+<LI>
+Ekert, A.K. and Palma, G.M.,
+"Quantum Cryptography with interferometric quantum entanglement.",
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2413 - 2424.
+
+<LI>
+Townsend, P.D. and Thompson, I.,
+"A Quantum key distribution channel based on optical fibre.",
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2425 - 2434.
+
+<LI>
+Rarity, J. G., Owens, P. C. M. and Tapster, P. R., "Quantum random number generation and key 
+sharing", Journal of Modern Optics, vol. 41, no. 12, December 1994, pp. 2435 - 2444.
+
+<LI>
+Crýpeau, C., "Quantum oblivious transfer",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Cre94.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Cre94.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Cre94.ps.gz">
+G
+</a>
+]
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2445 - 2454.
+
+<LI>
+Huttner, B. and Ekert, A.K.,
+"Information gain in quantum eavesdropping.",
+Journal of Modern Optics, Vol 41, No 12, December 1994, pp. 2455 - 2466.
+
+</UL>
+
+<H3> Various Sources</H3>
+
+<UL>
+
+<LI>
+Magniez, F., "Cryptographie Quantique",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Mag93.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Mag93.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Mag93.ps.gz">
+G
+</a>
+]
+mýmoire de magistere, ENS-Cachan, mai 1993.
+
+<LI>
+Cachin, C. and Maurer, U.,
+"Linking Information Reconciliation and Privacy Amplification",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/CM94.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/CM94.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/CM94.ps.gz">
+G
+</a>
+]
+Advances in Cryptology: Proceedings of Eurocrypt '94, May 1994, Springer - Verlag, pp. .
+
+<LI>
+Mayers, D. and Salvail, L.,
+"Quantum Oblivious Transfer is Secure Against All Individual Measurements",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/MS94.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/MS94.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/MS94.ps.gz">
+G
+</a>
+]
+Proceedings of the workshop on Physics and Computation, PhysComp '94, Dallas, Nov 1994, 
+pp. 69-77.
+
+<LI>
+Crýpeau, C. and Salvail, L.,
+"Quantum Oblivious Mutual Identification",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/CS95.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/CS95.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/CS95.ps.gz">
+G
+</a>
+]
+Advances in Cryptology: Proceedings of Eurocrypt '95, May 1995, Springer - Verlag, pp. 133-
+147.
+
+<LI>
+Mayers, D.,
+"On the security of the quantum oblivious transfer
+and key distribution protocols",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/May95.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/May95.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/May95.ps.gz">
+G
+</a>
+]
+Advances in Cryptology: Proceedings of Crypto '95, Springer - Verlag,
+to appear.
+
+<LI>
+Yao, A.,
+"Security of Quantum Protocols Against Coherent Measurements",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/DVI/Yao95.dvi">
+D
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Yao95.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Yao95.ps.gz">
+G
+</a>
+]
+Proceedings of the 26th Symposium on the Theory of Computing,
+June 1995, pp. 67-75.
+
+<LI>
+Townsend, P. D., Phoenix, S. J. D., Blow, K. J. and Barnett, S. M.,
+"Quantum cryptography for multi-user passive optical networks",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/PS/Tow1.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/Tow1.ps.gz">
+G
+</a>
+]
+Electronics Letters, vol. 30, pp. 1875-1877 (1994).
+
+<LI>
+Mayers, D.,
+"The trouble with Quantum Bit Commitment",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/PS/May96a.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/GZIP/May96a.ps.gz">
+G
+</a>
+]
+posted on quant-ph March 96.
+
+<LI>
+Lo, H.-K., and Chau, H.F.,
+"Is Quantum Bit Commitment Really Possible?",
+[
+<a href="http://www.cs.McGill.ca/~crepeau/PS/LC96.ps">
+P
+</a>
+/
+<a href="http://www.cs.McGill.ca/~crepeau/PS/LC96.ps" "quantum cryptography over 14 km of installed optical fiber," invited paper to be published in the proceedings of the "seventh rochester conference on coherence and quantum optics,"los alamos report la-ur-95-2836 </ul>
+
+
+

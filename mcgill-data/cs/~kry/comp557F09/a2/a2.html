@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 557 A2</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head><body>
+
+
+<center><table style="max-width: 800px;" width="100%" border="0"><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 557 - Fall 2009 - Assignment 2<br>
+Bezier Surfaces</h1>
+</div>
+
+
+<h2 class="section">Due 23:59 pm Friday 9 October</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+  <p>The purpose of this assignment is to evaluate Bezier surfaces and
+  to draw smooth objects using OpenGL. </p>
+
+  <p>The Bezier surfaces in this assignment are bicubic polynomials of
+  order 3 in each parameter, thus each patch is defined by a 4 by 4
+  grid of control points.  Unlike a triangle mesh, a Bezier surface
+  patch is smooth, differentiable, and its shape is entirely specified
+  by its 16 control points.  However, to draw such a smooth surface in
+  OpenGL we must approximate the smooth surface with small primitives
+  (e.g., triangles or quads).  You will do this by evaluating the
+  surface at regular intervals along the s and t directions, and
+  drawing triangles or quads.</p>
+
+  <p>Note that OpenGL can draw polynomial surfaces through the use of
+  evaluators. In the assignment, we ask you not to use OpenGL
+  evaluators, but rather to implement your own code to evaluate the
+  surface and its derivatives given values of the parameters s and
+  t.</p>
+
+  <h3 class="section">Provided Code</h3>
+
+  <p>The <a href="http://cs.mcgill.ca/~kry/comp557F09/a2/a2.zip">sample code</a> runs, but does nothing but
+  draw a world axis and calls a collection of methods in the
+  BezierPatchWork class that you need to complete.  The sample code
+  zip file has the following contents.
+
+  <ul>
+
+  <li>A2App and BezierPatchwork java files, which need to be placed in
+  a package called comp557a2, and you will need to add the jogl and
+  vecmath jars to your project as per the previous assignment.</li>
+
+  <li>mintools.jar, which also needs to added to your classpath as it
+  provides a small framework used by the sample code.  
+
+  <li>Three data files.  The file testPatch.txt contains one single
+  flat Bezier patch.  The file testPatches.txt contains two Bezier
+  patches.  The third contains Bezier patches defining the Utah
+  teapot.  Change the constructor of A2App to run your application
+  with different data files.</li>
+
+  </ul>
+
+  <p>The code (BezierPatchWork.java) contains TODO comments in the
+  places where you will need to add code to complete the assignment
+  objectives specified below.  The A2App code sets up the interface
+  and adds a number of swing controls to a control window.  You will
+  use these controls to turn on or off or adjust the display different
+  things as specified in the objectives.</p>
+
+  <h3 class="section">mintools Framework Jar</h3>
+
+  <p>While it is easy enough to start writing code from scratch when
+  building a new application, many small parts of code are always the
+  same.  The mintools.jar provides classes that help set up an
+  interactive application.  It takes care of clearing the screen,
+  setting up lights, and provides a simple interface.  In particular,
+  you can use the mouse to rotate and zoom the object: Left click and
+  drag to rotate, middle click and drag to translate, right click and
+  drag to zoom.</p>
+
+  <h3 class="section">Bezier Patch Data</h3>
+
+  <p>The teapot is composed of 32 Bezier patches, each with a 4 by 4
+  grid of control points for a total of 16 control points each. You
+  will notice that the BezierPatchWork class already contains code for
+  loading all this data into an array of Matrix4d objects.  Each
+  matrix contains the 16 control points of a given patch for a
+  given axis (x, y, or z).  For instance, Gx, the 4 by 4 matrix of x
+  coordinates of control points of the first patch will be found in
+  coordinatePatch[0][0], while the y coordinates are in
+  coordinatePatch[0][1], and z in coordinatePatch[0][2].  This code is
+  provided as a convenience to help you get started faster.  But if
+  you feel strongly about storing your control points in some other
+  manner then feel free to change it!</p>
+
+  </div>
+ 
+<h2 class="section">Steps and Objectives</h2>
+
+  <div class="sbody">
+
+<ol>
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Control Points</em></span></p>
+
+The drawControlPoints(gl,patch) method of BezierPatchWork is currently
+unfinished.  Add code to draw the control points using GL_POINTS.
+Make the points large and red by setting the colour with glColor and
+the point size with glPointSize.  The "Display Control Points"
+checkbox in the controls window will let you enable drawing.  Make
+sure it is checked when you are testing your code (it is on by
+default).</li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Surface</em></span></p>
+
+<p>The <i>draw(gl,patch)</i> method of BezierPatchWork is also
+unfinished.  Implement this method by drawing the specified patch as a
+mesh of quadrilaterals or triangles.  You should make
+<i>numEvaluations.getValue()</i> evaluations at regular intervals
+along each parameter direction.  You can think of each interval as
+defining a small rectangular region of the surface, which you can draw
+as a quad or a pair of triangles.</p>
+
+<p>Note that you will probably want to write a number of additional
+methods to help you compute Bernstein basis weights.  Also note that
+the "Display Bezier Mesh" checkbox must be checked when you are
+testing your code (it is checked by default).
+</p>
+</li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Tangents</em></span></p>
+
+Write code to compute the surface tangents (i.e., the derivatives in
+the s and t directions).  Write code in the drawSurfaceVectors method
+to draw the s and t derivitives as red and green lines at the surface
+point (s,t) provided in the parameters.  Note that the default state
+of the controls is not to call this method.  Use the s and t sliders
+in the controls window to check that your tangent vectors make sense.
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Normals</em></span></p>
+
+Write code to compute surface normals using your code that computes
+tangent vectors.  Compute a normal for each surface point you evaluate
+in objective 2, and modify the patch drawing code so that the normal
+is sent to OpenGL.  Note that the normal must be set with glNormal
+before calling glVertex!  Use the lighting checkbox in the control
+window to turn on lighting to check your result.
+
+<li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Repair Bad Normals</em></span></p>
+
+Note that some surface points have bad normals, notably the top and
+bottom of the teapot.  Why is this happening?  Write some code to
+check for when this is happening, and use a nearby point of the
+surface to approximate the desired value of the bad normal.  Note that
+your "fix" need not work in all cases, but should work in the case of
+the teapot data.  </li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Surface Coordinate Axis</em></span></p>
+
+Add more code to the drawSurfaceVectors method to compute a coordinate
+frame on the surface of the patch.  The local coodrinate system should
+have its x axis in the direction of the s tangent, the z axis in the
+direction of the normal, and the appropriate y axis to form a right
+handed coordinate system.  Use glMultMatrix to change to this
+coordinate system, and draw a wire cube with glutWireCube(0.1).  Be
+sure to use glPush and glPop so that you can restore the state of the
+modelview matrix when you have finished drawing the cube.
+
+</ol> 
+
+  </div>
+
+<h2 class="section">Written Questions</h2>
+
+  <div class="sbody">
+
+  <ol>
+
+  <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Shadow Projection</em></span></p>
+
+       <p>A trick for drawing shadows is to project geometry onto a
+       surface using the light position as the center of projection.
+       Once the geometry is flattened in the shape of a shadow on the
+       surface it can be drawn in a dark colour.</p>
+
+       <p>Let the plane with normal N and going through point C be the
+       surface, and let L be the position of the light.  Let P be a
+       point to be projected onto the plane.</p>
+
+       <p>The implicit equation of the plane (use N dot (X - C) = 0 as
+       the equation of your plane).  Substitute the parametric
+       equation of the line from the light to the given point P into
+       the equation of the plane, and solve the parameter value which
+       gives the point on the surface.  Give a simple expression for
+       this parameter value.</p>
+
+       <p>What is the position of the projected point (i.e., subsitute
+       the solved parameter value into the line equation)?  </p>
+
+       <p>Your answer for the projected point involves a division, but
+       instead write the answer in homogenous coordinates so that the
+       conversion from homogeneous to non-homogenous coordinates will
+       perform this division.  Keep your answer in terms of vectors
+       and dot products!</p>
+
+
+
+  <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Bezier Hermite Basis Conversion</em></span></p>
+
+    <p>The kth derivative at the end of a Bezier curve C(t) depends on
+    the positions of the k+1 control points at that end.  Show this to
+    be true for the 1st derivitive of a Bezier curve, and therefore
+    demonstrate that C'(0) is parallel to P1 - P0 (and likewise, that
+    C'(1) is parallel to the vector formed by the last two control
+    points).  Use your answer to write the change of basis matrices
+    that go from cubic Bezier to Hermite, and from Hermite to cubic
+    Bezier.</p>
+
+
+  </ol>
+
+  </div>
+<h2 class="section">Finished?</h2>
+
+    <div class="sbody">
+
+     <p>Great!  Be sure your name and student number is in the window
+     title, and in the comments of the code.  Submit your source code
+     as a zip file via <a href="http://www.mcgill.ca/webct">webCT</a>.
+     Include a readme.txt file with your comments.  Note that your
+     written questions need to be submitted to a different assignment
+     box!  DOUBLE CHECK BOTH of your submitted files by downloading
+     them from WebCT.  You can not recieve any marks for assignments
+     with missing or corrupt files!</p>
+
+     <p>Note that you are encouraged to discuss assignments with your
+     classmates, but not to the point of sharing code and answers.
+     All code and written answers must be your own.  </p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body></html>

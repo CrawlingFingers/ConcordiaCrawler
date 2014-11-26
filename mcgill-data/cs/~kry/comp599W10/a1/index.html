@@ -1,0 +1,507 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 599 A1</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head>
+
+<body>
+
+
+<center><table width="100%" style="max-width: 800px" border="0" ><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 599 - Winter 2010 - Assignment 1<br>Mass-Spring Particle System</h1>
+</div>
+
+
+<h2 class="section">Due 23:39 pm Tuesday January 26</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+  <p>Since this is the first assignment, you'll need to spend a little
+  bit of time to get set up.  If you are not already using Java then
+  download and install the latest
+  <a href="http://java.sun.com/javase/downloads/index.jsp">Java SE
+  JDK</a> (careful not to select the JRE).  I also recommend using
+  <a href="http://cs.mcgill.ca/~kry/comp599W10/a1/www.eclipse.org">Eclipse</a> as a development environment.
+  Note also that the specification of this assignment is long in that
+  this first assignment.  Future assignments will be much shorter and
+  you will be expected to complete them with more autonomy. </p>
+
+  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>New to Eclipse?</em></span></p>
+
+<p>If you are familiar with Eclipse (i.e., you took COMP 557 last term),
+then you can probably skip this section.  For those of you who are
+new, here is a few extra tips on using Eclipse and getting set up.</P>
+
+<p>Eclipse uses a workspace to organize your projects.  When you start
+eclipse for the first time, it will make you a workspace in some
+default location (probably your home directory), but you can switch
+workspaces with the file menu, and open any folder you want for your
+workspace.  One nice way to organize this would be to create a
+workspaceComp599 folder in your home directory, then tell eclipse to
+open that workspace. 
+
+<p>Once your workspace is open, add a new java project, give it a name
+like A1.  The defaults for the project when you click next are
+probably fine, e.g., default JRE, separate folders for source and
+class files.  Once it is created, you'll see a src folder for the
+source files and bin for the class files (note that you'll eventually
+need to create a directory called "stills" for when you're recording
+images to make a movie).</P>
+
+<p>You'll want to put the provided code (see below) in src folder of
+your new project, and there are lots of ways to do this, but you need
+the directory structure to match the package structure!! An easy way
+is to copy the comp599 directory in the zip file and paste it into the
+src directory.  Since everything lives in the package comp599 you need
+this folder (i.e., you can't just copy and paste the a1 folder into
+src). If you copy files into your project on the file system side,
+you'll need to tell Eclipse to refresh its view of the project (right
+click on the project and select refresh). So that summarizes the steps
+for "dumping the source code into a project". You'll have lots of
+errors at this point, but they all go away when you attach the jars as
+specified in the assignment. </p>
+
+<p>Lastly a few tips on using eclipse when you're browsing the code. If
+you let your mouse hover over an identifier, variable or method, a
+window will pop up telling you what it is, and providing you with the
+javadoc. If you hold ctrl and click on an identifier, it will take you
+to its definition (e.g., the implementation of a method). This is a
+great way to explore code rapidly! Note the yellow forward and back
+buttons on the tool bar are useful for going back to where you were
+after control clicking an identifier. </p>
+
+  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Sample Code</em></span></p>
+
+  Download the <a href="http://cs.mcgill.ca/~kry/comp599W10/a1/comp599-a1.zip">provided code</a> and dump it into a
+  new java project.  The code has two parts.  The first part is the
+  comp599.a1 package which contains the template code for this
+  assignment.  The second part is the comp599.tools package, which is
+  a set of tools for quickly getting started with 2D and 3D graphics.
+  There are three parts to the tools package:
+
+  <ul style="list-style-type: square;">        
+    <li>parameters contains boolean and double parameter
+        classes for quickly setting values with swing interface
+        controls.
+    <li>swing contains layout helpers and panels for
+        quickly throwing together a Java swing interface.
+    <li>viewer contains some simple classes for 2D and
+        3D viewing, including a 3D trackball and camera controls.
+        (note that for simplicity, this assignment is set up to be all
+        2D graphics).
+  </ul>
+
+  <p>You do not need to change anything in the tools package to
+  complete this assignment.  The source for the tools is provided only
+  for your convenience, and you should <span style="font-weight: bold;">
+  <em>focus your attention on the a1 package</em></span>.  Do not
+  change any of the package names as this will interfere with
+  marking.</p>
+
+  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Jars and Native Libraries</em></span></p>
+
+  <p>The code uses two libraries: JOGL for OpenGL bindings, and
+  vecmath for classes useful for math with 2D (and 3D) vectors.</P>
+
+  <p>The vecmath package is available as part
+  of <!--<a href="http://java.sun.com/javase/technologies/desktop/java3d/index.jsp">Java3D</a>-->
+  Java3D.  Instead of installing the full Java3D, download this copy
+  of <a href="http://cs.mcgill.ca/~kry/comp599W10/a1/vecmath.jar">vecmath.jar</a>.  Compared to the latest
+  version, I believe this version is only missing a few setter and
+  getters in the matrix classes (nothing that you will miss, and
+  marking problems will be avoided).  Also, the source code (i.e., the
+  javadoc) is in the jar, so if it isn't automatically attached,
+  you'll want to follow the following process.  First add the jar to
+  your build path, then open up Reference Libraries in your project,
+  right click on the jar to set properties, go to source code
+  attachment, and tell it where to find the zip file.  You might also
+  want to browse the
+<a href="http://java.sun.com/javase/technologies/desktop/java3d/forDevelopers/J3D_1_3_API/j3dapi/index.html">vecmath
+javadoc online</a> to become more familiar with the available classes
+and methods.</p>
+
+
+<p>The JOGL bindings project has moved and is now available at 
+  <a href="http://kenai.com/projects/jogl/pages/Home">Project
+  Kenai</a>.  From the main page you can find the necessary downloads from
+  the <a href="http://download.java.net/media/jogl/builds/archive/">archived
+  builds link</a>, but note that you do not want the JOGL2.0 beta
+  builds as there are some small but significant changes to
+  methods. Here is a direct link to the latest release build,
+  <a href="http://download.java.net/media/jogl/builds/archive/jsr-231-1.1.1a/">JSR-231 1.1.1a</a>. Be sure to download the appropriate files for your platform.  If on windows,
+  download </p>
+
+  <ul style="list-style-type: square;">        
+    <li>jogl-1.1.1a-windows-i586.zip</li>
+    <li>jogl-1.1.1a-src.zip (to have access to javadoc in Eclipse)</li>
+    <li>jogl-1.1.1a-docs.zip (if you prefer reading javadoc in your browser) </li>
+  </ul>
+
+  <p>To make your life more pleasant in Eclipse, you want to attach
+  the source code to the jar for the javadoc, as described above.</P>
+
+  <p>Note that the .dll (or .so) that comes with the jar must be in your
+  path.  You can do this by opening the reference libraries in your
+  project, right clicking to select properties, choose Native Library
+  and enter the location of the .dll or .so file.</p>
+
+  <p>Note that the most noticable change to OpenGL function signatures
+  under java is how functions with pointer arguments are mapped to two
+  parameters under java (one for the array, one for the offset).  See
+  the note on <em>Mapping of Pointer Arguments</em> and <em>Index
+  Parameter for Arrays</em> in the
+  <a href="http://download.java.net/media/jogl/builds/archive/jsr-231-beta5/javadoc_public/">JSR 231 Specification Overview</a>.
+
+  <p>There will not be extensive OpenGL programing in this assignment,
+  but if you need either a quick introduction to or to brush up on
+  OpenGL, check out these links:
+<a href="http://glprogramming.com/red/">The OpenGL Programming Guide
+(The Red Book) online version</a>
+(<a href="http://www.amazon.com/OpenGL-Programming-Guide-Official-Learning/dp/0321173481">or
+at
+Amazon</a>), <a href="http://today.java.net/pub/a/today/2003/09/11/jogl2d.html">
+Jumping into
+JOGL</a>, <a href="http://www.cs.umd.edu/%7Emeesh/kmconroy/JOGLTutorial/">JOGL:
+A Beginner's Guide and Tutorial</a>.  Another popular resource
+is <a href="http://nehe.gamedev.net/">nehe.gamedev.net</a> (see the
+NeHeGL JOGL link on the bottom left).  </p>
+
+
+<p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Creating Videos</em></span></p>
+
+  <p>Below you are asked to assemble a sequence of recorded frames
+  that demonstrate the required features of your program.  Everyone
+  should use
+  the <a href="http://www.xvid.org/Downloads.15.0.html">xvid</a>
+  MPEG-4 / H.264 codec.  Video creation is straightforward under
+  windows using <a href="http://www.virtualdub.org/">virtualdub</a>.
+  If you are using Linux or OSX, a good alternative is to use mencoder on
+  the command line (you can do this on windows too).  See the 
+  <a href="http://www.mplayerhq.hu/design7/info.html">MPlayer</a> page
+  for downloads and more information, and you can probably make your 
+  video with a command line that looks something like the following:
+
+  <pre>mencoder -ovc xvid -xvidencopts bitrate=1800000:me_quality=6 -fps 24 -o out.avi mf://img</pre>
+
+  Alternatively, under windows, once you have both the codec and virtualdub
+  installed, you can create an avi file from a sequence of png still
+  frames using the following steps (you'll probably want to complete
+  at least part of the assignment and then come back to these steps
+  later).</p>
+
+  <ol>
+  <li>In virtualdub, select "Open video file..." from the File menu
+  and choose the first image in the sequence (i.e., img00000.png).
+  This will automatically load the entire sequence</li>
+  <li>The loaded images probably do not have a width and height which
+  are multiple of 16, so you'll need to add a filter.  Under the Video
+  menu, select "Filters...", click Add, select Resize and click
+  OK.</li>
+  <li>In the window that opens, there should be an option for
+  Codec-friendly sizing in the bottom right.  Select "Multiples of 16"
+  and click OK.  Now back at the Filters, click OK to close it.</li>
+  <li>Now you need to set the codec.  Choose
+  "Compression..." under the video menu and choose the codec you
+  installed (e.g., Xvid MPEG-4 Codec).</li>
+  <li>The default configuration of the codec should be fine, but I 
+  would prefer that you use maximum quality settings (i.e., adjust the 
+  quantization).  It is unlikely that any of the files you are creating will be
+  too large, but use your best judgment!</li>
+  <li>Now you can save the image sequence to an avi file.  Select
+  "Save as avi..."  under the file menu and specify the file name,
+  then wait for virtualdub to finish encoding the file (it might need
+  a minute depending on the length of your video and the speed of your
+  computer).</li>
+  </ol>
+
+  <p>Note that there are also many other good ways to encode
+  videos.  Do whatever is easiest for you, but make sure that the 
+  result is high quality and uses the xvid codec.</p>
+
+  </div>
+
+<h2 class="section">Steps and Objectives (8/10)</h2>
+
+  <div class="sbody">
+
+  <p>The provided source code should help you get started quickly.  It
+  has an interface for creating points and dragging them around.  The
+  controls window lets to create a few different procedurally created
+  test systems and lets you adjust parameters stuff as stiffness,
+  damping, and step size.  The main method lives in the A1App class,
+  so this is the one you'll want to start when running your program.
+  Note also the keyboard commands attached to the drawing canvas that
+  let you start and stop the simulation, reset, and clear.  There are
+  also controls to help you save sequences of png files.  The
+  important parts of the program, however, are missing. Note also that
+  you will not be able to test much until you complete the first three
+  steps.</p>
+
+  <ol>        
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Spring Forces</em></span></p>
+
+        <p>Finish implementing the code that computes spring
+        deformation and viscous spring damping forces.  See the
+        Spring.java file and the comment the starts with "TODO".
+        Refer to your class notes or the PBM notes on the Pixar
+        site.  You can optionally add viscous damping too, but it
+        should be left at zero in your demonstration videos.</p></li>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Numerical Integration</em></span></p>
+
+        <p>Create getState and setState methods to get and set phase
+        space state of the system in a flat array.  Use these methods
+        to write a forward Euler numerical integration method using
+        the <em>Integrator</em> and <em>Function</em> interfaces
+        provided.  See the "TODO" comments in ParticleSystem.java in
+        the updateParticles and derivs methods.  Also see the "TODO"
+        comment in the ForwardEuler class in the numerical package.</p>
+
+<p>To elaborate on this a bit, the step method in integrator needs
+flat array containing the phase space state of the system. But the
+state of the system is contained in member variables of all the
+instances of the particles.  As such, you'll want to write a method
+such as getState(double[] y) in your particle system class to pack up
+all the positions and velocities of the particles. The setState method
+should obviously do the opposite, so you can take the double[] yout
+array result from calling step.  Of course, you'll also need to
+allocate yourself arrays of the appropriate size so you can use these
+methods, and so you can call step. Note that the number of particles
+will increase if you click to create them, so you'll probably want to
+do something smart, like grow the size of your arrays as needed.  So,
+what you want to do is, first check if you have arrays y and yout that
+are of an appropriate size for the current number of particles.  Then
+pack the state of the particles using your getState method. Then call
+the step method of the integrator.  Then unpack the result into your
+particles with your setState method.</p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Pinned Particles</em></span></p>
+
+        <p>Some of the example systems have particles with
+        a pinned property set to true.  Add a method to filter the
+        state (and forces) so that these simple constraints work
+        nicely with your numerical integration methods (both forward
+        Euler, and those in step 5).</p></li>
+
+<p>To elaborate on this slightly, if a particle is pinned (a bilateral
+constraint), then each coordinate of the particle needs to remain
+constant. It should also have zero velocity and it should not undergo
+any acceleration. Your derivs function needs to make sure that the
+velocity and acceleration are valid, otherwise strange things might
+happen! Suppose you let forces produce accelerations, and you
+integrate these to get velocities. You'll accumulate velocities for
+the particle, which will try to make it move at each step, but you'll
+set the position back to where it is supposed to be. But
+that <em>wrong</em> velocity that the particle has will affect damping
+forces on the particles to which it is attached by springs! Thus, it
+is best to make sure that the whole state makes sense with respect to
+the constraints.</p>
+
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Particle Wall Contact</em></span></p>
+
+        <p>Modify the method you made in the previous step to also keep
+        particles inside the window by projecting them to the closest
+        boundary.  For a particle in contact with a wall, a velocity
+        away from the wall is OK, but a velocity toward the wall
+        should not be allowed (the same for forces). </p></li>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Additional Numerical Integration Types</em></span></p>
+
+        <p>Create classes that implement the Integrator interface for the
+        midpoint method, the 2/3 point method, and the fourth-order 
+        <a href="http://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta<a>
+        method.  That is, add classes to the numerical package and use
+        them in your particle system.  You should also implement
+        the <a href="http://en.wikipedia.org/wiki/Semi-implicit_Euler_method">symplectic
+        Euler</a> method, but note that this will break the
+        abstraction of the Integrator interface slightly in that you
+        will need to know how the positions and velocities are packed
+        in the state array. </p>
+
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Keyboard Controls</em></span></p>
+
+        <p>Add keyboard controls so that you can switch between integrators
+        by pressing 1 through 4 (have a look at the "TODO" comment at
+        the bottom of the A1App class which adds the KeyAdapter to the 
+        canvas). </p>
+
+        <p>When adjustSubsteps is true, you should automatically adjust
+        the number of sub-steps so that each step involves the same
+        amount of work (i.e., number of calls to compute derivatives).
+        That is, 4 for FE, 2 for midpoint, 2 for 2/3 point, 1 for RK4.
+        You might try to find scenarios for spring and damping
+        parameters where different methods will perform better given
+        the same computational cost.</p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Stability Movie</em></span></p>
+
+        Record a sequence of examples that demonstrate how these
+        different numerical methods perform.  Specifically, with the
+        damping set to zero find a step size which demonstrates which
+        method performs best.  Also demonstrate what happens and which
+        is best when the damping is not zero (you might want to do the
+        written question and think about regions of stability when doing
+        this question.  Keep the time steps fixed.  Encode the video as
+        described above.  Please keep your video short (half a minute
+        should be plenty) and use the comment area to describe what
+        you are showing.</li>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Interesting Movie</em></span></p>
+        
+        <p>Finally record a sequence of something interesting or
+        amusing.  This could be something within the existing
+        functionality of the specification and provided code, or some
+        additional feature you add to your code (e.g., particles with
+        other properties such as colours, different bouncyness
+        properties).  Be creative, but don't spend too long on
+        anything as the assignment is quite long as it is. Encode the
+        video as described above.  Keep your video short and to the
+        point (i.e., at most a few MB).</li>
+
+  </ol>
+
+  </div>
+
+<h2 class="section">Written Questions (2/10)</h2>
+
+  <div class="sbody">
+
+  <p>Consider a one dimensional system consisting of a single particle
+     with mass 1 kg attached to a rigid wall with a spring (100 N/m).</p>
+
+  <ol>
+    <li> <p>If the particle starts with zero velocity at a position 0.01
+         m from rest (x=0), what is the exact trajectory?  What is the
+         frequency of the oscillation in Hertz?</P></li>
+
+    <li> <p>Given what you know (from class) about the stability of the
+         different integrators used in the programming part of this
+         assignment, what would be a good choice of step size for each
+         integrator?  Use your implementation to check that it matches
+         what you expect from the theory.</P></li>
+
+    <li> <p>In the case of forward Euler and given a step size of 0.05 s, what
+         is the minimum amount of damping required to prevent the system
+         from blowing up? </P></li> 
+
+    <li> <p>Again, in the case of forward Euler and given a step size of
+         0.05 s, What is the maximum amount of damping that can be
+         used without the system blowing up?  Use your implementation
+         to check that it matches what you expect from the theory.</P></li>
+
+  </ol>
+
+  <p>Prepare a pdf file with your answer to these written questions 
+  (scanned hand written document, or generated
+  with latex, openoffice, or otherwise) and submit it along with your
+  assignment via webCT.</p>
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+  <div class="sbody">
+
+  <p>Great!  Submit your source code and two xvid encoded videos as a
+     zip file via webCT.  Include a readme.txt file with any specific
+     comments.  Also be sure to include a pdf with your written answer
+     (i.e., scans of handwritten work, or typeset).  Your readme
+     should provide a list of people with which you discussed the
+     assignment, or state that you did discuss the assignment with
+     anyone.</p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body>
+</html>

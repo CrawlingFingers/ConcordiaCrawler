@@ -25,6 +25,9 @@ if len(sys.argv) < 2:
 retriever = Retriever(sys.argv[1])
 collections = retriever.get_collections()
 
+for doc in collections['electrical-computer']:
+  print(doc.get("sentiment"))
+
 
 # rank collections by sentiment
 sentiments = { k: reduce(lambda sum, val: sum + float(val.get("sentiment")), v, 0.0) for k, v in collections.iteritems() }

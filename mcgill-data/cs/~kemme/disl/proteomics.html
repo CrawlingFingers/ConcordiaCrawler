@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.06 [en] (X11; U; Linux 2.2.14 i586) [Netscape]">
+  <title>Proteomics Information Management</title>
+</head>
+<body bgcolor="#ffffff">
+<h2>Laboratory Information Management</h2>
+Multi-tier architectures have become the prevalent building block to
+develop laboratory information management systems (LIMS). The
+increasing prevalence of automated experimental techniques has allowed
+life-science researchers to dramatically increase the amount of data
+processed over the course of a typical scientific experiment. Such
+large volumes of data must be reliably stored, and processed for
+monitoring and data mining purposes. Therefore, many research groups
+maintain LIMS that keep track of the experiments conducted, record
+which ingredients and instruments are used, and any observations and
+results achieved. <br>
+<br>
+Our research group has been working with two bioinformatics groups at
+the NRC (Macromolecular Structure Group at Biotechnology Research
+Center) and McGill (Biomedical Engineering, Center for Bioinformatics)
+in order to better understand the open problems asscociated with LIMS.
+From there, we have built Exp-DB, a framework for the development of
+LIMS. We put particular focus on access control and workflow support. <br>
+<ul>
+  <li>As the groups collaborate with each other, they want to give
+their partners access to their LIMS, however, with very specific
+restrictions. We have developed a fine-grained access control mechanism
+based on role-based access control that allows the plug-in of arbitrary
+rules that can then be implemented in the form of programs. We use
+aspect-oriented programming which allows us to inject access control
+wherever it is needed in the application code without changing the code
+itself. <br>
+  </li>
+  <li>Another open problem for life-science researchers is to
+appropriately control their scientific experiments and automatically
+link the data to be fed to and retrieved from their wet labs with the
+LIMS in place. Existing workflow management systems, however, are often
+very difficult to integrate with the existing LIMS infrastructure of
+the labs. Thus, we have developed a workflow management system that is
+loosely coupled with the LIMS via aspect-oriented programming. It
+observes whenever data is entered or changed and triggers the start of
+new experiments whenever needed. It can communicate with robots and
+external agents via a distributed infrastructure. <br>
+  </li>
+</ul>
+
+
+</body>
+</html>
