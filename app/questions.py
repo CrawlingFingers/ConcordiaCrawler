@@ -31,7 +31,7 @@ sentiments = { k: reduce(lambda sum, val: sum + float(val.get("sentiment")), v, 
 
 
 # question 1
-print("1. Which is the most positive Department in ENCS at Concordia?")
+print("Q1. Which is the most positive Department in ENCS at Concordia?")
 most_positive_tuple = lambda current_highest, current_tuple: current_highest if current_highest[1] > current_tuple[1] else current_tuple
 positive = reduce(most_positive_tuple, [(k, v) for k, v in sentiments.iteritems()])
-print(" A: The most positive department is " + positive[0])
+print("A:  The most positive department is " + positive[0])
