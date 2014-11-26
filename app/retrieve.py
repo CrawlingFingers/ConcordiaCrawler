@@ -23,9 +23,11 @@ def main():
     print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, qq)
 
     for e in hits.scoreDocs:
-        print e.score, e.doc, e.toString()
+        # print e.score, e.doc, e.toString()
+        # doc = search.doc(e.doc)
+        # print doc.get("content").encode("utf-8")
         doc = search.doc(e.doc)
-        print doc.get("content").encode("utf-8")
+        print doc.get("filepath")
 
 if __name__ == "__main__":
     main()
