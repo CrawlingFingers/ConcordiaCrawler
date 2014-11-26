@@ -47,7 +47,7 @@ def main():
   retriever = Retriever(sys.argv[1])
 
   # init query loop
-  while not quit:
+  while True:
     userq = uquery()
     
     if userq == "quit":
