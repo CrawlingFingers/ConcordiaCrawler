@@ -33,7 +33,7 @@ class Retriever:
   # value is a collection of all the docs in that folder
   def get_collections (self):
     collections = {}
-    reader = lucene.DirectoryReader.open(self.directory)
+    reader = lucene.IndexReader.open(self.directory)
     for i in range(0, reader.maxDoc() - 1):
       doc = reader.document(i)
       file_path = doc.get("filepath")
