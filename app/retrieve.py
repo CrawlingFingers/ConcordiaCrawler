@@ -55,7 +55,7 @@ def main():
       sys.exit()
     
     hits = retriever.query_content(userq)
-    print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, qq)
+    print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, userq)
 
     for e in hits.scoreDocs:
       # print e.score, e.doc, e.toString()
