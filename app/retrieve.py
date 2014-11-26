@@ -61,7 +61,7 @@ def main():
       # print e.score, e.doc, e.toString()
       # doc = search.doc(e.doc)
       # print doc.get("content").encode("utf-8")
-      doc = self.search.doc(e.doc)
+      doc = retriever.search.doc(e.doc)
       print doc.get("filepath")
 
 if __name__ == "__main__":
