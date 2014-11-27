@@ -1,5 +1,6 @@
 from retrieve import Retriever
 import sys
+import rules
 
 ##############################################
 # 
@@ -27,7 +28,11 @@ collections = retriever.get_collections()
 
 
 # rank collections by sentiment
-sentiments = { k: reduce(lambda sum, val: sum + float(val.get("sentiment")), v, 0.0) for k, v in collections.iteritems() }
+classes = rules.get_sentiment_classifier()
+
+
+reduce_lambda = lambda sum, val: sum + (classes.classify(float(val.get("sentiment")))[1])
+sentiments = { k: reduce(reduce_lambda, v, 0.0) for k, v in collections.iteritems() }
 
 # intro printer
 print("")

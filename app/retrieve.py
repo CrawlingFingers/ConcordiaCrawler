@@ -44,8 +44,6 @@ class Retriever:
     return collections
 
 
-
-
 def uquery():
   userin = raw_input("Enter a query, or type \"quit\" to quit: ")
   return userin
