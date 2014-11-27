@@ -35,7 +35,9 @@ classes = rules.get_sentiment_classifier()
 
 
 reduce_lambda = lambda sum, val: sum + (classes.classify(float(val.get("sentiment")))[1])
-sentiments = { k: reduce(reduce_lambda, v, 0.0) for k, v in collections.iteritems() }
+sentiments_t = { k: reduce(reduce_lambda, v, 0.0) for k, v in collections.iteritems() }
+
+sentiments = {k: v/len(collections[k]) for k, v in sentiments_t.iteritems() }
 
 # intro printer
 print("")
