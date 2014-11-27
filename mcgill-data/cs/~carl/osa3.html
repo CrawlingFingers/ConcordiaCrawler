@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Operating Systems Assignment 3</TITLE>
+</HEAD>
+<BODY bgcolor="CCFFFF" text="#333333">
+<font color="#3399CC">
+<h1 align="center">Problem 3-Simulation of an RR Scheduler</h1>
+</font>
+
+In this exercise, you will write a discrete event simulator which you will use to analyze the RR scheduling mechanism. First
+a bit of background on discrete-event simulation, followed by a description of the problem itself. 
+<p>
+Computer simulations are programs which are used to model the behavior of a real system and predict its behavior by
+examining the behavior of the model instead of the system itself. These programs are widely used  to determine the
+behavior of man-made systems (aircraft, computer systems and networks) before they are built. They are also used to
+examine the behavior of natural systems such as the human brain and planetary motion. 
+<P>
+A simulation program is comprised of a set of modules, each of which is meant to model part of the system which we are
+studying (the target system). 
+For example, one module might represent a the enqueuer portion of a scheduler, another the ready list, another the
+dispatcher. The enqueuer module places the jobs in the ready list module, the dispatcher module retrieves simulated jobs from the 
+simulated ready list, etc. 
+Each simulation module is constructed as a simulation procedure, i.e. one or more programming
+language functions (think C or C++). 
+<P>
+As an example, consider the behavior of an airport reservation agent (they might be machines now) who are supposed to
+help passengers with their reservations, and ask them if they are terrorists. When a passenger enters the airport he goes to the back
+of a line to wait for help from the agent, waits his turn and is served by the agent, after which he goes on his way. The
+airlines might be interested in determining the average waiting time and the maximum waiting time for a customer, given a
+particular arrival pattern by the passengers. To answer these questions, we can construct a model of the system and
+simulate it.  
+<P>
+In a discrete-event model, the entities of interest (agents, passengers in the example)  are represented by data structures. The 
+state of the system is represented by values assigned to these data structures. In a discrete event system, the state of
+the system changes at discrete instants in time (as opposed to continuous simulations). In the airport model, if we assume
+that the simulation starts with all of the agents idle, then the first transition occurs when the first passenger arrives
+to be served. The events in the simulation would be:
+<ul>
+<li>Event 1 (Passenger arrival) Causes the simulator to run a function which creates a new instance of the passenger data structure
+and puts the instance into a data structure which represents the line of waiting passengers. Fields in the passenger data
+structure should identify the passenger, save the time of the passenger arrival, save the time at which the passenger
+begins service, and save the time at which the passenger leaves. These entities enable us to determine the waiting time of
+the customers. After the passenger arrives, the function should place him on a line. The function should check to see if there 
+are idle agents; if so, the agent should be paired with the passenger. This time at which the next passenger arrives can
+also be scheduled. 
+<li>Event 2(Customer departure) When a passenger begins service, the corresponding fucntion determines the time at which the
+service completes, and adjusts the data strutures to reflect this, and schedules the next event #2. If there are no
+passengers waiting, then the agent waits. This function can determine the amount of time that the agent is busy and is
+waiting. 
+</ul>
+<P>
+In general, a simulation program is comprised of a simulation application and simulation kernel. The application part is
+specific to the model, e.g. the airport model or a model of the RR scheduling algorithm. The kernel's job is to manage
+simulated time, calling the functions associated with the events at the right times. An outline of the simulation kernel
+follows.
+<br>
+simulated-time==0;<br>
+while(true) {<br>
+event=select-next-event();<br>
+if (event->time>simulated_time)<br>
+simulated_time=event->time;<br>
+evaluate(event->function,....);<br>
+}
+<P>
+You will need to implement a simulation kernel and the simulation application for this exercise. 
+Here is an outline for the kernel.
+<br>
+void runKernel(in quitTime)<br>
+{<br>
+Event *thisEvent;<br>
+if (wuitTime <=) quitTime=99999999;<br>
+simTime==0;<br>
+while(simTime < quitTime) {<br>
+if(eventList= =NIL {<br>
+thisEvent ==eventList;<br>
+eventList=thisEvent->next;<br>
+simTime=thisEvent->getTime( );<br>
+thisEvent->fire();<br>
+delete(thisEvent);<br>
+};<br>
+}
+<P>
+You will need a data structure to keep the events in time-stamped order. A priority queue (heap) ordered by the time of 
+each event is a standard approach. 
+<P>
+Now for the simulation application. Design it so that each procedure implements data structures that you need (e.g. the
+system's ready list) or procedures to change the simulations's state(creating a new job, entering the job into the ready
+list, dispatching a job, simulating an interrupt, etc). First define the modules that you will need in the program, and
+then encode them as procedures. 
+<P>
+Finally, you should instrument your simulation appliction to collect the necessary information you will need to measure
+the performance of the system. You will need to compare the performance of the system with different context switching
+times and time-slice values. 
+<P>
+Create an input file with entries having the form (job ID, job arrival time, job service time). Run the simulations for
+dispatcher overhead times to be 0,5,10,15,20,25 msec. and time quanta of 50,100,250 and 500 msec. 
+Run the simulation a number of times to gather the information and use a graphing package to plot the performance. You can 
+decide on what the package should portray. 
+</body>
+</html>
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.06 [en] (X11; U; Linux 2.2.14 i586) [Netscape]">
+  <title>XML Data Management</title>
+</head>
+<body bgcolor="#ffffff">
+<h2>McXML: A native XML Data Management System <br>
+</h2>
+McXML is a&nbsp; native XML database system with a focus on supporting
+updates and transaction management:<br>
+<br>
+<h4>Query Execution: </h4>
+McXML has as main logical data model a tree based main-memory structure
+that provides the DOM interface. Hence, any XQuery execution engine
+based on DOM can be plugged into McXML. Furthermore, McXML has its own
+query execution engine. This engine supports as a subset of the
+XQuery langauge and a set of XQuery update statements that were
+proposed as an extension to XQuery.&nbsp; The current execution engine
+uses standard DOM
+navigation with some extra index structures. McXML provides full transaction
+management and concurrency control . <br>
+<br>
+<h4>Storage Manager:</h4>
+McXML has a page-based
+storage manager. XML documents are split into subtrees which are stored
+in records&nbsp; placed on fixed-width pages. Pages are the basic unit
+for transfer between disk and main memory.&nbsp; Loading is done in a
+lazily, i.e., records are only loaded into memory and the corresponding
+subtree (DOM model) extracted when a query might need to access this
+part of the
+tree. When updates change the logical tree model, only the changed
+parts of the tree are written back to disk. That is, only the pages
+with records that contain chainged subtrees are written back to disk. <br>
+<br>
+<h4>Transaction Manager: </h4>
+McXML has a full-fledged transaction management in place. Several
+queries can be bundled to a transaction. All changes performed by a
+transaction are written back to disk at commit time. If a transaction
+aborts,
+its changes are automatically undone. McXML offers two snapshot based
+concurrency control methods, one providing optimistic concurrency
+control, the other a multi-version concurrency control providing
+snapshot isolation. Additionally, a hierarchical locking scheme is
+implemented. <br>
+<br>
+
+
+<hr>
+<address><a href="mailto:kemme@inf.ethz.ch"><br>
+</a></address>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 308-767 Parallel Programming</TITLE>
+<META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I: OSF1 V4.0
+alpha)[Netwscape]">
+</HEAD>
+<BODY bgcolor="ffffff" text="#333333" background="/backgrnds/whitepg23.gif">
+<p><!body background="chalk.jpg"></p>
+
+<table><tr><td valign=left align=top><img src="http://www.cs.mcgill.ca/gifs/pixel.gif" height="1" width="110" alt=""></td>
+<td valign=left align=top width=100%>
+<img src="http://www.cs.mcgill.ca/gifs/mcgillbanner.gif" alt="McGill University" height="48" width="170">
+<br>
+<font color="#ff0000">
+<font size=+4><b>School of Computer Science</b></font>
+</font>
+<br>
+<h1>Computer Science 308-767:
+Parallel Programming
+</h1>
+<BR>
+<h1><B>The Big Dance as seen by Barnes and Hutt
+</B></h1>
+<br>
+</td></tr></table>
+</body>
+</html>
+<p>
+As you can guess from the title of the assignment, you are going to
+implement the Barnes-Hutt algorithm. The emphasis will be on load
+balancing, since oct-trees are not very good at knowing where the bodies
+are located. You should use the BSP (Bulk Synchronous Programming) model
+to implement the  algorithm. 
+<p>In BSP all of the 
+processors do the following:
+<br>
+<ul>
+<li>compute</li>
+<li>barrier</li>
+<li>synchronize</li>
+<li>barrier</li>
+<li>repeat</li>
+</ul>
+<br>
+This approach is easy to implement and the serial code will not wind up
+looking all that different from the parallel code. The implementation
+should be on a shared memory machine.
+<p>
+Now to the fun part-load balancing. You can implement one of two load
+balancing algorithms (1) orthogonal recursive bisection (2) cost-zones.
+The first scheme is the easier of the two, and only works in 2-D. The
+second scheme will take more work to implement. You should use shared
+memory for this load balancing algorithm, as it will be much easier to
+implement this way. 
+<p>
+The choice is yours-if you feel adventurous and have the time, try 2.
+However it is not required (you will clearly get extra consideration for
+implementing the second method). There will be no loss of marks if you
+chose 1. 
+<p>
+You should use 4 to 6 processors . Assume that the particles all have
+the same mass (say 1). You should present results for several (at least
+3) different initial configurations, i.e. different load distributions
+in which you show the results for all of the processors. You should run
+the algorithm without load balancing for one of the initial
+configurations in order to show the improvements produced by the
+algorithm.
+<h2>References</h2>
+<ul>
+<li> The Barnes-Hutt lecture material, Berkeley slides are a
+good place to start. This will be posted. The material we cover in class
+will help.</li>
+<li>" A Hierarchical O(n log n) force calculation algorithm", J. Barnes
+and P. Hut, Nature, v. 324 (1986). This is the original paper.</li> 
+<li> Blackston and Suel, Supercomputing 1997 is the article which covers
+the parallelization scheme</li>
+<li> Warren and Salmon, Supercomputing 1992 covers the orthogonal
+recursive bisection algorithm</li>
+<li> Warren and Salmon, Supercomputing 1992 for LET and hashed cost zones
+</li>
+<h2>The assignment</h2>
+Your assignment should be submitted in two parts:
+<ul>
+<li>
+A tar file containing a separate directory for each of your
+programs. Each directory should contain your source code and a
+Makefile.
+</li>
+<li>Your writeup about the programs. 
+</li>
+</ul>
+<p>Email me a message with a text attachment containing the program and a
+second attachment containing your writeup (in either Word or pdf
+format). 
+<h2>Grading Criteria</h2>
+<ul>
+<li>
+10% Program correctness. 
+</li>
+<li>
+40% Program clarity, elegance and parallelization. The programs should
+be well-documented internally with comments.
+</li>
+<li>
+10% Program scalability and performance.
+</li>
+<li>
+40% Writeup. Your grade on the writeup includes the quality of the
+writing, whether all of
+the required elements are included, and the clarity of your
+explanations. 
+</li>
+</ul>
+<h2>Due Date</h2>
+Friday, November 30, 2007
+<hr />
+</body>
+</html>
+
+

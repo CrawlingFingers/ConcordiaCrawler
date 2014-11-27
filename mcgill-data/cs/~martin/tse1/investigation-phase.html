@@ -1,0 +1,178 @@
+<!-- $Id$ -->
+
+<html>
+	<title>Change Plan</title>
+	<body>
+	
+	We ask you to make a change to the code of JEdit.  JEdit is a
+	programmer's text editor developed in Java.  It allows users
+	to open, modify, and save text files.  In this part of the
+	study, you will first familiarize yourself with JEdit and one
+	of its feature: <I>autosave</I>.  You will then be asked to
+	prepare a change to the autosave feature.
+
+	<H2>JEdit</H2>
+
+	<OL>
+	<LI>Launch JEdit to check it out.  From the Eclipse Run
+	configurations menu, choose <TT>jEdit-4-1-pre6</TT>.  You see
+	JEdit appear.  Some warning messages will be displayed in the 
+	console.  This is normal.  Do not close JEdit.
+	<LI>In JEdit, an opened text file is called a <I>Buffer</I>.
+	The following is an extract from the JEdit Manual (section 2.1):
+	<P>
+	Several files can be opened and edited at once.  Each open
+	file is referred to as a <I>buffer</I>.  The combo box above
+	the text area selects the buffer to edit.  Different emblems
+	are displayed next to buffer names in the list, depending on
+	the buffer's state; a red disk is shown for buffers with
+	unsaved changes, a lock is shown for read-only buffers, and a
+	spark is shown for new buffers which don't yet exist on disk.
+	<P>
+	<LI>JEdit has an <I>autosave</I> feature.  The following is an
+	extract from the JEdit Manual (section 3.3.1):
+	<P>
+	"The autosave feature protects your work from computer crashes
+	and such.  Every 30 seconds, all buffers with unsaved changes
+	are written out to their respective file names, enclosed in
+	hash ("#") characters.  For example, <TT>program.c</TT> will
+	be autosaved to <TT>#program.c#</TT>."  
+
+	<P>JEdit will also
+	generate <I>backup</I> files, which are terminated with a
+	tilde (~) character.  These have nothing to do with your task
+	in this study.  You can completely ignore them.
+	<P>
+	Saving a buffer using one of the commands in the previous
+	section automatically deleted the autosave file, so they will
+	only ever be visible in the unlikely event of a JEdit (or
+	operating system) crash.
+	<P>
+	If an autosave file is found while a buffer is being loaded,
+	jEdit will offer to recover the autosaved data.
+	<P>
+	The autosave feature can be configured in the <STRONG>Loading
+	and Saving</STRONG> pane of tthe <STRONG>Utilities&gt;Global
+	Options</STRONG> dialog box;<P>
+	<LI>In JEdit, set the autosave frequency to 5 seconds.
+	<LI>Open the file <TT>C:\temp\Test.txt</TT>
+	<LI>Add a character to the file and do not save the file.
+	<LI>Look in <TT>C:\temp</TT>.  You should see the autosave
+	file.
+	<LI>Save the test buffer in JEdit.  The autosave file should
+	disappear.
+	<LI>Add a character to the test buffer and do not save it.
+	Wait 5 seconds.
+	<LI>Kill JEdit using the terminate button on the Eclipse
+	console (the button with the red square).
+	<LI>Launch jEdit again. JEdit will attempt to recover the
+	autosave file.  Click yes.  <STRONG>ATTENTION:</STRONG> A bug
+	in the code of JEdit will cause the program to hang if you do
+	not click <TT>yes</TT> or <TT>no</TT> in the recovery dialog
+	before the time in the autosave frequency.  To avoid this,
+	just click yes or no before the 5 seconds (or whatever) of the
+	autosave frequency are over.  If the program hangs, you can
+	kill it using the terminate button on the console.  You do not
+	have to worry about this bug for the study.  Your modification
+	will pass the test cases even in the presence of this bug.</OL>
+
+	From a user perspective, that's all there is to the autosave
+	feature.  You can close JEdit now.
+
+	<H2>Change Request</H2>
+
+	You will need to implement the following change to jEdit:
+	<P>
+	Modify the application so that the users can explicitly
+	disable the autosave feature.  The modified version should
+	meet the following requirements:
+
+	<OL>
+	<LI>jEdit shall have a checkbox labeled "Enable Autosave" above the autosave frequency
+	field in the Loading and Saving pane of the global options.
+	This checkbox shall control whether the autosave feature is
+	enabled or not.
+	<LI>The state of the autosave feature should persist between
+	different executions of the tool.
+
+	<LI>When the autosave feature is disabled, all autosave backup
+	files for existing buffers shall be immediately deleted from
+	disk.
+	<LI>When the autosave feature is enabled, all dirty buffers should be saved within
+	the specified autosave frequency.
+
+	<LI>When the autosave feature is disabled, the tool should
+	never attempt to recover from an autosave backup, if for some
+	reason an autosave backup is present.  In this case the
+	autosave backup should be left as is. 
+	</OL>
+
+	<H2>Expert Knowledge</H2>
+
+	You are given the following expert knowledge about the source
+	code:
+
+	A checkbox should be added to <TT>org.gjt.jedit.options.LoadSaveOptionPane</TT>
+	to enable/disable the autosave.  The autosave timer is in 
+	<TT>org.gjt.sp.jedit.Autosave</TT>.
+	
+	<H2>Test Cases</H2>
+
+	To determine whether or not you have successfully implemented
+	the change, we will perform the following tests:
+	
+	<OL>
+	
+	<LI><STRONG>With autosave enabled, modify a buffer.</STRONG>
+	The buffer should be autosaved within the specified time.
+
+	<LI><STRONG>Save the buffer.</STRONG>  The autosave file
+	should be deleted.
+
+	<LI><STRONG>Modify the buffer.</STRONG>  The buffer should be
+	autosaved within the specified time.  <STRONG>Disable the
+	autosave feature.</STRONG>  The autosave file should be
+	deleted.
+
+	<LI><STRONG>Enable the autosave feature.</STRONG> The buffer
+	should be autosaved within the specified time.
+
+	<LI><STRONG>Disable the autosave feature.</STRONG> The
+	autosave file should be deleted. <STRONG>Modify the buffer.</STRONG>  No
+	autosave file should appear.
+
+	<LI><STRONG>Enable autosave.  Close JEdit.  Launch JEdit.</STRONG>  Autosave
+	should be enabled.
+
+	<LI><STRONG>Disable autosave.  Close JEdit.  Copy and rename the test
+	file so it looks like an autosave file.  Launch JEdit.</STRONG>  No
+	recovery should be attempted.  Autosave should be disabled.
+
+	<LI><STRONG>Enable autosave.  Close JEdit.  Copy and rename
+	the test file so it looks like an autosave file.  Launch
+	JEdit.</STRONG> Recovery should be attempted.  <STRONG>Select
+	YES within 5 seconds.</STRONG>
+	</OL>
+
+	<H2>Task</H2>
+
+	<OL>
+	<LI>You must now investigate the code related to the change
+	you must make.  You can takes notes about the code to change,
+	or other aspects you deem useful.  These notes should be 
+	stored in the file <TT>Notes.txt</TT> in the JEdit
+	project.  
+
+	<LI>You must make <STRONG>no change</STRONG> to the source
+	code.  You are not allowed to perform temporary changes, or
+	try out different alternatives.  
+	<LI>Do not use the debugger.
+	<LI>You have one hour to investigate the code.  Use this time
+	to learn as much as possible about the code you must change.
+	You will need to rely on this knowledge to perform the change 
+	in the required time.
+	<LI>If you are ready to go, please notify the investigator.
+	</OL>
+
+	</body>
+</html>

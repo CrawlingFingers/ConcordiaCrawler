@@ -1,0 +1,556 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 599 A3</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head>
+
+<body>
+
+
+<center><table width="100%" style="max-width: 800px" border="0" ><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 599 - Winter 2010 - Assignment 3<br>
+Motion Capture Reuse</h1>
+</div>
+
+
+<h2 class="section">Due 23:55 pm Thursday March 11</h2>
+
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+  <p><img align="right" style="padding-left:20px;padding-bottom:20px;" src="http://cs.mcgill.ca/~kry/comp599W10/a3/mocaps.png"> In this assignment, you will create an animation of a human
+  figure by concatenating small clips of motion capture sequences.
+  This technique for reusing motion capture is often called motion
+  graphs because one can imagine the nodes as containing small
+  sequences of motion and the directed graph edges specify where
+  transitions can occur between clips.  Typically some computation is
+  necessary to decide which transitions to take when creating a new
+  motion to satisfy a goal or to follow some path; however, in this
+  assignment it will be sufficient to show some random transitions
+  that produce interesting motion.</p>
+
+  <p>Download the <a href="http://www.cs.mcgill.ca/~kry/comp599/mocap/">motion capture
+  data</a>.  You need the bhv and javabin files, but you do not need
+  the c3d files.  They are provided just for reference as it is a
+  standard format, and the javabin files are created from these using
+  a matlab script.  Note that you might just want to download one
+  sequence initially for testing (e.g., the OptiTrack-IITSEC2007 demo
+  sequence from NaturalPoint is a good starting point).  Sequences
+  captured in the lab will be added to this directory for everyone to
+  use.  Put the data files in to a "data" folder, and please <span
+  style="font-weight: bold; color: rgb(153, 0, 0);"><em>do not submit
+  bvh, c3d, or javabin data files when you submit your
+  assignment</em></span>.</p>
+  
+  <p>Download the provided code from WebCT 
+<!-- <a href="comp599-a3.zip">provided code</a> -->
+  and dump
+  it into a new java project.  The code contains two parts, just like
+  the previous assignments: the tools package, and the code specific
+  to assignment 3.  Note that there may have been small changes to the
+  tools package (i.e., the BoxRoom class which is used to draw a floor
+  and walls now lives in the comp599.tools.viewer package).  Here
+  follows a short description of the provided files.
+
+  <ul style="list-style-type: square;">        
+
+    <li> A3App contains the main method, creates the 3D viewer, and
+         defines the keyboard controls attached to the 3D canvas.
+         This is the only file you need to modify, but you can also
+         create other classes as you see fit (but <span
+         style="font-weight: bold; color: rgb(153, 0, 0);"><em>leave a
+         note in the readme.txt if you modify any of the other three
+         classes listed below</em></span>).</li>
+
+    <li> C3DData loads the marker data from a javabin file.  Note that
+         c3d files need to be converted to a java binary, and this has
+         already been done for you with the data we captured in class
+         (see the javadoc if you want to convert your own files).</li>
+
+    <li> BVHData loads the skeleton and joint angle data from a bvh
+         file.  The simple parser also creates a hierarchy of
+         SkeletonNode objects.  The setSkeletonPose method sets the
+         joint angles and root translation for the loaded skeleton.
+         The motionData is private, but you should not need to do this
+         for the objectives below.</li>
+
+    <li> SkeletonNode defines a joint which can rotate about a set of
+         axes.  The object has a parent SkeletonNode (null if it is
+         the root), and a list of children).  The rotation axes of the
+         skeleton node are located at a fixed offset from the parent
+         frame, and the order of rotation is specified in a channel
+         list (as loaded by the BVHData).  While all skeleton nodes
+         joints can also have a translation component, this is only
+         used for the root of the character (usually the hips).  The
+         init method of this class estimates the size of different
+         segments of the body to display simple 3D geometry between
+         the joint and its parent.  There are a number of controls for
+         displaying the skeleton in different ways.  Finally, note the
+         getTransform method which gives you a transformation from the
+         joint frame to the parent frame (you will want to use this to
+         find the position and orientation of the root of your
+         skeleton).  You may want to expand the "Skeleton pose
+         controls" in the provided interface and try adjusting
+         different angles to get some intuition for how these work.
+         </li>
+
+  </ul>
+
+    <p>A few things to watch out for:</p>
+    
+    <ul style="list-style-type: square;">
+
+    <li>The bvh and c3d data files may not contain the same number of
+    frames (it might be off by one, and the current bvh loader
+    currently tries to read an extra frame).  You may want to set the
+    maximum frame number to be the lower of the two frame
+    counts. </li>
+
+    <li>Watch out for Matrix4d.get( Matrix3d R ) as this does a SVD
+    normalization and can permute your axes when you're not looking.
+    The better option for getting the upper 3x3 component of a 4x4
+    matrix is getRotationScale().  Your upper 3x3 component should
+    already be unitary, but if it were not, again, you should use
+    Matrix3d.normalizeCP() instead of Matrix3d.normalize() as the
+    former does a cross product normalization instead of an SVD
+    normalization.</li>
+
+  </ul>
+
+  <p>Again, you do not need to change anything in the tools package to
+  complete this assignment.  The source for the tools is provided only
+  for your convenience, and you should <span style="font-weight: bold;
+  color: rgb(153, 0, 0);"><em>focus your attention on the a3
+  package</em></span>.  It is suggested that you read through all the 
+  provided code, and note in particular the areas that are marked
+  TODO.</p>
+
+  </div>
+
+<h2 class="section">Steps and Objectives (8/10)</h2>
+
+  <div class="sbody">
+
+  <ol>        
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Basic motion playback</em></span></p>
+
+         <p>The provided code will try to load a data file.  Modify
+         the constructor of A3App so that it uses the data file you
+         selected (note that you will revisit the other TODOs in the
+         constructor in later objectives).  </p>
+
+	 <p>The display method will automatically advance the current
+         frame by an amount specified by the playSpeed, but it does
+         not set the pose of the skeleton.  You need to make a simple
+         modification so that the skeleton pose is updated when the
+         frame number changes (i.e., the setSkeletonPose method of the
+         BVHData). This class also contains methods to allow you to
+         save a trajectory of modified skeleton poses back out to disk
+         in bvh format. See the addCurrentPoseToTrajectory() and
+         save(). </p>
+
+         <p>Note that the current code will not play the motion back
+         at the correct speed, but it is good enough for this
+         assignment.  The alternative would be to keep track of the
+         time elapsed and set the frame according to the capture rate,
+         which was 100 Hz (the range of the playSpeed parameter would
+         need modification too so that it could be less than 1 to slow
+         motion down).</p>
+
+         <p>Check that the c3d data and the bvh data both play and are
+         located in the same place (i.e., like virtual markers on a
+         virtual skeleton).  To do this you need to click the
+         <em>drawc3d</em> checkbox of the controls.</p>
+       
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Computation and display of the local floor frame</em></span></p>
+
+         <p>Write a method to compute a local frame for the current
+         skeleton pose.  Add code to your display call that uses this
+         method and displays the frame.  The local frame should be
+         located on the floor (y=0) with the y axis vertical, and the
+         z axis pointing in the direction of the z axis of the hips
+         (i.e., z axis of skeleton root projected onto the floor).
+         See the getTransform method of SkeletonNode for getting the
+         position and orientation of a skeleton node.</p>
+
+         <p>There are two reasons why we need this local floor based
+         reference frame.  First is to know where the character is and
+         to allow us to properly translate and orient a motion clip
+         based on what came before.  The second reason is to help us
+         with making comparisons between the posture of the skeleton
+         at different points in time (see the later objectives).  That
+         is, putting the marker data (c3d) in coordinates of this
+         frame allows two frames of marker positions to be compared
+         while disregarding position in the x-z plane and rotation
+         about the y axis.</p>
+
+         <p>You will likely find it useful to use a FlatMatrix4d
+         (comp599.tools.viewer) to store your frame (i.e., use the
+         getBackingMatrix to get the contained Matrix4d object);
+         notice the asArray method which you can use to get an array
+         that is compatible with glMultMatrixd.  Note that jogl always
+         has an extra parameter for any opengl call which takes an
+         array to allow for indexing within the array, so in this case
+         you would pass a zero as the second parameter to
+         glMultMatrixd.  Reuse the existing FancyAxis (that is used in
+         the display call to draw the world reference frame) to draw
+         your local frame, but you will want to call setSize to make
+         it an appropriate size (e.g., 25 cm high).</p>
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Basic transitions</em></span></p>
+
+	 <p>The constructor creates a frame pair and stores it in a
+         list.  Modify the display call so that the frame number is
+         modified to take this transition.  While both forward and
+         backward jumps make sense, you'll want to first test by
+         always taking the backward transition (i.e., make an endless
+         loop from a small portion of motion data). </p>
+
+         <p>Note that the frame
+         number is not necessarily advancing one frame at a time
+         (i.e., when playing at higher speeds) so you'll want to make
+         sure you still make this transition even if you're not
+         exactly at the frame.</p>
+
+<!--
+	 <p><span style="font-weight: bold; color: rgb(153, 0,
+         0);font-size: 1.2em;"> <em>MILESTONE MOVIE: Tuesday March 2nd
+         .</em></span><span style="font-weight: bold; color:
+         rgb(153, 0, 0)"> This assignment involves many steps!  To
+         ensure that you remain on track, you should submit a movie that
+         demonstrates that you've completed these first three steps.
+         Submit to the A3 milestone handin box.  </span></p>
+-->
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Accumulated transformation</em></span></p>
+         
+	 <p>Now that you have some basic code to loop a smaller clip
+         of motion capture data, you'll need to accumulate the
+         translation and rotation of the character (for instance, to
+         assemble two steps into a continuous walk).</p>
+
+	 <p>Again, you will probably want to use a FlatMatrix4d to
+	 create an accumulated transformation frame.  Initialize it to
+	 the identity, and update this accumulated frame each time you
+	 make a transition.  The update you need to apply is the one
+	 that puts the next clip's beginning floor frame at the
+	 current clip's ending floor frame (i.e., you have transforms
+	 that map A to W and B to W and you need A to B).</p>
+
+         <p>Add code to your display call so that you multiply this
+         accumulated frame on the matrix stack before displaying the
+         skeleton and c3d data.  Once this works, you might want to
+         hand pick two similar frames in the data you've loaded to
+         generate a nice walk cycle.</p>
+
+         <p>Finally, add code to reset this accumulated frame to the
+         identity when the 'R' key is pressed.  You need to have a
+         convenient means of bringing your animated character back
+         into the room if it goes wandering too far!</p>
+         
+         
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Compute and display local c3d positions and
+         velocities</em></span></p>
+
+	 <p>At startup you will want to precompute local frame marker data
+	 (i.e., go back to the A3App constructor and add a method call
+	 to whatever code you write for the computation part of this
+	 step).  Use your local floor frame code and the c3d data to
+	 build phase space vectors representing the position and
+	 velocity of markers in the local frame.  To compute the
+	 velocities average the velocity of the marker position over a
+	 small window (say 5 frames), so that the velocity estimates
+	 are <em>smooth</em> (not all trajectories were filtered in the Arena
+	 software before export, and there may be high frequency
+	 motions of markers due to poor position estimation from 2D
+	 camera data).</p>
+
+	 <p>You will want to test that you've computed these vectors
+         correctly, so add some code to the display method to multiply
+         the local frame (use glPush and glPop too) onto the matrix
+         stack and draw these positions and small (scaled) line
+         segments to represent the velocities.  Add a BooleanParameter
+         to enable and disable drawing the debugging information in
+         the A3App.  Add your BooleanParameter to the control panel in
+         the A3App getControls method.  You may also want to add a
+         DoubleParameter to the controls to help you scale the
+         visualization of the velocity vectors appropriately.</p>
+
+	 <p>Remember that we are computing the position and velocity
+         of the markers in this local frame to help with comparisons
+         of movement at different parts of the motion clip.  We could
+         also have used joint angles, but would need a more
+         complicated weighted metric, and we would need to deal with
+         the root of the skeleton differently.</p>
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Find good transitions automatically</em></span></p>
+
+	 <p>Write code to automatically find good transitions.  Again
+         you'll want to add a method call from your constructor to
+         initialize the pairs when you first start, but you might also
+         want to add a button to the control panel or add a call on a
+         key press to recompute the pairs again on the fly.  This is
+         because there are several parameters and heuristics involved
+         in finding good pairs, and you will want to adjust these
+         parameters without restarting and reloading the data every
+         time.</p>
+
+         <p>First note that comparing all frames with all other frames
+	 is expensive!  You may want to decimate the data by some
+	 factor (for instance, compute similarity only between frames
+	 which have frame number divisible by 5).  Also, I suggest you
+	 store the similarity scores in an array so that you can
+	 display the data to help with debugging.  More on this
+	 momentarily, but first let us consider the distance metric.</p>
+
+         <p>To compare two frames you'll want to have a parameter to
+         set the influence of the velocity component.  That is you
+         don't want to have either positions or velocities dominate
+         the comparison.  Thus, a good way to compute a similarity
+         score between frames a and b would be ||x_a - x_b|| + w ||v_a
+         - v_b||, where x is the positions of all markers in the local
+         floor frame in a single vector, v is the (smoothed)
+         velocities of all markers in the local floor frame, and w
+         weights the two.  If you create a double parameter for w,
+         then you can add it to the controls and tune the parameter
+         while you are running the program, and press a button to
+         request a recomputation of pairs with the new similarity
+         metric.  How do you choose a good value w?  This depends on
+         the units in which quantities are measured.  </em> Report in
+         your readme how you justify your choice of w</em>.</p>
+
+         <p>Once you have the similarity between frames, you will need
+         a threshold to decide which frames are close enough to permit
+         a transition.  Again, it is probably a good idea to create a
+         DoubleParameter and tune this online.</p>
+
+         <p>Finally, some good threshold values may producing too many
+         transitions.  I suggest you only implement some heuristics
+         for adding only the best transitions in any given local area
+         of the timeline.  For instance, you might go through all
+         frames one by one, checking for the best match that is below
+         the similarity threshold, and then only add that one best
+         match to the frame pairs list.  Likewise, to prevent a
+         transition at every frame, you might prevent any transitions
+         from being created within some number of frames.  Add to the
+         control panel whatever parameters you need for the heuristics
+         you choose, and then find parameters that work for you!  </em>Be
+         sure to comment on your heuristics and the parameters in your
+         readme file</em>.</p>
+
+	 <p>Finally, one last suggestion related to the similarity
+         data that I suggested (above) that you store: add code (and a
+         BooleanParameter to toggle display) to make a visual plot of
+         this similarity data for the current frame.  This will help
+         you visualize the result of your similarity metric at
+         different times, and to help in selecting a threshold.  See
+         the displayTimeline method (and the drawArc method) for a
+         hacky example of 2D drawing, and for additional suggestions
+         how to visualize the similarity data.</p>
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Random and interesting transitions</em></span></p>
+
+         <p>Add code that allow for a variety of different and
+         interesting transitions.  For instance, you might want to
+         randomly take transitions (either forward or backward).  You
+         might also want to prevent too many transitions from occurring
+         in a small time frame.  For instance, no more than 1
+         transition every half second since there will be a small
+         visual error in the motion at each jump (nothing matches
+         perfectly, so fewer transitions per second will minimize
+         this).  You might want to also identify the last frame that
+         has a transition, and always jump backwards from this frame
+         (and never jump forwards); this way you can avoid playing
+         past the end of the loaded capture file.  Finally, if you're
+         feeling ambitious, you might want to control the kinds of
+         transitions that can occur, forward, backward, random, or
+         none, using keyboard controls.</p>
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Make two movies</em></span></p>
+
+         <p>You must make two movies.</p>
+
+         <p> First, make a movie with the same snapshot saving method
+         used in the previous assignment to show your results.  Try to
+         capture something fun, but at the very least your video
+         should demonstrate a motion that involves multiple
+         transitions in the motion graph (i.e., both forwards and
+         backwards, in either a random or controlled sequence). Keep
+         this video short and to the point.
+
+         <p>Second, make a movie using a high quality rendering.  Save
+         a sequence of poses (i.e., mocap frames) to a file, and then
+         use Blender to create an animation using both direct lighting
+         and ambient occlusion.  <a href="blendermovie.html">Follow
+         these instructions</a> to create your movie.  This movie
+         should be short and aesthetically pleasing. Note that you
+         will need to do something special to account for the
+         accumulated translation and orientation in sequence of poses
+         that you export for rendering!</li>
+
+    <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>OPTIONAL Extensions</em></span></p>
+
+<p>You might optionally like to think about the following issues.</p>
+
+<ul style="list-style-type: square;">       
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+Transition Blending</em></span></p>
+
+     <p> Modify your code so that you blend a small group of frames
+         after making a transition (i.e., mix joint angles with alpha
+         and (1-alpha) where alpha runs from 0 to 1 over several
+         frames).  This should address small popping artifacts that
+         are visible at transitions, i.e., this problem can be reduced
+         if you blend the joint angles linearly over 5 to 10 frames.
+         Of course some transitions might always be bad based on how
+         forgiving you set your frame similarity threshold.  Note that
+         special care is necessary to blend the root frame!</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+Multiple Clips</em></span></p>
+
+     <p>The current code only loads one motion capture clip.  Can you 
+        devise a simple way of modifying the code so that you can 
+        accomodate a whole selection of clips.</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>Foot Skate</em></span></p>
+
+<p>Use heuristics to identify when there should be
+foot ground contact and use inverse kinematics to modify the motion so
+that a foot in contact with the ground stays firmly planted.  An easy
+way to exaggerate the foot skate problem is to modify the lengths of
+body segments (i.e., make the lower leg 25% longer, and the upper leg
+25% shorter).</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>Control</em></span></p>
+
+<p> Find a suitable collection of clips and transitions, and
+define heuristics to get the character to move where you want.  Note
+that this is easy if you string together different motions that always
+return to a rest pose, but a harder problem is to produce a smooth and
+natural motion that achieves the desired trajectory or goal.  How fast can you responde to changing goals?  Can you deal with dynamic obstacles?</p>
+
+</ul>
+
+
+    </ol>
+
+  </div>
+
+<h2 class="section">Written Questions (2/10)</h2>
+
+  <div class="sbody">
+
+  <p>Complete <a href="http://www.cs.mcgill.ca/~kry/comp599/a3/q.pdf">these written
+  questions</a> and submit your answers to WebCT.<p>
+
+  </ol>
+        
+  </ol>
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+  <div class="sbody">
+
+  <p>Great!  Submit your source code and xvid encoded videos as a zip
+     file via webCT.  Include a readme.txt file with any specific
+     comments, including a list of people with which you discussed the assignment.  <span
+  style="font-weight: bold; color: rgb(153, 0, 0);"><em>Do not submit
+  bvh, c3d, or javabin data files</em></span>.</p>
+
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body>
+</html>
+                                       

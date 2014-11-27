@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Operating Systems Assignment 4</TITLE>
+</HEAD>
+<BODY bgcolor="CCFFFF" text="#333333">
+<font color="#3399CC">
+<h1 align="center">Using pipes-assignment 4</h1>
+</font>
+In this exercise, you will use anonymous and named pipes to transmit information across address spaces. One process, the source,
+uses a host file interface to read information from a file and to write the information to an anonymous pipe. A second
+process, the filter process, reads infomration from the source (passed by the pipe), performs a simple filtering step (such as
+converting all upper-case letters to lower-case letters), and writes the resulting data to a named pipe. The named pipe is used for
+IPC between the filter and the sink process. The sink process reads the named pipe from the filter and writes the information to a
+second file. Remeber not to allow the filter to block on empty input if it has something to transmit. 
+<h3>Anonymouus pipes in UNIX</h3>
+Pipes are the main IPC mechanism for UNIX in a single processor. They are implemented by sockets in multiprocessor BSD UNIX. A
+pipe employs an asynchronous send() and a  blocking receive() operation. The blocking receive() operation can be changed to a
+non-blocking receive(). Pipes are FIFO buffers designed with an API that is similar (or tries to be) to the file I/O
+interface. A pipe can contain a (system defined) maximum number of bytes (normally 4KB) at a given time. A process sends
+information by writing it into one end of a pipe. Another process receives information by reading the other end of the pipe. 
+The buffer is a kernel buffer. 
+<p>
+A pipe is represented in the kernel by a file descriptor. When a process wants to to create a pipe, it makes a system call of the
+form:<br>
+int pipeID[2];<br>
+...<br>
+pipe(pipeID);
+<p>
+The kernel creates the pipe as a kernel FIFO data structure with two file ID's. In this example code, pipeID[0] is a file pointer
+to the read end of the pipe and pipeID[1] is a file pointer to the write end of the pipe. The file pointer is an index into the
+process's open file table. 
+<p>
+In order for two or more processes to use anonymous pipes for IPC, a common ancestor of the processes must create the pipe prior to
+creating the processes. Because the UNIX fork() command creates a child that has a copy of the parent's open file table, each child
+ingerits pipes that the parent created. To use a pipe, it need only read and write the proper file descriptors.
+<p>
+If a parent creates a pipe, it can create a child and communicate with it as follows:<br>
+...
+<br>
+pipe(pipeID);<br>
+if(fork()==0 {/*The child process*/
+<br>
+...<br>
+read(pipeID[0],childBuf,len);<br>
+/*process the message in childBuf*/<br>
+...<br>
+} else {/* The parent process*/ <br>
+...<br>
+/*Send a message to the child*/
+write [pipeID[1],msgToChild,len);<br>
+...<br>
+<p>
+Consider a pair of processes A and B, which share the variables x and y. Process A writes x and reads y while process B writes y and
+reads x. B must not read x until A has written to it and A must not read y until B has written
+to it. Here is a way to arrange this by means of pipes. <br>
+int A_to_B[2], B_toA[2]; <br>
+main(){ <br>
+pipe(A_to_B);<br>
+pipe(B_to_A);<br>
+if (fork()==0) {/*This is the first child process*/ <br>
+execve("prog_A.out",...); <br>
+exit(1); /*Error; terminate the child*/ <br>
+} <br>
+/*This is the parent process code*/ <br>
+wait(...); <br>
+wait(...); <br>
+} <br>
+proc_A(){ <br> 
+while (TRUE) { <br>
+<compute A>; <br>
+read)B_to_A[0],y,sizeof(int));<br>
+/*Use this pipe to get info*/ <br>
+} <br>
+} <br>
+proc_B() { <br>
+while (TRUE) { <br>
+read(A_to_B[0], x, sizeof(int)): <br>
+/*Use this pipe to get info*/
+<compute B1>; <br>
+write(B_to_A[1],y,sizeof(int));<br>
+/*Use this pipe to send info*/<br>
+<compute B2>;
+} <br>
+} <br>
+<h3>Nonblocking read operations in Unix</h3>
+As with any file, the read end of a pipe, a file descriptor, or a socket can be configured
+to use nonblocking semantics with an ioctl() call in Unix. After the call has been issued on the descriptor, a read() on the stream
+returns immediately with the error code set to EAGAIN in Posix (or EWOULDBLOCK in 4.3 BSD). Also, the read() will return a value of 0,
+thereby indicating it did not read any information into the buffer. Alternatively, the program can check the length value to see if it
+is non-zero and if the read succeeded. The following code fragment illustrates the use of the ioctl() to switch the read end of a pipe
+from its default blocking behavior to non-blocking behavior:<br>
+#include <sys/ioctl.h> <br>
+int errno; /*For non-blocking read flag <br>
+... <br>
+main() { <br>
+int pipeID[2]; <br>
+... <br>
+pipe(pipeID);
+/*Switch the read end of the pipe to the non-blocking mode*/<br>
+ioctl(pipeID[0],FIONBIO,&on);<br>
+...<br>
+while(...)  { <br>
+/*Poll the read end of the pipe*/ <br>
+read(pipeID[0],buffer,BUFLEN0; <br>
+if (errno != EWOULDBLOCK){  <br>
+/*Incoming info available from the pipe; process it*/<br>
+...<br>
+}... { <br>
+/*Check the pipe for input again later-do other things*/<br>
+... <br>
+} <br>
+} <br>
+...<br>
+} <br>
+
+<h3>Attacking the Problem</h3>
+It is necessary to check the asynchronous behavior of the solution. In order to do this your processes have to be able to 
+sleep or do a busy loop for random amounts of time, thereby allowing information to build up in the pipes. Make use of the
+rand() function to introduce the random delay in your program. 
+
+
+<p>
+</body>
+</html>
+
+

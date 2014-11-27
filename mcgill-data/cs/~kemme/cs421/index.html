@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta name="description" content="Course COMP-421, Winter: Database   Systems; School of Computer Science, McGill Univeristy, Montreal">
+  <meta name="keywords" content="Course Page COMP-421, Database Systems, School of Computer Science, McGill University, Montreal">
+  <meta name="GENERATOR" content="Mozilla/4.76 (Macintosh; U; PPC) [Netscape]">
+  <title>COMP-421: Database Systems (Winter Term 2014, School of Computer Science, McGill University)</title></head><body bgcolor="#ffffff">
+&nbsp;
+<h1>COMP-421: Database Systems</h1>
+
+<h2>
+<a name="Names"></a>Names and Numbers:</h2>
+<ul>
+  <li> <b>Lecture</b>: Tu/Th 11:25 AM -12:55 PM, Rutherford Physics Building 112<br>
+  </li>
+  <li> <b>Instructor</b>: <a href="http://www.cs.mcgill.ca/%7Ekemme/">Bettina
+Kemme</a> </li>
+  <li> <b>Office Hours Instructor</b>:after class and by appointment <br>
+  </li>
+</ul>
+<hr>
+<h2></h2>
+
+
+
+<h2>
+
+</h2><h2><a name="Outline"></a>Outline</h2>With the raise of e-commerce all
+of us use complex information systems on a daily basis -- by accessing
+the Minerva university system, by banking online, by buying a book
+online.&nbsp;Database management systems (DBMS) build the backbone
+software systems that store all mission-critical data of these
+information systems. The big DBMS vendors like Oracle, IBM (DB2) or
+Microsoft (SQL Server) are
+well known players on the IT market; Linux distributions (for instance
+Red Hat), include an
+open source database management system in their distribution package;
+even the Microsoft Office suite contains kind of a database
+management system. And recently, the NoSQL movement has shown that
+data management has become important in many new domains and markets.
+As a result, knowing at least the basic concepts
+behind
+these systems and how to use them is becoming an essential skill for
+IT specialists.
+<p>This course is intended to give students a solid background in
+relational DBMS. Furthermore is outlines non-relational solutions. If you are interested
+in becoming an effective user of a DBMS, or a DBMS professional, this
+is a good introduction to the topic. The course has two main parts:
+the first part explains <b> how to use </b> a DBMS, the second part
+looks
+at <b> how the DBMS works internally </b>.
+</p>
+<p>The first part will discuss the <b> design of databases </b> and
+how to write <b> queries </b> that extract the data you are looking for. Or in other words: how can you squeeze your "real world"
+data (the product information
+of a bookstore, the student and activity information of a students'
+association) into the relational data model of the database system and
+how can you retrieve the data later. </p>
+<p>The second part of the course is system-oriented and discusses the
+internals of a DBMS. Using a DBMS is one issue, using it efficiently
+and correctly is a different story. DBMS are designed to work for very
+different application areas and present a general purpose software. In
+order to be able to tune a DBMS to your specific requirements you must
+know how your database application is executed by the DBMS. <br>
+This
+second part will cover two main areas: <b> Transaction management </b> is
+important to keep data consistent when updates occur. <b> Query
+execution </b>
+is the process that efficiently finds the small set of data the user
+wants to see out of a possibly huge database.
+
+</p>
+<p>At the end of the course we will talk about non-relational (NoSQL)
+data models and their: semi-structured data that is better able to handle
+document-type data and key-value stores that are better able to store
+and query huge amount of data in a distributed fashion. 
+</p>
+<p> <span style="font-weight: bold;">Objectives:</span></p><p>In this
+course you will</p>
+<ul>
+  <li>learn the fundamental steps needed to develop a database
+  application using a commercial DBMS</li>
+  <li>apply this knowledge to build a database application for a
+  specific application domain</li>
+  <li>acquire the skills to quickly learn and understand new data
+  models and DBMS interfaces</li>
+  <li>understand some of the internals of a relational DBMS, and with
+  that,&nbsp;</li>
+  <ul><li>get to know the structure and complexity of a large software
+    system</li>
+    
+<li>see how knowing about the internals of the DBMS can help you
+improve your usage of a DBMS as an application programmer</li></ul>
+<li>get an understanding of performance in a DBMS</li>
+
+
+<li>conduct a relatively large scale project in a
+team</li></ul><p><span style="font-weight: bold;"></span></p>
+
+<p><b><br>Detailed Topic List </b> (each topic between 2 and 4 lectures):
+</p>
+<ul>
+  <li> Introduction
+  </li>
+  <li> Entity-Relationship Model
+  </li>
+  <li> Relational Model and Data Definition Language
+  </li>
+  <li> Relational Algebra
+  </li>
+  <li> Functional Dependencies
+  </li>
+  <li> SQL I: Simple Queries
+  </li>
+  <li> SQL II: Advanced Queries
+  </li>
+  <li> SQL III: Constraints and Triggers
+  </li>
+  <li> SQL V: Application Programming
+    </li>
+      <li> Transactions
+  </li>
+  <li> Concurrency Control
+  </li>
+  <li> Essentials of File and Disk Management
+  </li>
+  <li> Recovery
+  </li>
+  <li> Indexing
+  </li>
+  <li> Query Execution
+  </li>
+    <li> Semi-structured data (XML, JSon)
+  </li>
+    <li> Key-value stores and map-reduce
+  </li>
+  <li> Review
+  </li>
+</ul>
+<p><b>Prerequisites: </b>COMP-206, COMP-251 and COMP-302: Knowledge of
+data structures, algorithms, programming languages and basics of
+program development. Knowledge in operating systems is of advantage.
+</p>
+<p><b>Marking Scheme: </b>There are 4 written assignments, three
+project deliveries, one midterm, and
+one
+final. The scheme will be<br>
+</p>
+<ul>
+  <li>16% assignments (4% for each assignment)</li>
+  <li>15% project deliveries (5% for each deliverable)</li>
+  <li>10% midterm</li>
+  <li>59% final</li>
+</ul>
+
+<p>In assignments the students have to solve concrete
+problems. In some cases, late turn-in
+might not be possible (e.g., if I want to post the solution before the
+midterm/final). Otherwise, a late turn-in will result in
+a penalty of 10% per day (e.g. if an assignment has in total 100
+points,
+a student achieves 80 points but turns in the assignment a day too
+late,
+then he/she will receive 80-10=70 points. <br>
+<br> The assignments count 4% each.
+<br> The last assignment might be done in groups of several
+students. This still has to be determined.
+</p>
+<p>The three programming deliveries build a project in which
+  students have to develope and build
+database
+application for a real-world domain. The students will design a schema,
+create a database using DB2, maintain, query and update the data,
+and develop a
+application programs. 
+
+
+The students
+will
+work in teams of three on the programming project. All team members are
+supposed to work together and participate equally in the project
+development.
+</p>
+<b>Course Book:&nbsp;</b>
+<ul>
+  <li>Raghu Ramakrishnan and Johannes Gehrke: Database Management
+Systems;
+McGraw Hill, 3rd Edition, 2003. </li>
+</ul>
+<b>Alternative Literature</b>
+<ul>
+  <li>Abraham Silberschatz, Henry F. Korth and S. Sudarshan: Database
+System
+Concepts; McGraw
+Hill, 5th Edition, 2006.</li>
+  <li>Hector Garcia-Molina, Jeffrey D. Ullman and Jennifer Widom:
+Database
+systems :&nbsp;the complete book; Prentice Hall, 2002.</li>
+</ul>
+<br>
+<h4>A note on academic integrity</h4>
+            
+McGill University values academic integrity.  Therefore all students must understand
+the meaning and consequences of cheating, plagiarism and other academic offences
+under the Code of Student Conduct and Disciplinary Procedures (see
+<a href="http://www.mcgill.ca/integrity"> http://www.mcgill.ca/integrity/ </a> for more information).
+
+<h4>French/English</h4>
+In accord with McGill University's Charter of Students' Rights, students in this
+course have the right to submit in English or in French any written work that is to
+be graded.
+
+
+
+
+
+
+  
+
+
+<p></p>
+<br>
+
+
+
+
+</body></html>

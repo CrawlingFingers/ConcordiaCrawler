@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 310/ECSE 427  Operating Systems</TITLE>
+</HEAD>
+<BODY bgcolor="CCFFFF" text="#333333"">
+<font color="3399CC">
+<h1 align="center">Problem 2-A kernel timer</h1>
+</font>
+
+In this assignment, you will use the  ITIMER_REAL, ITIMER_VIRTUAL, and  ITIMER_PROF interval timers to measure the processor usage of a process. You will prepare a report which provides real-time (i.e. wall-clock time) of execution using the ITIMER_REAL timer, processor time (the time that a process is actually running in both user and kernel space), user space time, and kernel space time. You can check the accuracy of your wall clock time by calling gettimeofday( ). Design your solution to have millisecond precision, although not all clocks do have millisecond precision. Use signals to keep track of the number of seconds for the 3 categories of time by raising signals once per second. Measure the times of a parent and two child processes, each executing the Fibonacci program for N=20,30 and 36. 
+<br>
+<br>
+<B>Background</B>
+<P>
+UNIX keeps track of  the time elapsed (seconds and microseconds) since the beginning of the UNIX "time epoch", i.e. since January 1, 1970, making use of two long integer variables. 
+<P>
+The data structure which the UNIX kernel uses for holding time values is
+<br>
+<br>
+struct timeval { <br>
+<br>
+long tv_sec; <br>
+long tvusec; <br>
+
+}<br>
+<P>
+UNIX updates the timeval structure by making use of programmable timer devices, which are used to produce interrupts at precise time intervals (e.g. 100 times per second in Linux). When the OS is initialized, it sets the time variable to zero and increments it each time an interrupt occurs. If the interrupt occurs every 10 ms. the timer device handler adds 10 ms. to the OS time variable tv_usec filed, and carries the overflow into the tv_sec field whenever there is an overflow. 
+<P>
+The kernel accumulates time and is responsible for managing timers for each process. For example,  in order to implement a scheduling strategy, each process has to keep a record of the amount of CPU time it has used since it last accessed the CPU. The kernel keeps track of three different time intervals for each process:
+<br>
+ITIMER_REAL: Passage of real time, implemented using the it_real_value and it_real_incr fields.
+<br>
+ITIMER_VIRTUAL: Passage of virtual time, i.e. this timer is incremented only when the process is executing in user mode.
+<br>
+ITIMER_PROF: Passage of time during which the process is active (virtual time) plus the time that the kernel is doing work on behalf of teh corresponding process (e.g. executing a system call). 
+<br>
+<P>
+Each of these timers is a "countdown timer"-it is first initialized with some value and then counts down to zero. Upon reaching zero, it raises a signal to another part of the system (either the OS or a user program). It then resets the period and starts counting down again. 
+<P>
+Each timer is initialized via the setitmer( ) system call:
+<br>
+<br>
+#include  <sys/time.h><br>
+.....<br>
+setitimer{ <br>
+int timerType, <br>
+const struct timerval *value, <br>
+struct itimerval *oldValue <br>
+};<br>
+<P>
+The struct itimerval includes the fields
+<br>
+stuct itimerval { <br>
+struct timeval it_interval; <br>
+struct timeval it_value: <br>
+};<br>
+<P>
+More details can be found on the man page for setitimer( ). The timerType parameter is set to ITIMER_REAL, ITIMER_VIRTUAL, OR ITIMER_PROF\
+(constants define in the sys/time.h include file) . The value parmeter is used to initialize the second and microsecond fields of the timer, the it_value difeines the current value for the timer, and the it_interval field defines the value used to rest the timer when it reaches zero. 
+<br>
+A timer's value can be read with the getitimer( ) system call:
+<br>
+<br>
+#include <sys/time.h><br>
+... <br>
+getitimer{ <br>
+int timerType, <br>
+const struct timerval *value, <br>
+};<br>
+<P>
+The value parameter is used to return the value of the kernel clock. 
+<br>
+<P>
+The following code sets ITIMER_REAL and then reads it.
+<br>
+<br>
+#include    <sys/time.h><br>
+...<br>
+sturct itimerval v;<br>\
+....<br>
+v.it_interval.tv_sec=9; <br>
+v.it_interval.tv_userc=99999; <br>
+v.it_value.tv_sec=9; <br>
+v.it_value.tv_usec=99999; <br>
+setitimer(ITIMER_REAL, &v, NULL); <br>
+...<br>
+getitimer(ITIMER_REAL, &v); <br>
+printf("...%1d seconds, %1d microseconds.....",..., <br>
+v.it_value.tvsec, <br>
+v.it_value.tv_usec, <br>
+...); <br>
+.... <br>
+<P>
+When ITIMER_REAL reaches zero, it will be reset to (9, 99999) once again. 
+<br>
+<br>
+<B>SKELETON</B>
+<P>
+All forms of UNIX make use of signals, which are mechanisms which are used by a process to notify another process that an event has occurred. Some examples are  the user pressing the delete key, the run time system detecting an attempt to divide by zero, or one of the itimers reaching zero. Upon receiving a signal, the process executes code for that particular signal. Note that signals can be used between application processes.
+<P>
+There are 31 different types of signals built into contemporary UNIX systems. The system include file, signal.h defines symbolic names for the signal types. For example, SIGINT is raised by the terminal driver when the user presses the interrupt character (delete or cntl-C). Application programmers are not allowed to create their own signals; however SIGUSR 1 AND SIGUSR 2  are included in most versions of UNIX for application to application signaling. 
+<P>
+A signal is raised by calling the kill (  ) function and identifying the process to receive the signal and the signal type. The receiving process can cause the signal to be handled in the default manner, to be ignored, or to be processed by user-defined code. For example, to ignore the SIGALARM signal, the process must execute the signal (SIGALRM, SIG_IGN) system call. Default handling is obtained via signal(SIGALRM, SIG_DFL). By supplying a function s the second argument in signal, the application can use its own code to process the signal. The function takes an integer argument and returns void. 
+<P>
+In the following code we provide an outline of  how how the mechanism operates.
+The code is not intended to do anything real; it is merely an illustration of how signals are raised and caught. 
+<br>
+<br>
+#include <signal.h> <br>
+static void sig_handler(int);<br>
+int main void\{ <br>
+int i, parent_pid, child_pid, status; <br>
+/*Prepare the sig_handler routine to catch SIGUSR1_ AND SIGUSR2*/<br>
+if (signal(SIGUSR1, sig_handler)= =SIG_ERR)<br>
+printf("Parent: unable to create sig_handler for SIGUSR1\\n");<br>
+if (signal(SIGUSR2, sig_handler)= =SIG_ERR)<br>
+printf("Parent: unable to create sig_handler for SIGUSR2\\n");<br>
+parent_pid=getpid( );<br>
+if ((child_pid=fork( )= =0)) { <br>
+kill(parent_pid, SIGUSR1);/*raise SIGUSR1*/ <br>
+for (;;) pause( ); /*child waits for signal*/<br>
+} else\{ <br>
+kill(child_pid, SIGUSR2);/*parent raises SIGUSR2*/ <br>
+printf("Parent: terminating child with prejudice"); <br>
+kill(child_pid.SIGTERM); /*Parent raises SIGTERM*/ <br>
+wait(&status); /*Parent waits for kid to terminate*/ <br>
+printf("done\\n"); <br>
+} <br>
+} <br>
+<br>
+static void sig_handler(int signo){<br>
+switch (signo) {<br>
+case SIGUSR1; /*incoming SIGUSR1 signal*/<br>
+printf("Parent: received SIGUSR1\\n");<br>
+break;<br>
+case SIGUSR2; /*incoming SIGUSR1 signal*/<br>
+printf("Parent: received SIGUSR2\\n");<br>
+break;<br>
+}<br>
+return;<br>
+}<br>
+<br>
+<B>Solution Outline</B>
+<P>
+This is one possible outline for a solution.  Feel free to use your own approach.<br>
+<br>
+#include <sys/time.h><br>
+#include <signal.h><br>
+#include <unistd.h><br>
+#include <stdio.h><br>
+long unsigned in fibonacci(unsigned int n);<br>
+<br>
+//The following variables are used to record the accumulated times. They are set by 
+ //the signal handlers and are read by the processes when they report the results.<br>
+static long p_realt_secs = 0, c1_realt_secs=0, c2_realtsecs =0;<br>
+static long p_virtt_secs = 0, c1_virtt_secs=0, c2_virtt_secs =0;<br>
+static long p_proft_secs = 0, c1_proft_secs=0, c2_proft_secs =0;<br>
+static struct itimerval p_realt, c1_realt, c2realt;<br>
+static struct itimerval p_virtt, c1_virtt, c2_virtt;<br>
+static struct itimerval p_proft, c1_proft, c2_proft;<br>
+<br>
+main( int argc, char **argv) {<br>
+long unsigned fib = 0;<br>
+int pid1, pid2;<br>
+unsigned int fibarg;<br>
+int status;<br>
+<br>
+//get command line argument, fibarg (the value of N in the problem statement<br>
+...<br>
+//Initialize parent, child1 and child 2 timere values<br>
+p_realt.it_interval.tv_sec = ...;<br>
+p_realt.it_interval.tv_usec = ...;<br>
+p_realt.it_value.tv_sec = ...;<br>
+p_realt.it_value.tv_usec = ...;<br>
+...<br>
+//Enable parent's signal handlers<br>
+signal(SIGALARM,....);<br>
+signal(SIGVTALARM,...);<br>
+signal(SIGPROF,...);<br>
+<br>
+//Set parent's itimers<br>
+if(setitimer(ITIMER_REAL,...)== -1<br>
+perror("parent real timer set error");<br>
+if(setitimer(ITIMER_VIRTUAL,...)== -1<br>
+perror("parent virtual timer set error");<br>
+if(setitimer(ITIMER_PROF,...)== -1<br>
+perror("parent profile timer set error");<br>
+pid1=fork( );<br>
+if(pid1 == 0)\{<br>
+//Enable child 1 signal handlers (disable parent handlers)<br>
+//Enable child 1 itimers<br>
+//Set child 1 itimers<br>
+//Start child 1 on the fibonacci program<br>
+fib=fibonacci(fibarg); <br>
+//Read child 1 itimer values and report them<br>
+getiimter(ITIMER_PROF,...);<br>
+getiimter(ITIMER_REAL,...);<br>
+getiimter(ITIMER_VIRTUAL,...);<br>
+printf("\\n");<br>
+printf("Child 1 fib = %1d, real time = %1 d sec, %1 d usec, %1d msec\\n",<br>
+  fib, c1_realt_secs,<br>
+  elapsed_usecs(c1_realt.it_value.tv_sec,<br>
+                               c1_realt.it_value.tv_usec / 1000);<br>
+<br>
+printf("Child 1 fib = %1d, cpu time = %1 d sec, %1 d usec, %1d msec\\n",<br>
+  fib, c1_realt_secs,<br>
+  elapsed_usecs(c1_proft.it_value.tv_sec,<br>
+                               c1_proft.it_value.tv_usec / 1000);<br>
+<br>
+printf("Child 1 fib = %1d, user time = %1 d sec, %1 d usec, %1d msec\\n",<br>
+  fib, c1_virtt_secs,<br>
+  elapsed_usecs(c1_virtt.it_value.tv_sec,<br>
+                               c1_virtt.it_value.tv_usec / 1000);<br>
+<br>
+printf("Child 1 fib = %1d, kernel time = %1 d sec, %1 d usec, %1d msec\\n",<br>
+  fib, c1_delta_time(c1_proft, c_virtt),<br>
+  elapsed_usecs(c1_proft.it_value.tv_sec,<br>
+                               c1_proft.it_value.tv_usec / 1000)-<br>
+  apsed_usecs(c1_virtt.it_value.tv_sec,<br>
+                               c1_virtt.it_value.tv_usec / 1000);<br>
+<br>
+fflush(stdout);<br>
+exit(0);<br>
+}<br>
+else\{<br>\
+pid2 = fork( );<br>
+if (pid2 = = 0) {<br>
+//Enable child 1 signal handlers<br>
+...<br>
+//Set child 2 itimers<br>
+...<br>
+Start child 2 on the fibonacci program<br>
+fib= fibonacci (fibarg);<br>
+// Read child 2 itimer values and report them<br>
+....<br>
+} else{/*this is the parent*/<br>
+// Start parent on the fibonacci program<br>
+fib =fibonacci(fibarg);<br>
+// Wait for children to terminate<br>
+waitpid(0, &status, 0);<br>
+waitpid(0, &status, 0);<br>
+<br>
+//Read parent itimer values and report them<br>
+.....<br>
+
+}<br>
+<br>
+long unsigned int fibonacci(unsigned int n) {<br>
+if(n == 0)<br>
+return 0;<br>
+else if (n==1||n==2)<br>
+return 1;<br>
+else<br>
+return(finbonacci(n-1) + fibonacci(n-2)<br>
+}	                  
+}

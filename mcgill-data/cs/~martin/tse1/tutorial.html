@@ -1,0 +1,188 @@
+<!-- $Id$ -->
+
+<html>
+	<title>Eclipse Demo for the FEAT Study</title>
+	<body>
+		<H1>Introduction</H1> 
+
+		The Eclipse Platform allows you to view the files
+		comprising a system, to modify these files, and to run
+		a program.  This demo will give you a quick tour of
+		the functionalities you need to know to carry out this
+		study.
+		
+		<H1>Perspectives</H1> The Eclipse graphical user
+		interface (or Workbench), can be organized into
+		various <I>perspectives</I>.  A Perspective is simply
+		a pre-determined set of views.  For this study, you
+		will only use the <I>Java Perspective</I>.  A
+		perspective tool bar is on the left of the Eclipse
+		Workbench.  To open the Java perspective, click on the
+		top button and select <TT>Java Perspective</TT>, or,
+		alternately, click on the Java perspective shortcut
+		button.  You can also use the general menu: select
+		<TT>Window</TT> | <TT>Open Perspective</TT>, and
+		select the <TT>Java Perspective</TT>.
+		
+		By default, the Java perspective includes four views:
+		The package explorer (on the left), the editor (in the
+		middle), the outline view (on the right), and the
+		tasks view (on the bottom).  If at any point your
+		views get mixed up, you can come back to the default
+		Java perspective by selecting the menu <TT>Window</TT>
+		| <TT>Reset Perspective</TT>.  However, it is not
+		recommended to do this as some short cuts which are
+		preset for this study will be removed.  The package
+		explorer, editor, and task views will be explained in
+		detail as part of this demo.  The outline view will
+		not be used in this study.  You should close the view
+		by clicking on the X in the top right corner, and
+		refrain from using it during the study.
+		
+		To open or close individual views, use the menu and select <TT>Window</TT> | <TT>Show View</TT>.
+		
+		To close all the editors, use the menu and select <TT>File</TT> | <TT>Close All</TT>.
+		
+		<H3>Tutorial</H3>
+		
+		<OL>
+		<LI>Close the Java perspective (right-click on the
+		button with the 'J' in its icon, in the left tool bar, and select <TT>close</TT>.
+		<LI>Open the Java perspective (in the same tool bar,
+		click on the button with the 'plus' in its icon.
+		Choose <TT>Java</TT> from the menu.
+		<LI>Close the Outline view.
+		<LI>Close all the editors.
+		<LI>Close the package explorer.
+		<LI>Open the package explorer (In the workbench menu,
+		select <TT>Window | Show View | Packages</TT>.  You
+		might have to close the hierarchy view to reveal the
+		package view).
+		</OL>
+	
+		<H1>Package Explorer</H1>
+		
+		The Package Explorer contains the structure and files
+		of the system you are to modify.  In this demo, we use
+		the example system JHotDraw 5.3.  The top-level node
+		in the package explorer is the the project:
+		JHotDraw5.3.  Clicking on the plus sign expands the
+		project to reveal its various components: in this case
+		a single source directory.  Double-clicking on the
+		source directory (or clicking on the corresponding
+		plus sign) will reveal all the packages and source
+		directories which constitute the system.  The package
+		directories contain java files, and the other
+		directories contains other source files such as icons.
+		
+		If you expand the <TT>CH.ifa.draw.figures
+		package</TT>, a collection of Java source objects will
+		appear.  There are various actions you can perform on
+		Java files.  Double-click on the
+		<TT>ArrowTip.java</TT> object.  The code for this file
+		should appear in the editor.  You can also expand an
+		object.  Expand the <TT>ArrowTip.java</TT> object.
+		This will reveal the internal structure of the object,
+		in this case, an import declarations node and the
+		<TT>ArrowTip</TT> class.  Expand the <TT>ArrowTip</TT>
+		class.  You will see the class members.  A red square
+		indicates a private member, a yellow diamond a
+		protected member, a blue triangle a default member,
+		and a green circle a public member.  Clicking on a
+		member will show the declaration of this member in the
+		editor.
+		
+		To create a new element in the package explorer, right-click on a package a select <TT>New</TT>.
+		
+		<H3>Tutorial</H3>
+		
+		<OL>
+		<LI>Show the <TT>CH.ifa.draw.applet.DrawApplet.java</TT> file in the Editor.
+		<LI>Display the <TT>fDrawing</TT> field in the window.
+		<LI>Create a new class <TT>Test</TT> in the package <TT>CH.ifa.draw.contrib</TT>.
+		</OL>
+		
+		<H1>Editor</H1>
+		
+		The editor lets you change a file.  Modifications in a Java file are automaticaly compiled in the 
+		project when a file is saved.  To save a file in the editor, type <TT>Ctrl-S</TT>, or use the <TT>File</TT> menu.  If
+		file contains compilation errors, they will automatically be indicated in the editor.  Errors for which 
+		a suggestion is available are indicated on the left side bar with a yellow light bulb.  
+		Clicking on the light bulb will reveal a set of possible corrections.  Otherwise, the error will be
+		indicated with a red X.  All errors also appear in the task view, in at the bottom of the screen.  
+		Clicking on a task in the task view will show the corresponding part in the code which needs to be addressed.
+		The side bar on the right of the editor contains bookmarks for the various errors.
+		
+		The editor also supports an auto-completion feature.  When an identifier is partially typed, typing <TT>Ctrl-Spacebar</TT>
+		will attempt to complete the identifier.  <TT>Ctrl-Spacebar</TT> after a type name will attempt to enter an
+		import declaration for this name.
+		
+		<H2>Tutorial</H2>
+		
+		<OL>
+		<LI>Open <TT>ArrowTip.java</TT>.  <LI>Change
+		<TT>getAngle()</TT> to <TT>getAngleX()</TT>.
+		<LI>Observe the different errors and bookmarks.  Click
+		on the errors in the Tasks view to go to the
+		corresponding location in the editor.  Use the
+		bookmarks in the right side bar to navigate to the
+		locations of the errors.  <LI>Make a new
+		<TT>TextFigure</TT> object in the <TT>ArrowTip</TT>
+		constructor to show the autocomplete.
+		</OL>
+				
+		<H1>Search</H1>
+		
+		It is possible to search for the references and
+		declarations to a class or class member, either from
+		the package explorer, or through a search menu.  To
+		start a general search, select <TT>Search</TT> from
+		the menu, then click on the <TT>Java Search</TT> tab.
+		The results of the search will be displayed in a view
+		below the editor.  Clicking on a search result will
+		display the corresponding code in the editor.
+		Right-clicking on a search result will allow you to
+		perform new searches, for the references or
+		declarations of the search result element.
+		
+		It is also possible to launch a search from the
+		package explorer.  Right-click on an element and
+		select references or declarations, and then <TT>Workspace</TT>.  This will produce
+		a list of all the elements in the workspace referring
+		to the selected element.
+		
+		<H2>Tutorial</H2>
+		
+		<OL>
+		<LI>Search for all <TT>Text*</TT> class declarations.
+		<LI>Sort by parent name (Right-click in the search
+		results view, and select <TT>Sort by | Parent Name</TT>.
+		<LI>Search for references to class
+		<TT>TextHolder</TT>: Right-click on
+		<TT>TextHolder</TT> in the search results view, and
+		select <TT>References | Workspace</TT>.
+		<LI>Display a few of them in the editor.
+		<LI>Obtain all the methods accessing the field
+		<TT>CH.ifa.draw.figures.TextTool.fTypingTarget</TT>
+		(in the search results or in the package explorer,
+		right-click on the field, and select <TT>References | Workspace</TT>.
+		<LI>Display the field accesses by double-clicking on
+		the search results.
+		<LI>Remove all searches by clicking on the 5th icon
+		from the left in the search results tool bar.
+		</OL>
+		
+		<H1>Running a program</H1>
+		
+		You run a compiled program by launching it through the run button on the menu, or through the <TT>Run</TT> | <TT>Run...</TT>
+		menu.  The configuration for the program you will need to execute will be pre-set for you.
+		
+		<H2>Tutorial</H2>
+		
+		
+		<OL>
+		<LI>Run the JHotDraw5.3 configuration.
+		</OL>
+		
+	</body>
+</html>

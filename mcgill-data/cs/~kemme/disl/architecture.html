@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.06 [en] (X11; U; Linux 2.2.14 i586) [Netscape]">
+  <title>Architecture Aware Data Management</title>
+</head>
+<body bgcolor="#ffffff">
+<h2>Adaptability in Multi-tier Information Systems</h2>
+<br>
+Multi-tier architectures are now the standard for advanced information
+systems where clients make calls to the web-server (presentation
+tier), the business logic (shopping card, purchasing, browsing, etc.)
+is implemented and embedded in the application server tier, and the
+database tier stores all critical data.
+<br>
+<br>
+In the commercial world, J2EE, .NET, and CORBA are specifications for
+the middle-tiers of such multi-tier architectures. Application servers
+provide far reaching functionality and services that help in the
+development of information systems. Important services are various
+communication mechanisms (remote procedure calls, messaging systems,
+persistent queues, etc.), transaction management, security, access
+control, persistence, and many more. <br>
+The fact that application
+servers introduce an additional layer of complexity, and that both web
+and application servers use a wide range of new technology 
+leaves us with many challenging problems.
+<p>Our research looks at several issues in regard to such multi-tier
+architectures:</p>
+<ul>
+  <li><span style="font-weight: bold;">Detecting and analyzing
+  consistency anomalies:&nbsp; </span>
+Transactional multi-tier architectures as well as cloud data stores offer several levels
+of isolation providing a trade-off between performance and
+consistency. While it is fairly well known how to identify
+qualitatively the anomalies that are possible under a certain
+isolation level, it is much more difficult to detect and quantify
+such anomalies during run-time of a given application.
+We have developed a new approach to detect and
+quantify consistency anomalies for arbitrary multi-tier application
+running under any isolation levels ensuring at least
+read-committed. In fact, the application can run even under
+a mixture of isolation levels. Our detection approach can be
+on-line or off-line and for each detected anomaly, we identify
+exactly the transactions and data items involved. Furthermore,
+we classify the detected anomalies into patterns
+showing the business methods involved as well as analyzing
+the types of cycles that occur. Our approach can help designers
+to either choose an isolation level where the anomalies
+do not occur or to change the transaction design to avoid the
+anomalies. Furthermore, we provide an option in which the
+occurrence of anomalies can be automatically reduced during
+runtime. To test the effectiveness and efficiency of our
+approach, we have conducted a set of experiments using a
+wide range of benchmarks.
+
+<li><span style="font-weight: bold;">Caching:&nbsp; </span>
+  Middle-tier architectures widely exploit caching to avoid expensive
+access to the database backend. When replicating the middle-tier for
+better scalability, balancing the load across all servers and
+exploiting the full capacity of the cache becomes a challenge. While
+solutions exists that are able to not only retrieve data from the
+local cache but also from the remote caches of other servers, such
+accesses are considerably more time-consuming. In our research, we 
+develop load-balancing and object-assignment policies that allow
+requests to be equally distributed across servers and objects assigned
+to caches that favour local cache hits. Our approach is application
+agnostic and dynamic: we continuously observe the request load and the
+objects that are accessed and generate new policies on the fly
+whenever the workload and access patterns change; no access to the
+source code of the application is needed to determine the access
+patterns.  We evaluate our approach using the RuBIS benchmark
+as well as a suite of micro-benchmarks showing how our approach
+significantly enhances system performance even with fluctuating
+workload patterns.
+
+  
+  
+  <li><span style="font-weight: bold;">Fault-Tolerance:&nbsp; </span>7/24
+availability is crucial for many of these information systems. Hence,
+such systems must be able to handle the crash of individual components,
+e.g., the crash of the web-server, the applicatin server, or the
+database system. Ideally, such crash is transparent to the client,
+i.e., the client always receives exactly one response for each request
+it sends to the system. Furthermore, the crash of a component may not
+leave the system in an inconsistent state. Replication is widely used
+to provide such fault-tolerance. The idea is that servers are
+replicated and if one replica crashes the work assigned to this replica
+can failover to another replica. In principle, each tier can be
+replicated. We have several projects on <a href="replication.html">database
+replication</a>. Furthermore, we have developed replication strategies
+for application servers. Our work in this area consists of several
+parts:</li>
+  <ul>
+    <li>Since an application server is not the last component in the
+multi-tier architecture but makes calls to the database backend-tier,
+any solution for application server replication must take the
+interaction between application server and database system, and the
+behavior of the database system into account. We analyze what
+interaction patterns exist between these components. In particular, we
+look at transaction management, and how the actions of transactions can
+affect both application server and database system.</li>
+    <li>We have to define what correctness means. This must be done
+from the perspective of the client, e.g., that he/she always receives
+an appropriate response to a request, and from the perspective of the
+application server and database system, e.g., the state they maintain
+should be consistent.</li>
+    <li>Based on the model and the correctness criteria we have
+developed algorithms that provide fault-tolerance in an efficient
+manner. Requests are executed by a primary server, and state changes
+are propagated to backup servers which can take over if the primary
+crashes. Execution at the clients, the primary, and the backups is
+carefully coordinated to provide the degree of correctness that is
+required. <br>
+    </li>
+    <li>We have implemented our algorithms witin a concrete application
+server architecture, namely the J2EE specification. Our replication
+tool is open-source and can be accessed via <a href="http://sourceforge.net/projects/j2ee-adapt/">SourceForge</a>.</li>
+  </ul>
+  <li><span style="font-weight: bold;">Load Balancing</span>:
+Replication cannot only be used for fault-tolerance. Since the work to
+be performed at backups is not as time consuming as the work at the
+primary, the backups can be primary servers for other clients. Hence,
+by adding new server replicas to the system we are able to handle more
+client requests. There are two main issues to handle. First, how to
+distribute clients over the server to optimally distribute the load.
+The second is how to maintain the system if replicas leave the system
+due to crashes or necessary maintenance, or join the system after
+recovery or as new replicas in order to increase system capacity. Such
+system configurations have to be performed in a transparent manner
+without interrupting ongoing processing in the system.&nbsp;</li>
+  <li><span style="font-weight: bold;">Fault-tolerance across the
+entire system: </span>Even if each individual tier provides
+fault-tolerance mechanisms, e.g., through replication, it is not clear
+that the server system in its entirety provides fault-tolerance and
+correctness. We have analyzed how we can reason about the
+correctness of the entire system given fault-tolerant properties of the
+individual tiers. From there, we have derived interaction patterns that
+guarantee system-wide fault-tolerance. <br>
+  </li>
+</ul>
+</font></font>
+<hr>
+</body>
+</html>
+                                    
