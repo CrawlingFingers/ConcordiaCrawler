@@ -1,6 +1,6 @@
 from retrieve import Retriever
 import sys
-import rules
+import classifier import Classifier
 
 ##############################################
 # 
@@ -26,15 +26,12 @@ if len(sys.argv) < 2:
 retriever = Retriever(sys.argv[1])
 collections = retriever.get_collections()
 
-for doc in collections['electrical-computer']:
-  print(doc.get("sentiment"))
-
 
 # rank collections by sentiment
-classes = rules.get_sentiment_classifier()
+all_docs = reduce((lambda x, y: x + y), collections, [])
+classifier = Classifier(all_docs)
 
-
-reduce_lambda = lambda sum, val: sum + (classes.classify(float(val.get("sentiment")))[1])
+reduce_lambda = lambda sum, val: sum + (classifier.classify(float(val.get("sentiment")))[1])
 sentiments_t = { k: reduce(reduce_lambda, v, 0.0) for k, v in collections.iteritems() }
 
 sentiments = {k: v/len(collections[k]) for k, v in sentiments_t.iteritems() }
