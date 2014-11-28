@@ -1,6 +1,6 @@
 from retrieve import Retriever
+from classifier import Classifier
 import sys
-import classifier import Classifier
 
 ##############################################
 # 
