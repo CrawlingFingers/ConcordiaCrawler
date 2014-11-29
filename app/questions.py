@@ -65,6 +65,13 @@ ordered_sentiments = sorted(sentiments.items(), key=lambda x: x[1], reverse=True
 for i, s in enumerate(ordered_sentiments):
   print(str(i) + "       " + s[0] + "    " + str(s[1]))
 
+# question 4
+print("Q4. Classify the departments in ENCS with a three way classifier into positive, negative, and neutral")
+print("A:")
+for i, s in enumerate(ordered_sentiments):
+  print(str(i) + "       " + s[0] + "    " + classifier.classify(s[1])[0])
+
+  
 
 # finally
 print("")
