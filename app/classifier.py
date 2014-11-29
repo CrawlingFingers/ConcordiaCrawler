@@ -27,8 +27,8 @@ class Classifier:
     distances = map(lambda x: math.fabs(x - sentiment), self.centroids)
     closest_centroid = min((v, i) for i, v in enumerate(distances))
     if closest_centroid[1] == 0:
-      return "negative"
+      return ("negative", -1)
     elif closest_centroid[1] == 1:
-      return "neutral"
+      return ("neutral", 0)
     else:
-      return "positive"
+      return ("positive", 1)
