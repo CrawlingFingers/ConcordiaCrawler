@@ -8,11 +8,11 @@ class Classifier:
   def __init__ (self, documents):
 
     # add all sentiments to a single array
-    sentiments = []
-    for doc in documents:
-      sentiment_float = float(doc.get("sentiment"))
-      sentiment_vector = [sentiment_float]
-      sentiments.append(sentiment_vector)
+    sentiments = [[s] for s in documents]
+    # for doc in documents:
+    #   sentiment_float = float(doc.get("sentiment"))
+    #   sentiment_vector = []
+    #   sentiments.append(sentiment_vector)
 
     # compute centroids
     features = array(sentiments)
