@@ -28,7 +28,7 @@ collections = retriever.get_collections()
 
 
 # rank collections by sentiment
-all_docs = reduce((lambda x, y: x + y), collections, [])
+all_docs = reduce((lambda x, y: x + y), [v for k,v in collections.iteritems()], [])
 classifier = Classifier(all_docs)
 
 reduce_lambda = lambda sum, val: sum + (classifier.classify(float(val.get("sentiment")))[1])
