@@ -21,7 +21,7 @@ class Classifier:
 
 
 
-  def classify (sentiment):
+  def classify (self, sentiment):
 
     # check the closes centroid
     distances = map(lambda x: math.fabs(x - sentiment), self.centroids)
