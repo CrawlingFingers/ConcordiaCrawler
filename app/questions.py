@@ -61,7 +61,7 @@ print("")
 # question 3
 print("Q3. Rank the departments in ENCS by sentiment of their web documents")
 print("A:")
-ordered_sentiments = sorted(sentiments.items(), key=lambda x: x[1])
+ordered_sentiments = sorted(sentiments.items(), key=lambda x: x[1], reverse=True)
 for i, s in enumerate(ordered_sentiments):
   print(str(i) + "       " + s[0] + "    " + str(s[1]))
 
