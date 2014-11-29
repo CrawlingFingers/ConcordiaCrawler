@@ -68,9 +68,11 @@ print("")
 
 # question 4
 print("Q4. Classify the departments in ENCS with a three way classifier into positive, negative, and neutral")
+dept_sentiments = [v for k, v in ordered_sentiments]
+dept_classifier = Classifier(dept_sentiments)
 print("A:")
 for i, s in enumerate(ordered_sentiments):
-  print(str(i) + "       " + s[0] + "    " + classifier.classify(s[1])[0])
+  print(str(i) + "       " + s[0] + "    " + dept_classifier.classify(s[1])[0])
 print("")
 print("Classifier centroids: ")
 for centroid in classifier.centroids:
