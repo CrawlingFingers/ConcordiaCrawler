@@ -74,11 +74,12 @@ def main():
     print "Found %d document(s) that matched the query '%s':" % (hits.totalHits, userq)
 
     for e in hits.scoreDocs:
-      # print e.score, e.doc, e.toString()
+      print e.score, e.doc, e.toString()
       # doc = search.doc(e.doc)
       # print doc.get("content").encode("utf-8")
       doc = retriever.search.doc(e.doc)
       print doc.get("filepath")
+      print("")
 
 if __name__ == "__main__":
   main()
