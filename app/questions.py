@@ -75,8 +75,12 @@ print("A:")
 for i, s in enumerate(ordered_sentiments):
   print(str(i) + "       " + s[0] + "    " + dept_classifier.classify(s[1])[0])
 print("")
-print("Classifier centroids: ")
+print("Original centroids: ")
 for centroid in classifier.centroids:
+  print(centroid)
+print("")
+print("Department centroids: ")
+for centroid in dept_classifier.centroids:
   print(centroid)
 
 
