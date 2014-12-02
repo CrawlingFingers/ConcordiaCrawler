@@ -39,6 +39,7 @@ class Retriever:
       file_path = doc.get("filepath")
       collection_name = re.match("^data/([A-Za-z\-]*)", file_path).group(1)
       if collection_name not in collections:
+        print collection_name
         collections[collection_name] = []
       collections[collection_name].append(doc)
     return collections
