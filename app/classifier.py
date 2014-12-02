@@ -16,9 +16,6 @@ class Classifier:
 
     # compute centroids
     features = array(sentiments)
-    sorted_features = sorted(features)
-    for feature in features:
-      print(feature)
     centroids = kmeans(features, 3)[0]
     self.centroids = sorted(centroids)
 
