@@ -1,0 +1,350 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 599 A4</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head>
+
+<body>
+
+
+<center><table width="100%" style="max-width: 800px" border="0" ><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 599 - Winter 2010 - Assignment 4<br>Fluid Simulation</h1>
+</div>
+
+
+
+<h2 class="section">Due 23:39 pm Thursday March 25</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+  <p><img align="right" style="padding-left:20px;padding-bottom:20px;" src="http://cs.mcgill.ca/~kry/comp599W10/a4/fluidsim.gif"> In this assignment you will implement a simple
+  yet stable Eularian fluid simulation, similar to the approach
+  described
+  in <a href="http://www.dgp.toronto.edu/people/stam/reality/Research/pdf/GDC03.pdf">[Stam
+  et al. 2003]</a>.  You should read this link before starting the
+  assignment, and use it as a reference in completing the requirements
+  below.  
+
+ 
+  </p>
+
+  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Sample Code</em></span></p>
+
+  Download the provided code from WebCT (do not distribute).  The
+  code has two main packages, similar to the previous assignment.  Note
+  that the <em>tools</em> package has minor updates, so you will want to 
+  make sure you use this one.  The <em>a4</em> package contains code
+  to provide a mouse interface and drawing interface to your fluid 
+  simulation code.
+
+  <ul style="list-style-type: square;">        
+    <li> A4App.java contains the mouse interface and drawing code.
+         Left click creates a source, while right click will delete
+         it.  Sources can be dragged using the left button, while
+         dragging while holding the right button will apply forces to
+         your fluid simulation.  The mouse wheel, while hovering over
+         a source, can be used to adjust the heating/cooling rate of a
+         source.  Clicking with the middle button will create a
+         horizontal filament.  There are keyboard controls similar to
+         previous assignments (space to toggle the simulation, R to
+         reset, S to step, enter to record, C to create filaments);
+         see the code for full details, and feel free to adjust the
+         interface to suit your needs.
+
+    <li> Filament.java contains simple code for creating, advecting, and refining 
+         thin filaments.  This is provided purely as an additional visual
+         aid in determining if your fluid is behaving correctly.
+
+    <li> Source.java contains code representing a heating or cooling source.
+         A list of sources is maintained by the fluid, and is editable using
+         the mouse with the code in A4App.java.
+
+    <li> Fluid.java contains the fluid simulation framework.  This should
+         be the only place where you need to add code.
+  </ul>
+
+  <p>You <span style="font-weight: bold;">do not need to change
+     anything except Fluid.java</span>. However, you are free to edit
+     everything as you please, and you are certainly encouraged to
+     explore and understand the rest of the provided code as it is
+     small in size.  Be sure to leave a comment in your readme.txt on
+     any additional test cases you add, or other modifications outside
+     of the Fluid.java code.<p>
+
+<!--  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Jars and Native Libraries</em></span></p>
+-->
+
+  <p>The setup for jars and libraries 
+    is the same from the previous assignments.  Consult the 
+     A1 page for more information.  Likewise, you may also 
+     want to visit the previous assignment specification for
+     instructions on making videos.</p>
+
+  </div>
+
+<h2 class="section">Steps and Objectives (7/7) * 100%</h2>
+
+  <div class="sbody">
+    You will find that there is already a fair bit of provided code in
+    the Fluid class.  There are forces applied to the velocity field
+    when mouse dragging while right button is held.  With the velocity
+    field visualization turned on you can implement and test many
+    parts of the assignment.  Implementing in this case will often
+    mean taking code directly from the GDC03 code examples.  Note that
+    in your final step method, there are three main components: apply
+    forces, update velocities, update scalar fields (temperature,
+    density, etc.).  Most steps should be trivial to implement and you
+    should be able to test each using the functionality of the
+    provided code.</p>
+
+  <ol>        
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Diffusion</em></span></p>
+
+        <p>Implement stable diffusion as per GDC03.  Test it on the
+           velocity field.  Use the DoubleParameters in the Fluid code
+           to select the diffusion rate and the number of iterations 
+           to use with the Gauss Seidel method.</p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Transport</em></span></p>
+
+        <p>Implement a method to advect quantities in a scalar field
+         based on a velocity field.  You can follow the advect code
+         example in GDC03, but you should probably use 
+         the <i>traceParticle</i> (already provided) to find what goes
+         where.  Note that you might want to change traceParticle be
+         higher order or adaptive (see also [Stam 1999]).
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Scalar Step</em></span></p>
+
+        <p>Implement a method to do the scalar step which will diffuse
+         and advect scalar quantities in the temperature field.  Note
+         that you'll also want to apply the heating / cooling effects
+         of different sources to test your method.  Recall that you
+         want to left click and then use the mouse wheel to create
+         some sources for your test.
+        
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Poisson Solve</em></span></p>
+
+        <p>Implement a method to do fix the velocity field so that it
+         is divergence free.  Use a Gauss Seidel solve as per GDC03,
+         and use the DoubleParameter in the diffusion step.  Note that
+         as an extension you may want to consider a better solver
+         (e.g., Conjugate Gradients).
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Velocity Step</em></span></p>
+
+        <p>Implement a method to do the velocity update step as per GDC03.
+	  This will involves diffusion, transport, and a Poisson projection step.
+           
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Buoyancy Forces</em></span></p>
+
+        <p>Use the temperature scalar field to compute buoyancy forces
+         to apply to the scalar field.  Use the buoyancy
+         DoubleParameter to scale the response.  Thus, the velocity
+         update (vertical direction only) is buoyancy times step size
+         times temperature delta (comparing the temperature with the
+         reference temperature).  For more details, see [Foster and
+         Metaxas 1997].
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Interesting Video</em></span></p>
+
+        <p> Record a sequence of something interesting or amusing. </p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Optional: Extensions</em></span></p>
+
+        <p>There are a vast number of possible extensions.  Here are
+        a few you might like to think about:
+
+        <ul style="list-style-type: square;">        
+	  <li> Change the domain size, e.g., allow it to be a rectangle.
+            Change the width and height of cells.  How does this change 
+            the divergence and Laplacian and other computations?  Would
+            it be difficult to use an arbitrary triangular grid?  
+
+	  <li> Extend the code to work in 3D.  How would you visualize 
+            the different scalar fields?
+
+	  <li> Staggered grids.  Many people prefer to define
+            velocities at cell boundaries.  This makes for a trickier
+            interpolation problem while simplifying some of the other
+            calculations.
+
+          <li> Add obstacles to fluid flow using geometry.  How might
+            you make these obstacles dynamic and have fluid forces
+            move these objects?  What would be necessary to combine 
+            this fluid code with the 2D mass spring particle systems of
+            Assignment 2?
+
+          <li> The projection step could use a number of different
+            fast solvers.  Note that [Stam 1999] used FISHPAK.
+
+          <li> Use vorticity confinement to combat numerical dissipation
+             (see [Fedkiw et al. 2001]).
+            
+          <li> See also the extensions listed at the end of the GDC03 article.
+
+	</ul>
+    
+  </ol>
+
+<p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>References</em></span></p>
+
+    <ul style="list-style-type: square;">        
+
+<li> 
+<a href="http://www.dgp.toronto.edu/people/stam/reality/Research/pdf/GDC03.pdf">
+J. Stam, <i>Real-Time Fluid Dynamics for Games</i>, GDC 2003.
+</a>
+</li>
+
+<li>
+<a href="http://doi.acm.org/10.1145/311535.311548">
+J. Stam, <i>Stable Fluids</i>, SIGGRAPH 1999.
+</a>
+</li>
+
+<li>
+<a href="http://doi.acm.org/10.1145/311535.311548">
+R. Fedkiw, J. Stam, and H. W. Jensen, <i>Visual Simulation of Smoke</i>, SIGGRAPH 2001.
+(vorticity confinement)
+</a>
+</li>
+
+<li>
+<a href="http://www.cs.ubc.ca/~rbridson/fluidsimulation/">
+R. Bridson, and M. Mýller-Fischer, <i>Fluid Simulation for Computer Animation</i>, SIGGRAPH 2007 Course Notes.
+</a>
+</li>
+
+<li> 
+<a href="http://doi.acm.org/10.1145/258734.258838">
+N. Foster and D. Metaxas, <i>Modeling the motion of a hot, turbulent gas</i>, SIGGRAPH 1997.
+</a>
+</li>
+
+
+<li>
+<a href="http://graphics.cs.cmu.edu/courses/15-869-F07/project-3/description.html">
+A. Bargteil, Physical Simulation for Computer Animation
+Assignment 3, CMU, Fall 2007.
+</a>
+</li>
+
+
+</ul>
+
+
+
+</div>
+
+ <h2 class="section">Written Questions</h2>
+
+
+  <div class="sbody">
+
+  <p>This assignment has no written questions.</p>
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+  <div class="sbody">
+
+  <p>Great!  Submit your source code and xvid encoded videos as a zip
+     file via webCT.  Include a readme.txt file with any specific
+     comments.  Your readme should provide a list of people with which
+     you discussed the assignment, or state that you did discuss the
+     assignment with anyone.</p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body>
+</html>

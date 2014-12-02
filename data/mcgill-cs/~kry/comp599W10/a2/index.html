@@ -1,0 +1,384 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 599 A2</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head>
+
+<body>
+
+
+<center><table width="100%" style="max-width: 800px" border="0" ><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 599 - Winter 2010 - Assignment 2<br>Robust Collision Processing</h1>
+</div>
+
+
+
+<h2 class="section">Due 23:39 pm Tuesday February 16</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+  <p><img align="right" style="padding-left:20px;padding-bottom:20px;" src="http://cs.mcgill.ca/~kry/comp599W10/a2/a2demoV4.gif">
+  In this assignment you will implemnet robust collision 
+  processing, similar to the cloth system in [Bridson et al. 2002]. 
+  For simplicity, your implementation will be in 2D, and will in 
+  many respects extend the code you worked on in assignment 1 (see
+  the notes on provided code below).  In addition to creating a
+  video of something interesting, you are invited to take part in 
+  the "alphabet soup challenge" to see how many letters you can simulate 
+  before edge-edge interpenetrations occur.</p>
+
+  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Sample Code</em></span></p>
+
+  Download the provided code from WebCT (do not distribute).  The
+  code has two main packages, similar to the previous assignment.  Note
+  that the <em>tools</em> package has minor updates, so you will want to 
+  make sure you use this one.  The <em>a2</em> package contains code
+  which is very similar to the first assignment except for a few 
+  notable differences  
+
+  <ul style="list-style-type: square;">        
+    <li> ParticleSystem.java now implements a symplectic Euler 
+         step in update particles, and does not make use of the
+         Integrator interface from the previous assignment.
+    <li> TestSystems.java implements a variety of test systems 
+         that will help you debug and stress-test your code.  Feel
+         free to add your own test systems too, though note you can
+         also do this on the fly using mouse clicks.
+    <li> LeafSpring.java implements a joint spring between three 
+         particles, which is useful for creating long 2D strings
+         which hold their shape (for instnace, letters).
+    <li> AlphabetSoupFactory.java is used by TestSystem to generate
+         mass spring systems from fonts.
+    <li> SanityCheck.java is used by the application to test for 
+         edge-edge collisions, that is, a discrete collision detection
+         test.  If collisions are found, the background turns red and 
+         the simulation is stopped (i.e., game over).
+  </ul>
+
+  <p>You <span style="font-weight: bold;">do not need to change
+     anything except RobustCCD.java</span> and optionally
+     TestSystems.java if you want to hard code additional test cases
+     or special scenarios.  Be sure to leave a comment in your readme.txt
+     on any additional test cases you add, or other modifications 
+     outside of the RobustCCD.java code.<p>
+
+<!--  <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Jars and Native Libraries</em></span></p>
+-->
+
+  <p>The setup for jars and libraries 
+    is the same from the previous assignment.  Consult the 
+     A1 page for more information.  Likewise, you may also 
+     want to visit the previous assignment specification for
+     instructions on making videos.</p>
+
+  </div>
+
+<h2 class="section">Steps and Objectives (5/5) * 95%</h2>
+
+  <div class="sbody">
+
+  <p>This assignment contains two main parts.  First is the continuous
+  collision detection for points and line segments.  Second is the
+  response to collisions.  You will need to modify the symplectice
+  Euler step in the updateParticles() method, which advances the
+  system by the given time step h.  As discussed in class and
+  documented in the method, this method does the following:</p>
+
+  <ol style="list-style-type: numeric;">     
+  <li> Symplectic Euler velocity update using forces from springs, gravity, etc.
+  <li> Velocity-level collision response (iterative solve)
+  <li> Symplectic Euler position update (guaranteed intersection free)
+  </ol>
+
+  <p>Both main parts of the assignment are concerned with step two listed
+  above (i.e., the velocity-level collision resolution).</p>
+
+  <ol>        
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Continuous Collision Detection</em></span></p>
+
+        <p> Perform robust interval-based collision detection of all
+        particle-edge pairs during the time interval (0,h] for the
+        given step size h.  The edges defined by Spring objects
+        connecting particles.  As discussed in class, you will do this
+        by doing the following</p>
+
+	<ul style="list-style-type: square;">        
+	  <li> Given the particles are moving on linear trajectories
+          specified by their position at the current time and their
+          velocity, find all times of co-linearity on (0,h] by solving
+          the appropriate quadratic equation.
+          <li> determine the contact location on the line segment, for
+          instance, as a parameter alpha in [0,1].
+	</ul>
+
+	<p>Note that some roots will give you a situation where the
+        particle is not on the line segment.  You should go through
+        the roots in the interval (0,h] in ascending order, and then
+        process only the earliest collision you find.</p>
+
+        <p>Note also that your root finding needs to be robust!  You
+        may need to add epsilon checks for the alpha parameter you
+        compute, and it may also be beneficial to check roots that
+        happen just after h (i.e., h plus some small time based
+        epsilon).</p>
+
+	<p>A quick way of testing this part is to pin the three
+        particles involved in a collision each time you find a
+        collision in the interval (0,h].  You should make a very short
+        movie to demonstrate this objective and to show your progress.
+        </p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Collision Impulses</em></span></p>
+
+        <p> When you find a collision on (0,t], you must apply an
+        appropriate impulse to the particles involved to resolve the 
+        collision.  As discussed in class, this involves the following.
+	<ul style="list-style-type: square;">        
+	  <li>Computing a suitable unit normal for the collision (at
+        the time of collision),
+	    <li>Computing a suitable impulse using a small
+	    near-inelastic restitution coefficient (e.g., the 
+            default value which is set for you in the interface).
+	    <li> Updating the velocities of the particles given the
+             impulse, and using the assumption that pinned particles
+             have infinite mass (i.e., in computing the impulse and 
+             distributing the impulse to the 3 particles).
+	</ul>
+
+	<p>You may find it useful to temporarily setting the
+        restitution value to 1 (or other values using the slider)
+        to help debug your velocity impulses.</p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Iterative Solve</em></span></p>
+
+        <p>Many particles and edges may be colliding in a given time
+         interval.  You will want to sequentially check all
+         particle-edge pairs, and immediately after each check you
+         should apply the collision impulses you compute in the
+         previous step.  You should continue through all the pairs
+         in this manner, but note that there may still be collisions
+         on the interval (0,t] after processing all pairs as some
+         particles may be involved in multiple collisions.  As such
+         you'll need to iterate over all pairs until you have resolved 
+         all collisions on (0,t].  As discussed in class, this may be 
+         slow to converge.  It is a good idea to give up after a some
+         maximum number of iterations, and return false to report the
+         problem and halt the simulation.
+        
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Penalty Forces</em></span></p>
+
+        <p>Penalty forces can help keep objects separate and reduce
+	  the number of difficult velocity-level impulses that need to
+	  be applied.  The penalty forces will let you model edges as
+	  if they had a thickness of 2H.  A default thickness of 2
+	  pixels is set for you in the user interface controls.  So,
+	  as discussed in class, if a particle is within a distance of
+	  H of a line segment, then apply a simple spring force
+	  impulse with stiffness identical to the stretch springs.
+          see also [Bridson et al. 2002] for more details.</P>
+
+         <p>For your simulation to run smoothly, you'll likely need
+           to address particle-particle penalty forces, i.e., forces
+           when alpha falls just outside of [0,1].</P>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Interesting Video</em></span></p>
+
+        <p> Record a sequence of something interesting or amusing.
+        Note that you can create particles by clicking with the mouse,
+        and you can also pin and unpin particles by clicking them.
+        So experiment, have fun, and make a movie of something
+        creative and interesting. </p>
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Optional: Alphabet Soup Challenge</em></span></p>
+
+        <p>How many letters can you simulate before the soup goes bad?
+        Post your successes to WebCT, and the final results will be
+	also added to this page for posterity.  Note that simulation 
+        parameters must be reasonable (no extra bouncy
+        collisions).</P>
+
+
+    <li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Optional: Extensions</em></span></p>
+
+        You might optionally like to think about the following issues.
+
+        <ul style="list-style-type: square;">        
+	  <li> Frictional contact is generally a hard problem, but
+	    there exist many good models for friction during impact.
+	    For impacts, you may want to read about what Bridson
+	    suggests as a straightforward way to apply impulses
+	    opposing tangential motion.
+          <li> The iterative solver can fail to converge, even after
+            adding penalty forces.  You can improve robustness and
+            find solutions in these difficult cases by using <em>rigid
+            impact zones</em> as described in [Bridson 2002].  This
+            effectively acts like a velocity filter and provides a
+            "fail safe" to avoid interpenetration when the iterative
+            solver fails.  There are drawbacks, however, as rigid
+            zones can be large and will eliminate interesting
+            deformable dynamics.
+          <li>As particle numbers increase, the all particle-edge
+            pair collision test becomes quite expensive.  Space time
+            bounds can be used to cull many root finding tests, but you
+            could also consider a "broad-phase" collision detection
+            scheme, such as a uniform grid subdivision of space.
+          <li>You may like to think about the complexities of moving
+            this simulation to 3D.  For instance, the modifications
+            would include: both particle triangle tests and edge-edge
+            tests, robust solution of cubic polynomials, robustly
+            testing point in triangle.  A nice aspect of [Bridson et
+            al. 2002] is also the subdivision surface refinement of
+            the 3D cloth, which gives very smooth results for 
+	    coarse cloth simulations.
+	</ul>
+    
+  </ol>
+
+  Some tips for robust simulation.  Watch out for all special cases as
+  they will happen once you are running large simulations.  If you are
+  dividing, you can probably be sure that the denominator will be zero
+  in some cases (and you should deal with these cases differently).
+  Use double precision floating point.  Use epsilon checks to make
+  your code robust to floating point error.  Finally, strive for
+  correctness instead of speed.
+
+
+<p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>References</em></span></p>
+
+    <ul style="list-style-type: square;">        
+	  <li><a href="http://www.cs.ubc.ca/%7Erbridson/">Robert Bridson</a>,
+Ronald P. Fedkiw, John Anderson, <a href="http://www.cs.ubc.ca/%7Erbridson/docs/cloth2002.pdf"><span 
+ style="font-weight: bold;">Robust Treatment of Collisions, Contact,
+and Friction for Cloth Animation</span></a>, ACM Transactions on
+Graphics, 21(3), July 2002, pp. 594-603.
+    <li>Witkin, A., and Baraff, D., Eds. 2001. <a style="font-weight: bold;" href="http://www.pixar.com/companyinfo/research/pbm2001/">Physically
+Based Modeling: Principles and Practice. Course Notes.</a> ACM SIGGRAPH
+'01. 
+    <li><a href="http://www.cs.cornell.edu/~djames/">Doug James</a>, 
+     <a href="http://www.cs.cornell.edu/courses/cs5643/2009sp/a2Spaghetti/">
+     CS5643: Physically Based Animation for Computer Graphics,
+     Assignment #2</a>, Cornell University.
+</ul>
+
+
+
+</div>
+
+ <h2 class="section">Written Questions (1/1) * 5%</h2>
+
+
+  <div class="sbody">
+
+  <p><a href="http://cs.mcgill.ca/~kry/comp599W10/a2/a2w.pdf">The written question is available as a PDF
+  download.</a></p>
+
+  <p>Prepare a pdf file with your answer to this written question
+  (scanned hand written document, or generated
+  with latex, openoffice, or otherwise) and submit it along with your
+  assignment via webCT.</p> 
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+  <div class="sbody">
+
+  <p>Great!  Submit your source code and two xvid encoded videos as a
+     zip file via webCT.  Include a readme.txt file with any specific
+     comments.  Also be sure to include a pdf with your written answer
+     (i.e., scans of handwritten work, or typeset).  Your readme
+     should provide a list of people with which you discussed the
+     assignment, or state that you did discuss the assignment with
+     anyone.</p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body>
+</html>

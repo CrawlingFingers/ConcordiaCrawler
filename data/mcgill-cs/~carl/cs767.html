@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 308-767 Parallel Programming</TITLE>
+<META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I: OSF1 V4.0
+alpha)[Netwscape]">
+</HEAD>
+<BODY bgcolor="ffffff" text="#333333" background="/backgrnds/whitepg23.gif">
+<p><!body background="chalk.jpg"></p>
+
+<table><tr><td valign=left align=top><img src="http://www.cs.mcgill.ca/gifs/pixel.gif" height="1" width="110" alt=""></td>
+<td valign=left align=top width=100%>
+<img src="http://www.cs.mcgill.ca/gifs/mcgillbanner.gif" alt="McGill University" height="48" width="170">
+<br>
+<font color="#ff0000">
+<font size=+4><b>School of Computer Science</b></font>
+</font>
+<br>
+<h1>Computer Science 308-767:
+Parallel Programming
+</h1>
+<P><B>Instructor</B>:
+<a href="http://www.cs.mcgill.ca/~carl/:http//www.cs.mcgill.ca/~carl"> Carl Tropper </a>
+<br>
+112N  McConnell<br>
+Phone: 398-3743 
+<br>
+E-mail:carl@cs.mcgill.ca<br>
+Office hours<br>
+Tuesday, Thursday 10:30-12:00
+<p><b>Teaching assistant</b><br>
+TBAi<br>
+2@cs.mcgill.ca<br>
+Office hours: TBA<br>
+</p>
+
+<BR>
+<P><B>
+Course Description</B>:
+<P>
+In attempting  to explain the natural wold, it is standard practice for a
+scientist
+to develop  a theory and to then subject this theory to experimental 
+verification. Similarly, engineers build prototypes to investigate their
+designs. This paradigm is becoming increasingly difficult to pursue
+because of
+the sheer size and complexity of the systems which we are trying to 
+design and the phenomena which we are trying to understand. Trying to 
+subject theories on the evolution of the galaxy or climate change to 
+experimental verification or building a new aircraft on the basis of a
+paper
+design are not realistic approaches.  This traditional approach 
+is largely being replaced by a new paradigm, a computational science
+approach in which high performance computer systems are used
+to simulate the phenomena which we wish to either explain and the
+systems which we wish to design.  Examples of this  approach in science
+include
+global climate modeling, computational chemistry and brain modeling.
+Familiar examples in engineering include computational fluid dynamics
+for aircraft design, semiconductor design and nuclear weapons design. 
+In the business world, economic forecasting models drive both 
+business decisions and stock trading programs. 
+</P>
+<P>
+One inescapable conclusion is that the computing platforms on
+which we implement these numerical models (or simulations) must
+be powerful.  They are also parallel machines. The reason that they
+are parallel is that there are limitations to the number of transistors
+which can be packed onto a chip and we are rapidly approaching this
+limit, in spite of all of the efforts made by VLSI designers. Moore's
+law ( enunciated in 1965)  predicted that the number of transistors
+which
+could be etched on a chip would double once every 18 months. In 1975
+that meant about 4,000. In 2006 it means about a billion!! In that time
+period 
+the clock rate of a microprocessor went from about 1 MHz to 1 GHz. 
+This came at a cost, however. Moore's second law saw in increase
+in the cost of a semi-conductor foundry go from about  $10,000,000
+to $10,000,000,000 (constant 1995 dollars).  There is an inevitable
+consequence, which is physical. There is a limit to how far a transistor
+
+can shrink. At present, they are not the size of atoms, which will be
+necessary
+in order to continue this growth. In short, the future is parallel- for
+those of
+little faith, you need look no further then the  January, 2006
+announcement by Apple that the iMac and the MacBook Pro are now dual
+core machines. 
+</P>
+<p><B>Syllabus</B>
+<br>
+The focus of this course is on parallel programming. There will be an
+emphasis on the use of clusters because they are there-by this I mean
+that they are cheap and can be built from off the shelf CPU's and
+networks. 
+<P>
+Here is an outline of the topics which we are going to cover. 
+<ul>
+<li>Parallel machine and programming models-shared memory, distributed
+shared
+memory, message passing
+
+<li>Programming techniques-partitioning, pipelined computations, synchronous
+computations, load balancing and termination detection
+
+<li>Algorithms and applications-linear algebra, partial differential
+equations,
+particle methods.
+</ul>
+<br>
+These topics are subject to time limitations and the instructor's whims
+......
+<P><B>
+How the course will be run</B>:
+
+I am going to cover material from the course text and other places in 
+the form of lectures. You will build parallel programs based on the
+material which we cover in the course. This is a seriously hands on
+course. You have the option of replacing one of the assignments
+which I give you with a project of your very own. It can be from your
+research. Needless to say, I have to be happy with it. 
+I will expect a detailed description of the algorithms which
+you chose to implement, a detailed description of related algorithms,
+a detailed description of the application which you chose along
+with your motivation for chosing the problem.
+<p><B>
+Class Materials</B>
+<br>
+Texts
+<br>
+<ul>
+<li>There is a text for the course: Parallel Computing, by Grama,Gupta,
+Karypis,Kumar, Addison-Wesley.
+It is in the bookstore.  <br><br>
+Other texts for the material which we plan to cover include
+<br>
+<li>Parallel Programming, by Wilkinson and Allen ( Pearson-Prentice
+Hall)
+<li>Fundamentals of Parallel Processing by Jordan and Alaghband (Prentice
+Hall)
+</ul>
+<br>
+On-line references/course materials
+<ul>
+<li>The McGill Clumeq Supercomputer web page:
+<a href="http://www.clumeq.mcgill.ca/">Clumeq</a>
+There are a number of workshops and tutorials which are available
+through
+Clumeq on parallel programming. 
+<li>Designing and Building Parallel Programs, by Ian Forster. Originally
+published as a textbook, this is a web version of the text. 
+<a href="http://www-unix.mcs.anl.gov/dbpp/">Designing and Building
+Parallel Programs</a>
+<li>The IEEE on-line Parallel Processing Home-Page:
+<a href="http://dsonline.computer.org/portal/site/dsonline/menuitem.20d6846e1c7ed783f1a516106bbe36ec/index.jsp?&pName=dso_level1_home&path=dsonline/topics/parallel&file=index.xml&xsl=generic.xsl&">IEEE Parallel Processing Home</a>
+<li>mpi: <a href="http://www.unix.mcs.anl.gov/mpi">mpi</a>
+<li>mpi-standard: <a href="http://www-unix.mcs.anl.gov/mpi/mpi-standard/mpi-report-1.1/mpi-report.html">mpi-standard</a>
+<li>mpi tutorials: <a href="http://www-unix.mcs.anl.gov/mpi/learning.html">tutorial</a>
+<li>web pages: <a href="http://www-unix.mcs.anl.gov/mpi/www/">web-pages</a>
+<li>mpich 2: <a href="http://www-unix.mcs.anl.gov/mpi/mpich/">mpich2</a>
+<li>mpi-text: <a href="http://mitpress.mit.edu/catalog/item/default.asp?ttype=2&tid=3614">Using
+MPIt</a>
+</ul>
+<P>Slides for the course can be found at <a href="parprogslides.html">
+Course slides</a>. The slides are in powerpoint-if you don't have it on
+your machine, you can download open office. 
+
+<P><B>Course Evaluation</B>
+<br>
+Assignments: 100%
+<br>
+<br>
+<p><b>Assignments</b>
+<br>
+<ul>
+<li><a href="fishnsharks.html">fishnsharks</a>
+<li><a href="gaussianmpi.html">distributed memory Gaussian</a>
+<li><a href="nbody.html">nbody</a>
+</ul>
+<br>
+</td></tr></table>
+</body>
+</html>
+
+
+                                                                                                                        

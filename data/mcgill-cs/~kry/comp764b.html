@@ -1,0 +1,964 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
+  <title>COMP 764B - Computer Graphics and Animation</title>
+
+
+  <style>
+<!--
+.small-text {font-family: Arial, Helvetica, sans-serif;
+color:#000000; font-size: .83em;}
+.medium-text {font-family: Arial, Helvetica, sans-serif;
+color:#000000; font-size: 1em;}
+-->
+  </style>
+</head>
+
+
+<body>
+
+<table style="text-align: left; width: 100%; height: 100px;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr style="font-family: Helvetica,Arial,sans-serif; color: rgb(255, 255, 255);">
+
+      <td style="background-color: rgb(0, 0, 153);" colspan="1" rowspan="1">
+      <h2 style="text-align: center;">COMP 764B - Computer
+Graphics and Animation<small> <br>
+
+Winter 2008 (Advanced Topics Systems 1)</small></h2>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<center>
+<table style="font-family: Helvetica,Arial,sans-serif; width: 800px; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <td></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="width: 800px;"> <span style="font-weight: bold;" class="small-text">Last
+updated: 19 February 2008<br>
+
+      <br>
+
+      <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Overview">Overview</a> - <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Prerequisites">Prerequisites</a> - <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Objectives">Objectives</a> - <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Course_Format_and_Evaluation">Format</a> - <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Course_Format_and_Evaluation">Evaluation</a> - <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Final_project">Project</a> - <a href="http://www.cs.mcgill.ca/~kry/comp764b.html#Course_Materials">Materials</a></span>
+      <h3>General Information</h3>
+
+      <div style="margin-left: 40px;">
+      <table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="0">
+
+        <tbody>
+
+          <tr>
+
+            <td style="width: 140px;"><small>Course
+Web Page</small></td>
+
+            <td style="width: 614px;"><a href="http://www.cs.mcgill.ca/%7Ekry/comp764b.html"><small>www.cs.mcgill.ca/~kry/comp764b.html</small></a></td>
+
+          </tr>
+
+          <tr>
+
+            <td style="width: 140px;"><small>Lectures</small></td>
+
+            <td style="width: 614px;"><small>Mondays
+and Wednesdays <span style="font-weight: bold;">from 4:00
+to 5:30 </span>in ENGMC 320</small></td>
+
+          </tr>
+
+          <tr>
+
+            <td style="width: 140px;"></td>
+
+            <td style="width: 614px;">&nbsp;</td>
+
+          </tr>
+
+          <tr>
+
+            <td style="width: 140px;"><small>Instructor</small></td>
+
+            <td style="width: 614px;"><small>Paul Kry</small></td>
+
+          </tr>
+
+          <tr>
+
+            <td style="width: 140px;"><small>Telephone</small></td>
+
+            <td style="width: 614px;"><small>514 398
+2577</small></td>
+
+          </tr>
+
+          <tr>
+
+            <td style="width: 140px;"><small>Office</small></td>
+
+            <td style="width: 614px;"><small>MC113N</small></td>
+
+          </tr>
+
+          <tr>
+
+            <td style="width: 140px;"><small>Office
+Hours</small></td>
+
+            <td style="width: 614px;"><small>By
+appointment (any time!)</small></td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      <small><br>
+
+      <span style="color: rgb(153, 0, 0);">NOTE: This is
+an initial course outline and it will change during the
+term. &nbsp;Please refer to the latest version at the link above.<br>
+
+      <br style="color: rgb(0, 0, 0);">
+
+      </span><a href="http://www.cs.mcgill.ca/~kry/internal">Additional course
+materials (internal access only)</a></small><small><span style="color: rgb(153, 0, 0);"></span></small></div>
+
+      <h3><a name="Schedule"></a>Schedule</h3>
+
+      <table style="width: 750px; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="4">
+
+        <tbody>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px; vertical-align: top;">Mon&nbsp;7&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px; vertical-align: top;">Introduction,
+course description, overview of topics.<br>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;9&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">Motion
+capture, technology, motion reuse and modification.<br>
+
+Reading:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://www.interactioncapture.org/siggraph06.html">Interaction
+Capture and Synthesis, P. G. Kry, D. K. Pai, SIGGRAPH 2006</a></li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;14&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">Review,
+ordinary differential equations and numerical integration<br>
+
+Reading:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://www.pixar.com/companyinfo/research/pbm2001/">Physically
+Based Modeling</a> ODE Basics, glance through particle systems or
+skip directly to implicit methods</li>
+
+            </ul>
+
+More Information:
+            <ul style="list-style-type: square;">
+
+              <li><strong></strong>David Baraff and
+Andrew Witkin, <a href="http://portal.acm.org/citation.cfm?id=280821">Large
+steps in cloth simulation</a>, SIGGRAPH 1998<strong></strong></li>
+
+              <li>Computer Methods for Ordinary Differential
+Equations
+and Differential-Algebraic Equations, Uri M. Ascher and Linda R.
+Petzold, Chapter 3</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;16&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">Review,
+constraints, constraint stabilization (Baumgarte, post stabilization),
+mathematical introduction to rigid body motion, (no time for solving
+linear systems,&nbsp;sparse systems)<br>
+
+Reading:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://www.pixar.com/companyinfo/research/pbm2001/">Physically
+Based Modeling</a> Constrained Dynamics, start looking at rigid
+body simulation</li>
+
+            </ul>
+
+More Information:
+            <ul style="list-style-type: square;">
+
+              <li>A Mathematical Introduction to Robotic
+Manipulation, R. Murray, Z. Li, and S. Sastry, Chapter 2</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;21&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">More
+rigid body motion, screws, brief look at solving linear systems.
+&nbsp;(no time was left for unilateral constraints,
+reduced physical models, e.g., Good Vibrations, DyRT).<br>
+
+Suggested Reading: <br>
+
+            <ul style="list-style-type: square;">
+
+              <li>M. B. Cline and D. K. Pai, <a href="http://www.cs.rutgers.edu/%7Edpai/papers/ClinePai03.pdf">Post-Stabilization
+for Rigid Body
+Simulation with Contact and Constraints</a>, in proceedings of
+the IEEE Intl. Conf. on Robotics and Autom., 2003. [Describes both
+Baumgarte stabilization, and post-step stabilization]</li>
+
+              <li>A. Pentland , J. Williams, <a href="http://portal.acm.org/citation.cfm?doid=74334.74355">Good
+vibrations: model dynamics for graphics
+and animation</a>, ACM SIGGRAPH Computer Graphics, v.23 n.3,
+p.207-214,
+July 1989<span style="font-family: helvetica,arial,sans-serif;"></span></li>
+
+            </ul>
+
+More Information:
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://portal.acm.org/citation.cfm?id=77287">Physically-based
+modeling: past, present, and future</a>, siggraph panel 1989</li>
+
+              <li>M.-J. Kim, M.-S. Kim, and S. Y. Shin, <a href="http://doi.acm.org/10.1145/218380.218486">A General
+Construction Scheme for Unit Quaternion Curves with Simple High Order
+Derivatives</a>, SIGGRAPH&nbsp;1995&nbsp;</li>
+
+              <li><font face="Arial,Helvetica">Doug
+L. James and Dinesh K. Pai, DyRT: <a href="http://www.cs.cornell.edu/%7Edjames/research/index.html">Dynamic
+Response Textures for Real Time Deformation Simulation with
+Graphics Hardware</a><span style="font-family: helvetica,arial,sans-serif;">, </span></font><span style="font-family: helvetica,arial,sans-serif;"><span style="font-style: italic;">ACM Transactions on Graphics</span></span><span style="font-family: helvetica,arial,sans-serif; font-style: italic;">
+(ACM SIGGRAPH 2002)</span><span style="font-family: helvetica,arial,sans-serif;">, </span><i style="font-family: helvetica,arial,sans-serif;">21(3)</i><span style="font-family: helvetica,arial,sans-serif;">, pp.
+582-585, 2002.</span></li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;23&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">Final
+summary of rigid body motion, dynamics.<br>
+
+            <br>
+
+More Information:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li>A Mathematical Introduction to Robotic
+Manipulation, R. Murray, Z. Li, and S. Sastry, Chapter 4</li>
+
+            </ul>
+
+            <span style="color: rgb(204, 0, 0);">Note:
+(moved) Send paper suggestions and preference of order and dates to me
+in email by Jan 23</span><span style="color: rgb(204, 0, 0);"></span>
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;28&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">Revisit
+missed topics from Monday 21, plus time permitting: collision
+detection and response, broad phase, narrow phase, OBB, AABB, spheres,
+collision response, we may also touch on optimization, data fitting,
+and approximation.<br>
+
+Suggested Reading:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li><font face="Arial,Helvetica">Doug
+L. James and Dinesh K. Pai, BD-Tree: <a href="http://graphics.cs.cmu.edu/projects/bdtree/">Output-Sensitive
+Collision Detection for Reduced Deformable Models</a>, <i>ACM
+Transactions on Graphics (</i></font><span style="font-family: helvetica,arial,sans-serif; font-style: italic;"></span><font face="Arial,Helvetica"><i>ACM SIGGRAPH 2004)</i>,
+23(3), pp. 393-398, August 2004.</font></li>
+
+              <li>Teschner et al., <a href="http://www-evasion.imag.fr/Publications/2004/TKZHRFCFMS04/STARmain.pdf">Collision
+Detection for Deformable Objects</a>, Eurographics STAR 2004
+[survey]</li>
+
+            </ul>
+
+More Information:
+            <ul style="list-style-type: square;">
+
+              <li>Boyd and Vandenberghe, <a href="http://www.stanford.edu/%7Eboyd/cvxbook/">Convex
+Optimization</a>, [i.e., for Lagrangian and KKT conditions]</li>
+
+              <li>Evangelos Kokkevis, <a href="http://www.research.scea.com/research/pdfs/VangelisK_GDC2004.pdf">Practical
+Physics for Articulated Characters</a>, GDC 2004</li>
+
+              <li><a href="http://books.google.ca/books?id=a9SzFHPJ0mwC&printsec=frontcover">Game
+Physics</a> (book), David Eberly</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;30&nbsp;Jan</td>
+
+            <td class="small-text" style="width: 619px;">Motion
+capture reuse and control. &nbsp;BD-Tree discussion.<br>
+
+Reading:
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://portal.acm.org/citation.cfm?id=1272724">Multiobjective
+Control with Frictional Contacts</a>, Yeuhi Abe, Marco da Silva,
+Jovan
+Popovi&#263;, Symposium on Computer Animation (SCA), 2007</li>
+
+              <li><a href="http://doi.acm.org/10.1145/1073204.1073249">Dynamic
+Response for Motion Capture Animation</a>, Zordan, V. B.,
+Majkowska, A., Chiu, B., Fast, M SIGGRAPH 2005</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;4&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">Clarke,
+Inverse Rendering<br>
+
+Reading:
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://graphics.stanford.edu/papers/invrend/">A
+Signal-Processing Framework for Inverse Rendering</a>, Ravi
+Ramamoorthi, Pat Hanrahan, SIGGRAPH 2001</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;6&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">Discussion
+of Dynamic Response for Motion Capture Animation (read for Jan 30), and
+            <br>
+
+Reading:
+            <ul style="list-style-type: square;">
+
+              <li>Metoyer et al., <a href="http://ieeexplore.ieee.org/iel5/2945/4359476/04359496.pdf?arnumber=4359496">Psychologically
+inspired anticipation and dynamic response for impacts to the head and
+upper body</a>, IEEE TCVG 2008</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;11&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px; color: rgb(204, 0, 0);"><span style="color: rgb(0, 0, 0);">Reading: </span>
+            <ul style="list-style-type: square; color: rgb(0, 0, 0);">
+
+              <li><a href="http://grail.cs.washington.edu/projects/graph-optimal-control/">Near-optimal
+Character Animation with Continuous Control</a>, Treuille, A.
+Lee, Y. Popovi&#263;, Z.<br>
+
+SIGGRAPH 2007</li>
+
+              <li><a href="http://grail.cs.washington.edu/projects/charanim/paper0129_final.pdf">Learning
+Physics-based Motion Style with Inverse Optimization</a>, K. Liu,
+A. Hertzmann, Z. Popovi&#263;, SIGGRAPH 2005</li>
+
+            </ul>
+
+            <span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 0);"></span></span>Note:
+Tentative
+due date for final project proposal (survey paper as part of proposal
+if only one presentation)</td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;13&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">Marta,
+            <a href="http://www.cs.mcgill.ca/~kry/internal/paper12.pdf">Facial
+Animation Perception</a></td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;18&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">More&nbsp;facial
+animation, physically based and data driven methods.<br>
+
+Reference:<span style="color: rgb(0, 0, 0);"> </span>
+            <ul style="list-style-type: square; color: rgb(0, 0, 0);">
+
+              <li><a href="http://doi.acm.org/10.1145/1103900.1103906">Facial
+modeling and animation</a>, SIGGRAPH 2004 course notes</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;20&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">Finish
+with facial animation: performance capture and resynthesis.<br>
+
+Hands: modeling and animating techniques, grasping, control, planning,
+quality.<br>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;25&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">No
+class (Study break)</td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;27&nbsp;Feb</td>
+
+            <td class="small-text" style="width: 619px;">No
+class (Study break)</td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;3&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">Real-time
+lighting and precomputed light transfer.<br>
+
+Reference:<span style="color: rgb(0, 0, 0);"> </span>
+            <ul style="list-style-type: square; color: rgb(0, 0, 0);">
+
+              <li>
+                <dl>
+
+                  <dt><a href="http://www.cs.berkeley.edu/b-cam/Papers/Kirk-2007-RTA/">Real-Time
+Ambient Occlusion for Dynamic Character Skins</a>, A. G. Kirk, O.
+Arikan, I3D 2007</dt>
+
+                  <dd> </dd>
+
+                </dl>
+
+              </li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;5&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">Sammy,
+            <a href="http://graphics.uni-ulm.de/BIH.pdf">Instant
+Ray Tracing: The Bounding Interval Hierarchy</a> </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;10&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">Tom,
+            <a href="http://graphics.cs.cmu.edu/projects/muscle/">Capturing
+and animating skin deformation in human motion</a> </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;12&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">Fahim,
+            <a href="http://www.cemyuksel.com/research/waveparticles/">Wave
+Particles</a></td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;17&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">Skinning:
+PSD, EigenSkin, MWE, Character Skins from Examples.<br>
+
+Reading:<span style="color: rgb(0, 0, 0);"> </span>
+            <ul style="list-style-type: square;">
+
+              <li>
+                <dl>
+
+                  <dt> <a href="http://doi.acm.org/10.1145/545261.545286">EigenSkin:&nbsp;real
+time large deformation character skinning in hardware</a>, Kry,
+James, Pai, SCA'02</dt>
+
+                </dl>
+
+              </li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;19&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">cancelled</td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;24&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">No
+class (Easter Monday)</td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;26&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">More
+Skinning:&nbsp;dual quaternions, skinning mesh animations.<br>
+
+Reading:<span style="color: rgb(0, 0, 0);"> </span>
+            <ul style="list-style-type: square;">
+
+              <li>
+                <dl>
+
+                  <dt><a href="http://isg.cs.tcd.ie/kavanl/">Skinning
+with Dual Quaternions</a>,&nbsp;L. Kavan, S. Collins, J.
+Zara, C. O'Sullivan, I3D 2007 </dt>
+
+                </dl>
+
+              </li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;31&nbsp;Mar</td>
+
+            <td class="small-text" style="width: 619px;">Fahim,
+SPH fluid simulation<br>
+
+Reading:<span style="color: rgb(0, 0, 0);"> </span>
+            <ul style="list-style-type: square;">
+
+              <li>
+                <dl>
+
+                  <dt><a href="http://graphics.ethz.ch/Downloads/Publications/Papers/2003/mue03b/p_Mue03b.pdf">Particle-Based
+Fluid Simulation for Interactive Applications</a>, Matthias
+M&uuml;ller, David Charypar and Markus Gross, SCA 2003 </dt>
+
+                </dl>
+
+              </li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;2&nbsp;Apr</td>
+
+            <td class="small-text" style="width: 619px;">Advanced
+motion capture analysis<br>
+
+Reading:
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://www.eurasip.org/Proceedings/Eusipco/Eusipco2007/Papers/C5P-H02.pdf">Exact
+Principal Geodesic Analysis for Data on SO(3)</a>, Said, Courty,
+LeBihan, Sangwine, <br>
+
+USIPCO 2007</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text" style="width: 103px;">Mon&nbsp;7&nbsp;Apr</td>
+
+            <td class="small-text" style="width: 619px;">Reading:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://www-evasion.imag.fr/Membres/Lionel.Reveret/AnimalGaits/index.html">Animal
+Gaits From Video</a>,&nbsp;Favreau, Reveret, Depraz, Cani,
+SCA 04</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td class="small-text" style="width: 103px;">Wed&nbsp;9&nbsp;Apr</td>
+
+            <td class="small-text" style="width: 619px;">Marta,
+motion exaggeration <br>
+
+Reading:<br>
+
+            <ul style="list-style-type: square;">
+
+              <li><a href="http://portal.acm.org/citation.cfm?id=1055081">Martial arts in artificial reality</a>,
+Hamalainen et al., SIGCHI 05</li>
+
+            </ul>
+
+            </td>
+
+          </tr>
+
+          <tr bgcolor="#dddff0">
+
+            <td class="small-text">Tue 15 Apr</td>
+
+            <td><span class="small-text">Final
+project demos, meet at 5pm in MC110A</span></td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      <br>
+
+      <small><span style="color: rgb(153, 0, 0);"></span></small>
+      <h3><a name="Overview"></a>Overview</h3>
+
+      <div style="margin-left: 40px;"><small>Recent
+advances in
+computer graphics and animation are permitting new levels of realism
+and interactivity with benefits to a variety of applications such as
+video games, movies, and training simulations. The goal of this
+course is to expose students to a sample of these new and advanced
+techniques and to help each student develop an understanding of the
+state of the art in computer animation research. The format of the
+course will be seminar style with in class student presentations and
+discussions of important and recent publications. Example
+topics may include motion capture processing, animating humans and
+animals, character skinning, acoustics, rigid body dynamics, deformable
+objects, collision detection and response, physically based methods,
+and more. The course will also involve a final project. </small></div>
+
+      <h3><a name="Prerequisites"></a>Prerequisites</h3>
+
+      <div style="margin-left: 40px;"><small>This
+course is intended
+for graduate students in Computer Science or Electrical and Computer
+Engineering. It is also open to other students with
+permission of the instructor. Students
+taking this course will ideally have taken an introductory computer
+graphics course, and and have good knowledge of linear algebra,
+calculus, for working through papers. Strong
+programming skills will also be helpful in completing the course
+project. </small></div>
+
+      <h3><a name="Objectives"></a>Objectives</h3>
+
+      <div style="margin-left: 40px;"><span class="small-text" style="font-weight: normal;"> The
+objective of this course is to have students develop an understanding
+of the state of the art in computer graphics and animation.
+This will be achieved by reading, analyzing, and discussing
+the new ideas and advanced techniques presented in recent publications.
+At the end of the term, students will have a good idea of the current
+important challenges in computer animation research. Students may also
+be able to reuse general methods
+and techniques covered during the term in their
+own research. Finally, a general
+objective is for students to gain experience in reading and presenting
+research articles, which should be of benefit when they carry out their
+thesis research. </span><br>
+
+      </div>
+
+      <h3><a name="Course_Format_and_Evaluation"></a>Course
+Format and Evaluation</h3>
+
+      <div style="margin-left: 40px;"><span class="small-text">The class will
+be taught in a seminar-style format. The first weeks be lectures
+presented by the
+instructor to review background material, but most classes will consist
+of student presentations and
+a group discussion. </span><span class="small-text">You
+should find your own papers to read
+and present, but a
+summary of papers in different areas will be provided in class to help
+those who are looking for a place to start.</span><span class="small-text"> </span><span class="small-text">You
+will be expected to present one time during the
+term, and you will need to provide a list of a few papers that
+interest you
+for the second week of class. The selected papers will be grouped
+into different themes, and if there are overlaps you may be
+asked to choose an alternative paper.<br>
+
+      <br>
+
+Presentations will be approximately 15 to 20 minutes in length. You are
+also expected to read the papers for
+each class, and must be ready to discuss ideas in the paper.
+&nbsp;Discussion will clarify questions such as the real
+contributions and impact of the paper,</span><span class="small-text"> the relationship does it has to other
+papers and current practices, the limitations of the method and how it
+could be improved, etc.<br>
+
+      <br>
+
+In addition to the one presentation that is expected, you write a short
+survey on a area of interest to you. &nbsp;Alternatively, you can
+present a second time as an alternative. <br>
+
+&nbsp;<br>
+
+There are three components to the grading
+scheme.</span></div>
+
+      <ul class="small-text" style="list-style-type: square;">
+
+        <ul style="list-style-type: square;">
+
+          <li>40% paper presentation / paper survey or 2nd
+presentation</li>
+
+          <li>20% class participation</li>
+
+          <li>40% final project</li>
+
+        </ul>
+
+      </ul>
+
+      <p class="small-text" style="margin-left: 40px;"><em><span style="font-weight: bold;">Academic Integrity</span></em></p>
+
+      <p class="small-text" style="margin-left: 40px;"><em>McGill
+University values academic integrity.
+Therefore, all
+students must understand the meaning and consequences of cheating,
+plagiarism and other academic offences under the Code of Student
+Conduct and Disciplinary Procedures. &nbsp;See <a href="http://www.mcgill.ca/integrity/">www.mcgill.ca/integrity</a>
+for more information, as well as&nbsp;<a href="http://www.mcgill.ca/integrity/studentguide">www.mcgill.ca/integrity/studentguide</a>,
+      </em><em>the Student Guide to Avoid
+Plagiarism.</em></p>
+
+      <h3><a name="Final_project"></a>Final
+project</h3>
+
+      <div class="small-text" style="margin-left: 40px;">Each
+student will complete a final project of their choosing, either alone
+or in a group. &nbsp;A
+project should be an implementation of the key
+parts of one one of the papers discussed in class. If possible,
+students should also try to incorporate
+something new or novel in their projects. This could be a small
+extension of a method, an analysis, an evaluation, or some additional
+feature. A brief one page proposal proposal will be
+submitted for approval. A final report along with source
+code, videos, images and any other relevant material will be due at the
+end of the term. The report should be brief but thorough and
+should highlight what you learned, what was easier than expected, what
+was harder, and what you wish you knew before starting. More details
+will be provided in class and on this web page later in the term.<br>
+
+      </div>
+
+      <h3><a name="Course_Materials"></a>Course
+Materials</h3>
+
+      <div class="small-text" style="margin-left: 40px;">All
+the articles and papers needed for readings and
+presentations in this course should be available online. Use Tim
+Rowley's site, Google
+scholar, Citeseer, the
+ACM digital library, or look for the paper directly on the web page of
+one of the authors. If you are using an Internet connection at home,
+you may need
+to use a <a href="http://www.mcgill.ca/library-using/connect/#OUTSIDE">McGill
+library VPN</a> connection to access some resources.</div>
+
+      <ul class="small-text" style="list-style-type: square;">
+
+        <ul style="list-style-type: square;">
+
+          <li><a href="http://trowley.org/">Tim
+Rowley's web page</a></li>
+
+          <li><a href="http://www.pixar.com/companyinfo/research/pbm2001/">Physically
+Based Modeling</a></li>
+
+        </ul>
+
+      </ul>
+
+      <ul class="small-text" style="list-style-type: square;">
+
+        <ul style="list-style-type: square;">
+
+          <li><a href="http://portal.acm.org/browse_dl.cfm?linked=1&part=transaction&idx=J778&coll=ACM&dl=ACM&CFID=48147784&CFTOKEN=49535486">Transactions
+on Graphics (TOG) and SIGGRAPH (issue 3)</a></li>
+
+          <li><a href="http://portal.acm.org/browse_dl.cfm?linked=1&part=series&idx=SERIES10768&coll=ACM&dl=ACM&CFID=48147784&CFTOKEN=49535486">Symposium
+on Computer Animation</a></li>
+
+          <li><a href="http://catalogue.mcgill.ca/F">McGill
+Catalogue</a></li>
+
+          <li><a href="http://www.cs.mcgill.ca/~kry/www.acm.org/dl">ACM
+Digital Library</a></li>
+
+          <li><a href="http://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=2945">IEEE
+Xplore</a></li>
+
+          <li><a href="http://scholar.google.ca/">Google
+Scholar</a></li>
+
+          <li><a href="http://citeseer.ist.psu.edu/">Citeseer</a></li>
+
+        </ul>
+
+      </ul>
+
+      <div style="margin-left: 40px;"><span class="small-text">Note
+that videos of some SIGGRAPH presentations in recent years can be found
+online in the ACM Digital Library. Many are good
+examples to emulate, though class presentations may want to focus on
+different aspects.
+Some advice for giving good presentations will be provided in class,
+while lots of additional <a href="http://www.cgl.uwaterloo.ca/%7Esmann/GSInfo/talk_guidelines.html">advice
+for giving a good presentation</a> can be found on the web.</span></div>
+
+      <br>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</center>
+
+</body>
+</html>

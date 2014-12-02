@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 308-767 Parallel Programming</TITLE>
+<META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I: OSF1 V4.0
+alpha)[Netwscape]">
+</HEAD>
+<BODY bgcolor="ffffff" text="#333333" background="/backgrnds/whitepg23.gif">
+<p><!body background="chalk.jpg"></p>
+
+<table><tr><td valign=left align=top><img src="http://www.cs.mcgill.ca/gifs/pixel.gif" height="1" width="110" alt=""></td>
+<td valign=left align=top width=100%>
+<img src="http://www.cs.mcgill.ca/gifs/mcgillbanner.gif" alt="McGill University" height="48" width="170">
+<br>
+<font color="#ff0000">
+<font size=+4><b>School of Computer Science</b></font>
+</font>
+<br>
+<h1>Computer Science 308-767:
+Parallel Computing
+</h1>
+<BR>
+<P><B>Gaussian Elimination Using MPI
+</B>:
+
+
+	In this assignment, you will use what you learned about parallelizing
+Gaussian elimination with partial pivoting to develop a scalable
+message passing implementation using MPI. 
+You should write your program in C+MPI. 
+You may want to use some of the MPI
+collective communication primitives in your program.
+<p> 
+Use problem size 6000 x 6000 to evaluate the performance of your 
+implementation. 
+You should randomly generate
+the input matrix <code>a</code> and solution vector <code>b</code>.
+<p>
+ Your program should
+measure the elapsed time of your solver, which includes
+the elimination and back solve phases, 
+but not the matrix initialization or answer verification. 
+<p>
+Write a document that describes how your program works. 
+This document should <em>not</em> include your
+programs, though it may include figures containing pseudo-code that
+sketch the key elements of your parallelization strategy for each
+implementation. Explain how
+your program partitions the data, work, and exploits parallelism. 
+If your program uses collective communication, explain how; if not,
+explain why not.
+Your writeup should include a table with timing
+measurements for your solver on
+the processors which you use. 
+Plot the <b>parallel efficiency</b>
+ of your program executions. 
+The x axis should show the number of processors. The Y
+axis should show your measured parallel efficiency for the execution.
+</li> </ul> 
+
+<h2>Submitting your Assignment</h2>
+Your assignment should be submitted in two parts.
+<ul>
+<li>A tar file containing a separate directory for each of your
+programs. Each directory should contain your source code and a
+Makefile.
+</li>
+<li>Your writeup about the programs. 
+</li>
+</ul>
+Email me a message with a text attachment containing the program and a
+second attachment containing your writeup (in either Word or pdf
+format). The program is due on Tuesday, April 3 at midnight. 
+<h2>Grading Criteria</h2>
+<ul>
+<li>
+10% Program correctness. 
+</li>
+<li>
+40% Program clarity, elegance and parallelization. The programs should
+be well-documented internally with comments.
+</li>
+<li>
+10% Program scalability and performance.
+</li>
+<li>
+40% Writeup. Your grade on the writeup includes the quality of the
+writing, whether all of
+the required elements are included, and the clarity of your
+explanations. 
+</li>
+</ul>
+<h2>Due date</h2> Friday, November 2, 2007</h2>
+<hr />
+</body>
+</html>
+

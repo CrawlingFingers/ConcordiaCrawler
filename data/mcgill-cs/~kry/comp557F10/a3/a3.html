@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 557 A3</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head><body>
+
+
+<center><table style="max-width: 800px;" width="100%" border="0"><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 557 - Fall 2010 - Assignment 3<br>
+Catmull-Clark Subdivision Surfaces</h1>
+</div>
+
+
+<h2 class="section">Due 12:00 Noon Wednesday 10 November</h2>
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+<img style="padding-left: 10px; padding-bottom: 20px;" src="http://cs.mcgill.ca/~kry/comp557F10/a3/monkey2.png" border="0" align="right">
+<img style="padding-left: 20px; padding-bottom: 20px;" src="http://cs.mcgill.ca/~kry/comp557F10/a3/monkey0.png" border="0" align="right">
+
+
+  <p>In this assignment you will build half edge data structures from
+  polygon soups, and subdivide meshes using the Catmull-Clark subdivision
+  scheme.  The polygon soup loader has been written for you and is
+  very minimal.  It will load the vertex and face data from an 'obj'
+  file (though these files can also contain lots of other information
+  too).  We have also provided you with a number of sample meshes that
+  will be useful for testing your program.</p>
+
+  <h3 class="section">Provided Code</h3>
+
+  <p>Download the sample code from WebCT.  It is a 
+<!--The <a href="a2.zip">sample code</a> is a --> working program that
+  will load one of the sample polygon soups and will draw it.  You will
+  need to add the jogl, vecmath, and mintools jars to your project.
+  The sample code zip file has the following contents.
+
+  <ul>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  A3App
+  </em></span>
+
+  <p>The main application loads a polygon soup, will make calls to try
+  to build a half edge data structure and will try to subdivide it
+  (these method calls will fail because you need to implement them).
+  The display call will draw the coarse polygon mesh by default, and
+  also draws a half edge of the coarsest half edge data structure.
+  You can use the keyboard interface to walk the half edge data
+  structure.  Press space to go to the twin and N for the next half
+  edge.  Left and Right arrows will take you to first and second child
+  (if they exist), while up arrow will take you to the parent (if it
+  exists).  Home and end keys can be used to change the subdivision
+  level currently displayed, while page up and page down will allow
+  you to go forwards and backwards in the model list (the model is
+  loaded and subdivided each time).</P> </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  PolygonSoup
+  </em></span>
+
+  <p>Contains a vertexList and a faceList, and code to load these from
+  an obj file.  There is also some simple drawing code used by the
+  <em>A3App</em> class to draw the loaded soup.</p>
+  </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  HalfEdge
+  </em></span>
+
+  <p>The half edge class is simple, and provided for you.  It has 6
+  pointers (<em>next, head, twin, child1, child2, parent</em>), and a method
+  for drawing a half edge to help you verify that your program is
+  working.  For your convenience, it also contains a <em>prev</em>
+  method to get the previous half edge.</p> </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  Vertex
+  </em></span>
+
+  <p>The vertex class is simply a container to hold the position of the
+  vertex, the normal (if it has been computed), and a pointer to its 
+  subdivision child (if it exists).</p>
+  </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  Face
+  </em></span>
+
+  <p>The face class is a simple container for the face normal 
+  (for flat shading), a pointer to the half edge, and a pointer to
+  its subdivision child (a vertex) if it exists.  The constructor will
+  compute the normal and set all the <em>leftFace</em> pointers of the
+  half edge loop appropriately.</p>
+  </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  HEDS <b>(you need to finish this class)</b>
+  </em></span>
+
+  <p>HEDS is the Half Edge Data Structure, and simply contains a list
+  of faces (each face has a half edge loop).  You will need to
+  implement the constructor which builds the structure given a polygon
+  soup</p> </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  CatmullClark <b>(you need to finish this class)</b>
+  </em></span>
+
+  </P>This class has one method called subdivide which takes a half
+  edge data structure and returns the half edge data structure for the
+  subdivided mesh.  You will need to implement this method, and will
+  likely want to create several private static helper methods to
+  complete the objectives described below.</P> </li>
+
+  <li><span style="font-weight: bold; color: rgb(153, 0, 0);"><em>
+  Sample Geometry
+  </em></span>
+
+  <p>A number of sample obj files are included.  All of the samples
+  are orientable manifolds, or orientable manifolds with boundary, and
+  work with the provided soup loader.  Some consist only of
+  quadrilaterals, while others are a mix of triangles and
+  quadrilaterals.  You should test with simple models such as the
+  torus and cube before trying out the money and human models.
+  Several are meshes that involve boundary and should only be used if
+  you decide to complete the 6th objective. Feel free to add your own
+  models or modify these as you please.</li>
+
+  </ul>
+
+  </div>
+ 
+<h2 class="section">Steps and Objectives</h2>
+
+  <div class="sbody">
+
+  <p>In these first steps, assume that your mesh is a closed
+  orientable manifold, and as such, your half edges will always have a
+  non null twin pointer (i.e., assume no boundaries).  For steps 2 and
+  3, refer to Figure 4.8 on page 76 of
+  the <a href="http://www.cs.nyu.edu/~dzorin/sig00course/">siggraph
+  2000 course notes on subdividion surfaces</a>.  For the normals in
+  step 5 refer to Equation 4.1 on Page 71.  Many meshes will not be
+  exclusively quads.  You should deal with these problem cases by
+  using a modification of the subdivision rules.  See the description
+  starting at the bottom of page 76 and continuing on page 77.  For
+  this assignment it is fine to use simplified versions of these rules
+  as discussed in class, and we can note that after one subdivision
+  all faces will have 4 sides.</p>
+
+<ol>
+<li> 
+<img style="padding-left: 20px; padding-bottom: 10px;" src="http://cs.mcgill.ca/~kry/comp557F10/a3/he-animation.gif" border="0" align="right">
+
+<p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Half Edge Data Structure (two marks)</em></span></p>
+
+<p>Write code that builds the half edge data structure.  You will
+probably want to keep track of the half edges you create as you make
+them so that you can easily connect each half edge with its twin. One
+simple and somewhat inefficient approach would be to use
+<em>Map&lt;String,HalfEdge&gt;</em> where "i,j" is the key for the edge from
+vertex i to vertex j.  An alternative mentioned in class would be to
+maintain a list of half edges leaving each vertex and match up the
+twins as you find them.</p>
+
+<p>You can test that your structure is correct by using the interface
+that the <em>A3App</em> provides for walking the data structure (space
+for twin and N for next). Once you have your half edge data structure
+working, set the default value of the <em>drawCoarse</em> parameter in
+the <em>A3App</em> to false (so that you can avoid unchecking this
+parameter in the interface on each subsequent run).</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Even Vertices (two marks)</em></span></p>
+
+<img style="padding-left: 20px; padding-bottom: 10px;" src="http://cs.mcgill.ca/~kry/comp557F10/a3/plane-rgb2.png" border="0" align="right">
+<p>Write code to compute the new position of the existing vertices in
+the subdivided model (i.e., compute the even vertices).  You might do
+this by visiting each face, and then computing the vertex child if it
+has not already been computed.</p>
+
+<p>You do not need to return a completed <em>HEDS</em> in
+the <em>CatmullClark.subdivide</em> call.  Instead, check that you are
+getting the expected result by checking the "display child vertices"
+checkbox in the controls.  Code to draw the child vertices (if they
+exist) is already in the provided code (see the bottom of the half
+edge data structure class).  Even vertices are drawn as red
+points.</p> </li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Odd Vertices (two marks)</em></span></p>
+
+<p>Write code to compute the odd vertices by subdividing the half
+edges of every face.  Odd vertices are created at each edge and in the
+center of each face.</p>
+
+<p>The face child vertex is easiest to compute (it is the average of
+the vertices).  Use the "display child vertices" to make sure that
+these vertices are in the correct positions.  They will be drawn as
+blue points.</p>
+
+The edge child vertices are slightly more involved.  The <em>head</em>
+of <em>child1</em> should point to the new vertex, while
+the <em>head</em> of <em>child2</em> should point to the child vertex
+of the half edge you are subdividing (i.e., one of the <b>even</b>
+child vertices you created in step 2).  Be sure to set the parent
+pointers on the children that you create.  In contrast, do not worry
+about setting next pointers at this step (see step 4).  As such, you
+will not yet be able to display these new half edges using the <em>A3App</em>
+keyboard interface.</p>
+
+<p>Make sure that you also create children of the twin edge, hook the
+children up to each other with their twin pointers.  Be sure to get
+the connections correct, i.e., child1's twin is its parent's twin's
+child2.</p>
+
+<p>Use the "display child vertices" checkbox to make sure that the
+child vertices appear to be in the correct positions.  Odd vertices
+created by edge subdivision are drawn as green points.</p>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Connectivity (two marks)</em></span></p>
+
+<p>In this step you'll finish building the half edge data structure
+for the subdivided mesh.  To do this, you will need to create the 8
+child half edges that fall into the middle of each face (their parent
+is a face rather than an edge, so leave the parent pointer null).  You
+will need to set their head, next, and twin pointers, and also set the
+next pointers of all the other child half edges in each face.  You
+will also need to create the child faces, each of which will be a
+quad.  Normally there will be 4 child faces, but if the source mesh
+has n-gons, then you will be generating n child faces at this point!
+
+<p>Use the keyboard controls to walk between the parent and child half
+edge data structures to make sure you have connected everything
+correctly.  Keeping your code as simple as possilbe and drawing
+yourself pictures will likely help you succeed with connecting up all
+the pointers correctly in this step.</p>
+
+<li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Normals</em></span></p>
+
+<p>Once you have a correctly connected data structure for the
+subdivided mesh, you can compute normals of the limit surface.  Refer
+to Equation 4.1 on Page 70 of the <a href="http://www.cs.nyu.edu/~dzorin/sig00course/">siggraph 2000 course
+notes on subdividion surfaces</a> (note that vertex order is important
+for getting your normal in the correct direction).  When you set the
+normal of a vertex, it will be used by the display method of the HEDS
+class to draw the object with smooth shading.</p>
+
+  </li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Boundaries (optional, 5% bonus)</em></span></p>
+
+<p>Quite often, we deal with meshes that have boundaries, and in these
+cases you will have half edges that have no twin.  Write code that
+detects this, and implements the boundary subdivision rules.  For
+instance, before subdividing a vertex, you probably compute the
+valence of the vertex by walking the half edges that arrive at that
+vertex; use the boundary subdivision rule if you come across a null
+twin pointer.</p>
+
+<p>You will also need to modify your code that computes the vertex
+normals in a similar way.  Refer to equation 4.2 on page 72 of the
+subdivision course notes as a guide.  Note the typo for k=3, and
+modify the k>=4 case so that you compute a weighted sum of vectors (as
+opposed to working with weighted points).  Resolve any ambiguity with
+respect to this on the WebCT discussion board.
+</p>
+
+<p>Note again that this objective is optional.  That is, you are not
+required to complete this step.  It is suggested that you only
+complete this objective if you finished the others too quickly.</p>
+
+  <li> <span style="font-weight: bold; color: rgb(153, 0, 0);">
+  <em>Readme File</em></span>
+
+       <p> Create a <em>readme.txt</em> or <em>readme.pdf</em> file to
+       submit with your assignment.  The readme should include any
+       comments you have with respect to the assignment, and describes
+       anything you deem to be noteworthy.  Try to be brief!  Your
+       readme should also contain a written answer to the following
+       question:</p>
+
+       <ol type=a>
+       <li><p>The monkey head model has 32 triangles and 468
+       quadrilaterals for a total of 500 faces.  How many faces will
+       there be after 2 levels of subdivision.  Give a formula, or
+       clearly explain your computation.  If you implement step 6,
+       then you can also check your answer with your
+       implementation!</p></li> </ol>
+
+       </li>
+
+
+</ol> 
+
+<!-- 
+Other possible extensions:
+Limit positions of vertices *
+Creased / sharp edges and vertices **
+Triangle strips
+Parametric evaluation
+Textures
+Non triangular starting meshes
+Other subdivision schemes
+Coarse mesh editing ***
+-->
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+    <div class="sbody">
+
+     <p>Great!  Be sure your name and student number is in the window
+     title, in your readme, and in the top comments section of each of
+     your source files.</p>
+
+     <p>Submit your source code as a zip file via <a href="http://www.mcgill.ca/webct">webCT</a>.  Include a
+     <em>readme.txt</em> or <em>readme.pdf</em> file with your
+     comments.  Be sure to check that your submission is correct
+     by downloading your submission from WebCT.  You can not
+     recieve any marks for assignments with missing or corrupt
+     files!</p>
+
+     <p>Note that you are encouraged to discuss assignments with your
+     classmates, but not to the point of sharing code and answers.
+     All code and written answers must be your own.  </p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body></html>

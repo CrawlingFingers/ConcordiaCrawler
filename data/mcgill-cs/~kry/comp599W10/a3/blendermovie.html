@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 599 BVH Blender Movie Instructions</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head>
+
+<body>
+
+
+<center><table width="100%" style="max-width: 800px" border="0" ><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 599 - BVH Blender Movie Instructions</h1>
+</div>
+
+<!-- <h2 class="section">Getting Started</h2> -->
+
+  <div class="sbody">
+  
+<p><img align="right" style="padding-left:20px;padding-bottom:20px;" src="http://cs.mcgill.ca/~kry/comp599W10/a3/mocapdude.gif"> This page describes instructions on how to render
+a movie of a BVH sequence with ambient occlusion and motion blur using
+Blender.  You should plan ahead as this step can be time consuming
+depending on the length of your motion sequence.  That is, you will
+likely need to let your computer render for a few hours! Use the
+following steps as a general guide for setting up and rendering your
+movie, but feel free to experiment and do your own thing!
+
+<ol> 
+
+    <li><p>Download and install <a href="http://www.blender.org/">Blender</a>.  Note that you will
+    also need to install <a href="http://www.python.org/">Python<a>,
+    and you should be careful to install the exact version that
+    Blender asks (if it isn't correct it will complain, and you'll
+    likely not be able to use any scripts).  If you missed the 15
+    minute tutorial in class on using Blender, you may want to read
+    the getting started tutorial in the <a href="http://www.blender.org/education-help/tutorials/">tutorial
+    archive<a>, or search for video tutorials on youtube.</li>
+
+    <li><p>You'll also need a script to help build geometry for the
+    armature you will load from the bvh file.  Download the python
+    script at <a href="http://www.malefico3d.org/blog-en/?p=13">this
+    page</a>.  Put the script in your .blender/scripts folder.  The
+    location of this folder will vary depending on how you install
+    Blender.  On windows, this will either be under the "Program
+    Files" folder or in a user folder such as "C:\Documents and
+    Settings\kry\Application Data\Blender
+    Foundation\Blender\.blender\scripts" on XP or
+    "C:\Documents\kry\AppData\Blender
+    Foundation\Blender\.blender\scripts" on Vista.  Check that the
+    script is loaded by running Blender, and then selecting scripts
+    from the button at the top left the window (the button has a tool
+    tip to tell you that the button lets you select the window type).
+    Click the scripts button that appears when you change the window
+    type to scripts, and verify that "Armature Modeler" appears under
+    the "Animation" entry.  If it doesn't show up, or if other items
+    are empty (or if the import options are missing in the next step),
+    then your scripts are likely not installed correctly.  Check for
+    errors and repeat!  Put the top window back to "User Preferences"
+    type when you are done so you have access to the menu bar.
+
+    <li><p>Now, load out.bvh using the menu "File -> Import ->
+    MotionCapture (.bvh)...".  When you click on the "Import BVH"
+    button, "As Armature" will be selected. Click OK.</li>
+
+    <li><p>After loading, the armature will be selected by default.
+    You'll want to rotate it 90 in x so that it is walking on the x-y
+    plane instead of the x-z plane.  Press 'n', then click the value
+    next to RotX and set it to 90.</li>
+
+    <li><p>Press 'numberpad-0' to see the camera view.  Use the middle
+    mouse button to rotate out of the camera view.  Use the scroll
+    wheel to zoom in and out.  To see the animation that you loaded
+    you'll want to bring up the timeline: right click exactly on the
+    line between the perspective panel and select "split area", then
+    left click in the bottom panel to divide the area.  Click the left
+    top most button in the area you created, and select timeline from
+    the menu.  Use the left mouse button to drag in the timeline to
+    see the animation.</li>
+
+    <li><p>When you started Blender, the default scene included a cube
+    called "Cube".  Use the cube to create a template bone geometry.
+    Select it by right clicking on it.  Press n to show the transform
+    properties if they are not already showing.  Set the scale in y to
+    be 3, then translate the scaled cube so that its long direction is
+    going down the y axis.  Press 'tab' to go into edit mode, and then
+    set Median Y to 1.0 in the transform properties window, then press
+    tab again to return to object mode.</li>
+
+    <li><p>Select the armature by right clicking on it, then select
+    "Pose Mode" from the mode combo box (the one that was changing
+    between object and edit when you press tab).  Press 'a' to select
+    all the armature bones.  Now select in your scripts window
+    "Scripts->Animation->Armature Modeler".  If you do not see the
+    whole interface then make the window a bit larger.  Change the
+    bone type from "Octaedron" to "custom" and provide the name "Cube"
+    where it asks for OB.  Feel free to follow the instructions on
+    Malefico's page to create different geometry, or tune the shapes
+    in other ways.  </li>
+	 
+    <li><p>Create a plane for your character to walk on by selecting
+    from the menu Add->Mesh->Plane.  Scale and position your plane by
+    adjusting the transform properties (press 'n' to bring them up).
+    Location 0,0,0 and scale 50,50,50 should work OK.  You may want to
+    translate your original Cube below the plane so it is hidden from
+    view.</li>
+
+    <li><p>Change the colour of your character by selecting the Cube
+    and pressing F5 to bring up the shading buttons, then select the
+    small red sphere to select the material buttons.  Under Material,
+    click on the grey rectangle next to "Col" to select a different
+    colour.</li>
+
+    <li><p>Turn on ambient occlusion rendering by pressing the world
+    "World buttons" when you have the shading buttons selected.
+    Pressing F5 multiple times will take you there.  It is the last
+    button on the right.  Select the "Amb Occ" tab and press the
+    "Ambient Occlusion" button.  The default settings are fine.</li>
+
+    <li><p>Change the position of the camera so you can properly see
+    your character throughout the animation.  Select the camera by
+    right clicking it, press 'numberpad-0' for the camera view, 'n' to
+    change change its position and orientation.</li>
+
+    <li><p>Change the position of the light so you can properly see
+    your character.  Right click the light drag it around, or set its
+    transform properties.</li>
+
+    <li><p>Press F12 to do a test render, and adjust everything as you
+    see fit.</li>
+
+    <li><p>Press F10 to select the "Scene" button and make sure the
+    left most button with tooltip "Render buttons" is selected. Under
+    "Format" choose "AVI Codec" instead of "jpeg", select xvid, and
+    configure the codec for high quality.  Just under file format
+    combo box is a FPS setting.  Since the natural point system
+    records at 100 Hz, you should change the value to 100.  In the
+    "Anim" tab to the left, change the step setting at the bottom to
+    be 10 so that you're not rendering every frame, and set the End
+    frame to be whatever you want as the end frame (check by scrubbing
+    the cursor in the timeline window).  Finally, in the "Render" tab
+    press the "MBLUR" button and set the Bf parameter to some suitable
+    parameter, such as 5 (i.e., so it renders the blur over a longer
+    period of time).  Press F12 once more for a test render to see
+    that everything is satisfactory for the current frame.</li>
+
+    <li><p>Finally, when you are ready, press the "ANIM" button on the
+    "Anim" tab to render the whole animation to disk.  This will
+    likely take a few hours, so you might want to test with a short
+    sequence first and make any adjustments based on the result.</li>
+
+    </ol>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body>
+</html>

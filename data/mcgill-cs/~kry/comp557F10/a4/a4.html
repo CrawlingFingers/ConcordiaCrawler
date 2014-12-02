@@ -1,0 +1,430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+  <title>COMP 557 A4</title>
+  <style>
+  .title { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(153, 0, 0);
+    font-size: 0.8em;
+    text-align: left;
+    padding-top: 0px;
+    }
+  .section { 
+    font-family: Arial,Helvetica,sans-serif; 
+    color: rgb(153, 0, 0);
+    font-size: 1.2em;
+    text-align: left; 
+    }
+  .indent, .sbody{
+    margin-left: 40px;
+    }
+  .sbody { 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    max-width: 800px;
+    text-align: left; 
+   }
+  .info{
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .icell1{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .icell2{
+    padding-right: 25px;
+    vertical-align: top;
+    } 
+  .schedule{ 
+    font-family: Arial,Helvetica,sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 0.83em;
+    text-align: left;
+    vertical-align: top;
+    width: 90%;
+    border-color: rgb(192, 192, 192);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+  .scell{
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    } 
+  .scellg {
+    padding-left: 5px;
+    border-color: rgb(192, 192, 192);
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    vertical-align: top;
+    background-color: rgb(222, 222, 222);
+    }
+  </style>
+</head><body>
+
+
+<center><table style="max-width: 800px;" width="100%" border="0"><tbody><tr><td>
+      
+<div class="title">
+<h1>COMP 557 - Fall 2009 - Assignment 4<br>
+Ray Tracing</h1>
+</div>
+
+
+<h2 class="section">Due noon Wednesday 1 December</h2>
+
+
+<h2 class="section">Getting Started</h2>
+
+  <div class="sbody">
+
+<img style="padding-left: 20px; padding-bottom: 10px;" src="http://cs.mcgill.ca/~kry/comp557F10/a4/rt.png" border="0" align="right">
+
+  <p>In this assignment, you will write a raytracer.  Note that there
+  is no written part to this assignment. The 
+  <!--<a href="a4.zip">sample code</a>--> 
+  sample code on webCT will get you started with an XML scene file
+  parser and code to write PNG image file.  
+<!-- The XML scene format is very very loosely based off of the Yafaray format, but is simplified
+  and modified for the purpose of this assignment.-->
+  You are free to make any modifications and extensions that you
+  please, to both the XML format, parser code, and the ray tracing
+  code; however, your code should still work with the simple examples
+  provided, and likewise, any changes you make must be well documented
+  in your readme file.</p>
+
+  <h3 class="section">XML scene description</h3>
+
+  <p>The XML file is organized as sequence of named materials, lights,
+  cameras, nodes, and renders.  The main scene is defined in the node
+  with the name "root".  In general you will only need to have one
+  node defined, and it must have the name "root", but nodes can also
+  be referred to within the scene graph hierarchy as an instance
+  (i.e., to help you reuse parts of the scene hierarchy multiple
+  times).  
+
+  <p>The scene nodes each have an associated transformation.  The node
+  definition can contain a list of transformations (translation, rotx,
+  roty, rotz, and scale (and others if you choose to add them)).
+  These transformations are applied in order to build the node
+  transformation (note in <em>SceneNode.java</em> how the transforms
+  are applied in the order in which they are parsed from the file).
+  The node can also list a number of different kinds of geometry
+  (sphere, cube, mesh, instance).  Finally, the node can also contain
+  a list of child nodes, allowing a hierarchy of transformations and
+  geometry to be built.
+
+  <p>Look at the two examples provided to get a better idea of how the
+  scene description files are organized.  Please share your test
+  scenes on WebCT.  Note again that you may also need to implement
+  additional tags and attributes as you proceed through the
+  objectives. </p>
+
+  <h3 class="section">Provided Code</h3>
+
+  A4App opens an xml document and calls the Scene constructor to load
+  the scene definition from the xml file.  It then calls the scene
+  render method to produce an image file.  This render method is a
+  good place to start making changes to the code, but you will need to
+  make lots of changes to many classes, and make new classes on your
+  own.  You've been provided with basic classes for defining a
+  materials, lights, and nodes, but they do nothing but hold loaded
+  data.  A Ray class and an intersection result have been defined for
+  your convenience, but you may wish or need to change them.  They are
+  defined to allow the Intersectable interface to be defined.  The
+  sphere, cube, plane, mesh, or any other geometry (or node) that can
+  be intersected will implement this interface.
+
+  <h3 class="section">Optional Competition</h3>
+
+There will be optional competition for images created with your
+raytracer. You do not submit an image if you do not want to
+participate.
+
+To participate, you should submit an image, and a short description
+describing the technical achievements and/or artist statement for your
+submission.  Submit the image and statement with your assignment.
+
+A small jury will judge submissions based on aesthetics, creativity,
+and technical merit.
+
+  </div>
+
+
+ 
+<h2 class="section">Steps and Objectives</h2>
+
+  <div class="sbody">
+
+<ol>
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Generate Rays</em></span></p>
+
+<p>The sample takes you up to the point where you need to compute the
+rays to intersect with the scene.  Use the camera definition to build
+the rays you need to cast into the scene.  You should have a default
+background for when rays do not intersect objects, and this should not
+be a solid colour.  Choose some pleasing background colour based on
+your ray direction or pixel coordinate.
+</p>
+</li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Sphere Intersection (2 marks)</em></span></p>
+
+<p>The simplest scene includes a single sphere at the origin.  Write
+the code to perform the sphere intersection and set the colour to be
+either black or white depending on the result (i.e., don't worry about
+lighting in this first step).  Implement an additional position
+attribute for the sphere tag so that you can create a scene with
+several spheres at different positions without using the
+transformation tags (see step 7).  For instance, &lt;sphere
+radius="0.5" position="0 0 0" material="red"/&gt;.
+</p>
+</li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Lighting and Shading (2 marks)</em></span></p>
+
+<p>Modify your code so that you're always keeping track of the closest
+intersection, and the material, and the normal.  Use this information
+to compute the colour of each pixel by summing the contribution of
+each of the lights in the xml file.  You should implement ambient,
+diffuse Lambertian, and Blinn-Phong specular illumination models as
+discussed in class.
+</p>
+</li>
+
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Shadows</em></span></p>
+
+<p>Modify your lighting code to compute a shadow ray, and test that
+the light is not occluded before applying computing and adding the
+light contribution in the previous step.  Make sure your shadows work
+with multiple lights.
+</p>
+</li>
+
+
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Cube</em></span></p>
+
+<p>Add code to create an intersectable Cube object.  The cube should
+be axis aligned, centered at the origin, and with edges of length
+specified in the XML file, i.e., &lt;cube size="1" material="red"&gt;.
+You may alternatively consider providing in XML the lower left and
+upper right corner of an axis aligned rectangular solid.
+</p>
+</li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Triangle Meshes</em></span></p>
+
+<p> The provided code includes the polygon soup loader from the
+previous assignment.  You can use this loader, or extend it, or write
+something new to load the obj file specified in the mesh XML nodes.
+Note that you do not have vertex normals by default, so flat shaded
+triangles are fine (though Phong shading would be nice).
+</p>
+</li>
+
+<li><p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Hierarchy and Instances</em></span></p>
+
+<p> Use the transformations defined in the scene nodes to transform
+the rays before intersecting the geometry and child nodes.  Be sure to
+also transform the normals of the intersection result that you return
+to the caller.  Implement the instance tag to reuse named subtrees of
+the hierarchy.  Do something reasonable with the material definition
+of an instance (i.e., replace the material of the intersection, or
+modulate the colours).
+</p>
+</li>
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Create a Novel Scene</em></span></p>
+
+<p>Create a unique scene of your own.  Be creative.  Try to have some
+amount of complexity to make it interesting (i.e., different shapes
+and different materials).  Your scene should demonstrate all features
+of your ray tracer.  Note that there will be a separate submission for
+the ray tracing competition later in the term.
+</p>
+</li>
+
+
+<li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Bonus (10%)</em></span></p>
+
+<p> Implement some extra feature (or features) in your ray tracer, and
+make sure that it is something of some minimum difficulty if you want
+to receive full bonus marks.  Here is a list of thing you might
+consider, but note that the items have been adjusted from the original
+posting of this assignment to account for the new requirements of the
+combined fourth and fifth assignments
+</p>
+
+<ul>
+<li> Adaptive per pixel jittered super sampling
+<li> Fresnel Reflection
+<li> Refraction and Fresnel term
+<li> Motion blur
+<li> Depth of field blur
+<li> Spot lights
+<li> Area lights (i.e.,soft shadows)
+<li> Procedural volume textures
+<li> Environment maps
+<li> Textured mapped meshes (adaptive sampling or even mipmaps would
+be useful here)
+<li> Bump maps
+<li> transparency and compositing
+<!-- <li> Programmable shading -->
+<li> Acceleration techniques (hierarchical bounding volumes,
+parallelization).
+<li> Quadrics
+<li> Other implicit surfaces (e.g., metaballs)
+<li> Subdivision surfaces
+<li> Bezier surface patches 
+<li> Constructive Solid Geometry
+<li> Something else totally awesome
+
+
+
+<!--
+  <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Jittered Super Sampling</em></span></p>
+
+  <p>This need not be adaptive, but you should consider each of
+  jittering and super sampling separately by adding additional tags to
+  your scene file to enable or disable them independently.  
+
+  <p>For super sampling, you will want to sample the image at regular
+  locations within each pixel, as if you were building an image at
+  twice the resolution (or some other resolution).  But you should
+  also observe how some high frequency aliasing problems can still
+  exist.</p>
+
+  <p>Observe how adding a small random perturbation to the
+  direction of each ray fixes the aliasing problem.  The amount of 
+  random perturbation should be configured in your xml scene file. </p>
+
+  <p>Note that you naturally have high frequency details in your
+  scenes, such as edges.  Likewise if you implement textures
+  (optional) then the aliasing problems should be even more evident.
+  You should also try putting high frequency details in your
+  background colour computation as an easy test, for instance,
+  choosing a colour modulated by cos(k*(x^2+y^2)) would give low
+  frequency when looking down the negative z axis, but will have
+  higher frequency as you cast rays away from this axis (adjust k so
+  you can observe the aliasing effect).  Again, you might want to make
+  this an option so that you are not stuck with the same background in
+  all your test images!</P>
+
+  <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Simple Acceleration for Meshes</em></span></p> 
+
+  <p>Compute an axis aligned bounding box for each mesh in your scene.
+  Test first ray intersection with the box before testing all
+  triangles in the mesh.  Make sure that you can turn on or off your
+  acceleration method.  Measure the improvement for your sample scene
+  and report on the improvement in your readme and on your submitted
+  web page (see below).
+  </p>
+
+  <li> <p><span style="font-weight: bold; color: rgb(153, 0, 0);">
+         <em>Area Lights and Soft Shadows</em></span></p>
+
+  <p> Define a new tag for an area light where you specify its
+  position and shape as a quadrilateral in world coordinates.  Cast
+  several shadow rays to random positions on the area to compute a
+  weighted lighting computation.  Note that the number of rays you
+  cast should be configurable in the lamp definition, but you could
+  optionally optimize the number of rays you cast depending on the
+  distance between the light and the surface being lit. </p>
+-->
+  </ol>
+
+  <h3 class="section">Final Submission Format (read carefully)</h3>
+
+  <p>You should create and submit a document (either a web page, pdf,
+  or odt file), and submit this along with your assignment submission.
+  This page should contains images that clearly demonstrate each
+  requirement of the assignment, along with a demonstration of each of
+  the extra features you implemented. <b>If you submit a web page, you
+  should submit the files, and not just the link!  If you submit a
+  document, the rendered images should be provided as png files with
+  appropriate names.</b> </p>
+
+  <p>While you could probably create one image to show all of your
+  features at once, it is suggested that you take some time to create
+  a variety of nice test scenes and render several images.  You will
+  probably want to use simple test scenes at each stage of the
+  assignment for your own debugging purposes, so keep these scenes and
+  the results for your submission web page.  Ideally, images should be
+  plain and simple to demonstrate individual features.  Other images
+  could be more complex to demonstrate a creative use of your software
+  to generate interesting images.</p>
+
+  <p>Each image in your submitted document <b>must</b> include a
+  caption that gives the name of the xml scene file you used to
+  generate the image, the computation time to generate the image, a
+  list of features demonstrated in the image, and any additional
+  comments.  You may also want to list your hardware and operating
+  system in the document to help give meaning to the timings for each
+  image.  Note that the images should be rendered at a reasonable
+  size, for instance, 640x480 is sufficient for showing many of the
+  features, but you may optionally want to compute higher resolution
+  images for your final scene, but do not go higher than 1920x1200.<p>
+
+  <p>Note that the TA will also be running your code, but will not
+  have the time to render all your tests, so a large part of the
+  evaluation of your assignment will be by inspection of images in the
+  submitted documents.  Submitting an image that was not generated by
+  your code is considered cheating.  Your raytracer may take a long
+  time to generate any given image, thus the TAs will only selectively
+  run specific examples, and it is largely on your honor that the
+  images you show are yours (do not violate this trust).</p>
+
+</ul>
+
+<p> Be sure to document your extra feature or features in your readme!</P>
+
+</li>
+
+</ol> 
+
+  </div>
+
+<h2 class="section">Finished?</h2>
+
+    <div class="sbody">
+
+     <p>Great!  Submit your source code as a zip file, along with
+     everything else, via <a href="http://www.mcgill.ca/webct">webCT</a>.  Be sure to include
+     a readme.txt file as requested.  DOUBLE CHECK your submitted
+     files by downloading them from WebCT.  You can not recieve any
+     marks for assignments with missing or corrupt files!</p>
+
+     <p>Note that you are encouraged to discuss assignments with your
+     classmates, but not to the point of sharing code and answers.
+     All code must be your own.  </p>
+
+  </div>
+
+</td></tr></tbody></table></center>
+
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Computer Science 310/ECSE 427  VLSIRESEARCH</TITLE>
+</HEAD>
+<BODY bgcolor="CCFFFF" text="#333333">
+<font color="3399CC">
+<h1 align="center">Parallel Gate Level Simulation</h1>
+</font>
+ 
+The goal of this project is to develop a scalable distributed Verilog simulation suitable for execution on both distributed and shared memory multi-processors. The raison d'etre of this project is that gate level simulation has proved to be the principle bottleneck in digital circuit designs. Large designs (e.g. NVIDIA's game chips) can take weeks to simulate on conventional uni-processors. It has become necessary to employ parallel architectures in order to accommodate large circuit designs and to obtain significant reductions in the run time of these simulations. We chose Verilog because of its wide-spread industrial use as a design language.
+<p>
+Fittingly, we are confronted with major challenges in distributed simulation on this project. A small laundry list includes (1)the simulation has a small computational granularity(2)a small fraction of the simulation processes are active at any time and (3)the load continuously changes its location throughout the course of the simulation. 
+<p>
+Our first approach to the problem was Clustered Time Warp (CTW). CTW is a hybrid approach, making use of clusters,
+or groups of simulation processes (gates) which are simulated sequentially while Time Warp synchronization is used between clusters. The use of clusters was inspired by the low level of activity at the individual gate level. Three checkpointing algorithms and accompanying strategies for rolling back clusters or LPs were
+developed. When compared to "standard" Time Warp, we saw a significant reduction in the exection time as well
+as memory savings.  
+poralso developed a dynamic load balancing algorithm which reduced the running time of a CTW
+simulation by about 25%. 
+<p>
+Our next effort involved the use of an open source Verilog compiler (Icarus) as a front end to a distributed simulator which was based upon CTW. We called it DVS (Distributed Verilog Simulator). DVS consists of 3 layers. The bottom layer is the communications layer, which provides a common message passing interface to the upper layers. Inside this layer, the software communication platform can be either PVM or MPI. The middle layer is a parallel discrete event simulation kernel, OOCTW, an object-oriented version of CTW. It provides services such as rollback, state saving and restoration, GVT computation and fossil collection to the top layer. The top layer is the distributed simulation engine, which includes an event handler and an interpreter which executes instructions in the code space of a virtual thread. A partitioning framework was created and included in
+this environment in order to experiment with a number of partitioning algorithms.
+A simple hierarchical partitioning algorithm,CAKE,which minimizes
+the inter-processor communication was developed, resulting in the best speedup when compared to breadth first search, depth first search and string partitioning.
+
+DVS served as an experimental vehicle for research on event reconstruction, reinforcement learning, parallel Verilog compilation, compiled code simulation,distributed direct cancellation,
+and partitioning. Event reconstruction eliminates event saving by reconstructing events from the state queue. It results in a
+significant reduction in memory utilization compared to dynamic checkpointing.
+Reinforcement learning is an AI technique which we use to control the optimism in Time Warp via a bounded window. Because partitioning is central to the success of distributed simulation, we briefly summarize the work on static partitioning.
+<p>
+Our static partitioning algorithm takes advantage of the
+hierarchical information described by Verilog modules and their instances. A Verilog instance represents one vertex in a circuit hypergraph. The algorithm attempts to minimize the cutsize of the hypergraph while maintaining a balanced load. A vertex can be flattened into multiple vertices in the event that a sufficiently good load balance is not achieved by the algorithm. In this case, the algorithm flattens the largest instance and moves gates between the partitions in order to improve the load balance.We  compared the algorithm to {\em hmetis}, a well-known interative algorithm which extracts clusters from a flattened netlist, achieving a 4.5 reduction in the cutsize of a circuit. It also resulted in a
+decrease in the simulation time compared to a sequential simulation.
+<p>
+Our research then took a new turn in which resulted in a new simulation engine which we named XTW. 
+In this project we developed a new event scheduling mechanism and a new rollback procedure \cite{Xu06}. LPs are grouped into a cluster-level queuewhich is used to schedule events in the cluster.
+Each input channel to a logical process (a gate) is
+managed separately in order to maintain the FCFS property. A separate
+LP input queue is also maintained together with a cluster queue, which is used
+for the actual scheduling of events. The resulting event scheduling
+mechanism has an O(1) complexity, a vast improvement over well-know scheduling
+mechanisms- the splay-tree,the heap,and the red-black tree. In addition,
+the cost of finding and deleting a scheduled event in the cluster
+queue is $O(1)$, a distinct improvement over CTW, for
+which the cost is $O(\log n)$. 
+<p>
+The new rollback procedure in XTW involves the replacement of anti-messages  by rb messages, resulting in a lower time complexity- $O(\log n)$ versus $O(n\log n)$ for anti-messages. The output queue at an LP is eliminated as well, resulting in a large savings of memory. Experimental results on a 90,000 gate circuit clearly demonstrate that XTW is far superior to CTW with any number of processors. CTW ran out of memory with more then
+3 processors, while XTW continued to show scalable results. 
+<p>
+The scalability of XTW was investigated utilizing 5M,10M and 25M gate circuits, on a 
+128 node Beowulf cluster-our results indicated that XTW scales almost
+linearly with the number of processors and scales well with the size of
+the circuits.
+<p>
+Several years ago, Sun made several of its old CPU designs (at the register transfer level) available to the design community to serve as benchmarks. We took advantage of this by creating gate level netlists
+which could be used as input to XTW. 
+Our results for these (realistic) designs indicated that XTW is indeed highly scalable. For example, we
+observed 4 million gates per second for an 8k gate Viterbi decoder.  
+<p>
+Recently, our work has focused on the use of AI techniques to develop dynamic load balancing algorithms and to control the optimism in Time Warp by means of a bounded window. The bonded window mechanism prevents Time Warp can become unstable in the event that its optimism runs unchecked, hence it is important to control it. A number of classical AI techniques were used including genetic algorithms, learning algorithms and simulated annealing for both of these objectives.
+
+Several papers which are representative of the work which we have done on gate level simulation are listed below.
+
+<ol>
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/tcad.pdf">On the Scalability and Dynamic Load Balancing of Time Warp</a> Scalability of XTW for the Sun
+CPUs and AI based algorithms for dynamic load-balancing.  
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/xtwjournal.pdf">Towards Large Scale Optimistic VLSI Simulation</a>Describes XTW along with a performance
+study. </a>
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/herve.pdf">On Checkpointing and Rolling Back in Time Warp</a> Describes CTW
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/designdrivenpartitioning.pdf">A Design Driven Partitioning Algorithm for
+Distributed Verilog Simulation</a> Title says it all.
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/eventrecon.pdf">Event Reconstruction in Time Warp</a> Interesting technique
+for reconstructing input events in order to save memory. Inspired by reverse computation. 
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/dlb.pdf">The Dynamic Load Balancing of Clustered Time Warp for Logic
+Simulation</a> Eactly what it says. 
+<li> <a href="http://www.cs.mcgill.ca/~carl/www.cs.mcgill.ca/~carl/davidknn.pdf">

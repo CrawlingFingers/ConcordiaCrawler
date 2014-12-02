@@ -1,0 +1,97 @@
+<html>
+
+<head>
+<title>Joelle Pineau's Research</title>
+</head>
+
+<body bgcolor="white" text="black">
+
+<br><br>
+
+<h2>Research projects</h2>
+<h3> (somewhat out of date... see <a href="publications.html">publications page</a> for recent work.)
+
+<hr>
+<h3>Research interests:</h3>
+<ul>
+<li> Planning, learning and decision-making
+<ul>
+  <li> Learning and representation of probabilistic systems
+  <li> Reinforcement learning, MDPs, POMDPs
+  <li> Machine learning<p>
+</ul>
+<li> Mobile robotics, human-robot interaction.
+<ul>
+<li> Design of an intelligent robotic wheelchair (Smartwheeler project)
+<li> Large-scale dialogue management<p>
+</ul>
+<li> Adaptive treatment design
+<ul>
+<li> Automated learning of adaptive treatment strategies for chronic 
+depression
+<li> Computational modelling and adaptive treatment of epilepsy
+<li> Preference elicitation in medical decision-making
+</ul>
+</ul>
+<p>
+</ul>
+
+<hr>
+<p>
+<h3>Planning, Learning, and Decision-making</h3>
+<ul>
+<li> <strong>Bayesian reinforcement learning</strong>: (with Stephane Ross, Brahim Chaib-draa, Robin Jaulmes and Doina Precup)<br>
+Most approximate POMDP solutions assume a known model. In many domains, its hard to get an accurate model. We look at ways of formulating POMDP solutions such that we take into account model uncertainty, and improve model accuracy through careful selection of queries (see <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-ecml05.pdf">[ECML'05]</a> <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-ecml05workshop.pdf">[ECML'05 workshop]</a> <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-icra07.pdf">[ICRA'07]</a>).<br>
+We also propose a full Bayes-optimal formulation of the problem, for both discrete and continuous domains (see <a href="http://www.cs.mcgill.ca/~jpineau/files/sross-nips07-bapomdp.pdf">[NIPS'07]</a> and <a href="http://www.cs.mcgill.ca/~jpineau/files/sross-icra08-bacpomdp.pdf">[ICRA'08]</a>).<br>
+Most recently we have applied similar methods to Bayesian structure learning in MDPs (see <a href="http://www.cs.mcgill.ca/~jpineau/files/sross-uai08.pdf">[UAI'08]</a>).<p>
+
+
+<li> <strong>Fast approximation algorithms for POMDPs</strong>: (with Stephane Ross, Brahim Chaib-draa)<br>
+The main goal of this project is to find tractable solutions for large discrete POMDP problems. This started with some of my earlier work on anytime approximate algorithms for solving discrete POMDPs (see <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-ijcai03.pdf">[IJCAI'03]</a> <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-nips03.pdf">[NIPS'03]</a> <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-isrr05.pdf">[ISRR'05]</a> and <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-jair06.pdf">[JAIR'06]</a>).<br>
+More recently, we have been exploring the use of online methods for fast POMDP approximations (see <a href="http://www.cs.mcgill.ca/~jpineau/files/sross-nips07-aems.pdf">[NIPS'07]</a>).<br>
+A survey paper of online POMDP methods is now available (see <a href="http://www.cs.mcgill.ca/~jpineau/files/sross-jair08.pdf">[JAIR'08]</a>).<p>
+
+<li> <strong>Learning and representation of systems with hidden state</strong>: (with Ricard Gavalda, Prakash Panangaden and Doina Precup)<br>
+We investigate a new framework for representing systems with hidden state, which is based on duality theory, and unifies earlier representations such as PSRs and POMDPs (see <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-aaai06.pdf">[AAAI'06]</a>).<br>
+We also propose an algorithm to learn a provably good (and preferably compact) representation for such systems in polynomial time (see <a href="http://www.cs.mcgill.ca/~jpineau/files/gavalda-ecml06.pdf">[ECML'06]</a>). <p>
+
+<li> <strong>Randomized algorithms for planning in STRIPS domains</strong>: (with Dan Burfoot)<br>
+We investigated a randomized approach to planning in determinstic (STRIPS) domains. Our approach is inspired by Rapidly-exploring Random Trees (RRTs), an approach originally proposed (by S. LaValle and colleagues) for path planning in continuous spaces (see <a href="http://www.cs.mcgill.ca/~jpineau/files/burfoot-icaps06.pdf">[ICAPS'06]</a> or longer Tech Report version<a href="http://www.cs.mcgill.ca/~jpineau/files/burfoot-tr-06.pdf">[TR]</a>).<br>
+</ul>
+<p>
+
+<hr>
+<h3>Robotics</font></h3>
+<ul>
+<li> <strong>SmartWheeler: Multi-modal intelligent wheelchair control</strong>: (with Amin Atrash, Robert Kaplow, Chris Prahacs, Julien Villemure, Robert West and Hiba Yamani)<br>
+This project looks at customizing a robotic wheelchair such that it can be operated by a person with severe mobility impairements. The goal is to optimize a flexible multi-modal interface that allows high-level control of the wheelchair in a manner that is safe and effective (see <a href="http://www.cs.mcgill.ca/~smartwheeler">the project webpage<a> or a <a href="http://www.cs.mcgill.ca/~jpineau/files/smartwheeler_poster_CIM20yr.ppt">poster</a> on the project).<p>
+
+<li> <strong>Large-scale dialogue management</strong>: (with Amin Atrash)<br>
+The role of a dialogue manager is to pick appropriate actions and responses, when interacting with a person. In this project, we aim to build a large-scale dialogue manager for a robot interface, and to apply machine learning techniques (e.g. reinforcement learning, parameter estimation) to optimize the performance of the dialogue manager (see <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-acl00.pdf">[ACL'00]</a> <a href="http://www.cs.mcgill.ca/~jpineau/files/atrash-aaai06wkshp.pdf">[AAAI'06 workshop]</a>).<p>
+
+</ul>
+<p>
+
+<hr>
+<h3>Adaptive treatment design</h3>
+<ul>
+<li> <strong>Automated learning of adaptive treatment strategies for chronic depression</strong>: (with Mahdi Milani Fard, Peter Biernot, Erica Moodie, Susan Murphy and John Rush)<br>
+The STAR*D trials consist of large multi-stage randomized treatment sequences for people with clinical depression. The goal for computer scientists is to automatically learn optimal treatment sequences. This can phrased as a reinforcement learning problem, where we use the data collected in the STAR*D trials to learn an (approximately) optimal policy (see <a href="http://www.pubmedcentral.nih.gov/picrender.fcgi?tool=pmcentrez&artid=1934348&blobtype=pdf">[DAD'07]</a>. See also white paper on adaptive treatment strategies <a href="http://dx.doi.org/10.1038/sj.npp.1301241">[MCATS'06]</a>).<br>
+We have recently derived a method for computing the variance for POMDP policy evaluation, which is particularly useful to compare different treatement strategies (see <a href="http://www.cs.mcgill.ca/~jpineau/files/mfard-aaai08.pdf">[AAAI'08]</a>).<p>
+
+<li> <strong>Computational modelling and adaptive treatment of epilepsy</strong>: (with Robert Vincent, Arthur Guez, Keith Bush, Aaron Courville and Massimo Avoli)<br>
+The goal of this project is to investigate the use of reinforcement learning to optimize deep-brain stimulation strategies for the treatment of epilepsy. We began by investigating the problem of seizure detection from electrophysiological recordings (see <a href="http://www.cs.mcgill.ca/~jpineau/files/vincent-canai07.pdf">[CanAI'07]</a>). We are currently implementing a mathematical model of the brain neural network, which exhibits the synchronous patterns that are characteristic of epilepsy.<br>
+We have recently shown that reinforcement learning can be used to optimize treatment strategies using batch data collected from in-vitro rat hippocampal slices under fixed stimulation policies (see <a href="http://www.cs.mcgill.ca/~jpineau/files/guez-iaai08.pdf">[IAAI'08]</a>).<p>
+</ul>
+
+<hr>
+
+<h3>Past research activities:</h3>
+My past research has focused on developing new planning approaches for the <a href="http://www.cs.brown.edu/research/ai/pomdp/index.html">POMDP</a> framework. More details are available on my old <a href="http://www.cs.cmu.edu/~jpineau">CMU web page</a>.
+I was also actively involved in the <a href="http://www.cs.cmu.edu/~nursebot">Nursebot</a> project, which developed a nursing-assistant robot prototype that provided help and companionship to elderly individuals (see <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-ras03.pdf">[RAS'03]</a> <a href="http://www.cs.mcgill.ca/~jpineau/files/jpineau-aaai02.pdf">[AAAI'02]</a>).<p>
+
+<hr>
+
+</body>
+</html>
+                                 
