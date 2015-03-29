@@ -1,0 +1,42 @@
+COMP479 Final Project
+ by 
+Connor Bode, Greg Houle, Michael Ambartso
+
+Q1. Which is the most positive Department in ENCS at Concordia?
+A:  The most positive department is computer-science-software-engineering
+
+Q2. Is Computer Science and Software Engineering more positive or less positive than Electrical and Computer Engineering?
+A:  Computer Science and Software Engineering is more positive than Electrical and Computer Engineering
+
+Q3. Rank the departments in ENCS by sentiment of their web documents
+A:
+0       computer-science-software-engineering    0.0
+1       mcgill-ece    -0.111111111111
+2       electrical-computer    -0.125
+3       mechanical-industrial    -0.125
+4       bcee    -0.125
+5       info-systems-eng    -0.142857142857
+6       eng-society    -0.25
+
+Q4. Classify the departments in ENCS with a three way classifier into positive, negative, and neutral
+A:
+0       computer-science-software-engineering    positive
+1       mcgill-ece    neutral
+2       electrical-computer    neutral
+3       mechanical-industrial    neutral
+4       bcee    neutral
+5       info-systems-eng    neutral
+6       eng-society    negative
+
+Original centroids: 
+[ 0.0217237]
+[ 0.65466463]
+[ 1.34953781]
+
+Department centroids: 
+[-0.25]
+[-0.12579365]
+[ 0.]
+
+Bye! :)
+
